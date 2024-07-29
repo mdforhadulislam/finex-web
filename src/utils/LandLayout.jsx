@@ -1,0 +1,19 @@
+import FooterBar from "@/components/Footer/FooterBar";
+import NavBar from "@/components/NavBar/NavBar";
+import { ToastContainer } from "react-toastify";
+import Spinner from "./Spinner";
+
+const LandLayout = ({ children }) => {
+  return (
+    <div className="scrollbar">
+      <NavBar />
+      <div className="w-full h-[55px] lg:h-[60px]"></div>
+      {children}
+      <FooterBar />
+      <ToastContainer />
+      <Spinner />
+    </div>
+  );
+};
+
+export default LandLayout;
