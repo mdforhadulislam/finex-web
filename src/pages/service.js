@@ -1,8 +1,15 @@
+import ServiceByAirSection from '@/components/Service/ServiceByAirSection'
+import ServiceBySeaSection from '@/components/Service/ServiceBySeaSection'
+import ServiceHeaddingSection from '@/components/Service/ServiceHeaddingSection'
 import React from 'react'
 
 const service = () => {
   return (
-    <div>service</div>
+    <>
+      <ServiceHeaddingSection />
+      <ServiceByAirSection />
+      <ServiceBySeaSection/>
+    </>
   )
 }
 

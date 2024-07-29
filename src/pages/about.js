@@ -1,8 +1,14 @@
-import React from 'react'
+import AboutDetailsSection from '@/components/About/AboutDetailsSection'
+import AboutTeamMemberSection from '@/components/About/AboutTeamMemberSection'
+import AboutTitleSection from '@/components/About/AboutTitleSection'
 
 const about = () => {
   return (
-    <div>about</div>
+    <>
+    <AboutTitleSection />
+    <AboutDetailsSection />
+    <AboutTeamMemberSection/>
+    </>
   )
 }
 

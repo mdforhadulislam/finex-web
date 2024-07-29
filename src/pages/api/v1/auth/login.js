@@ -3,7 +3,6 @@ import response from "@/libs/common/response";
 import { createToken, findUser } from "@/libs/repositories/auth.repositories";
 
 const { default: configDB } = require("@/libs/config/db");
-
 configDB();
 
 export default async function handler(req, res) {

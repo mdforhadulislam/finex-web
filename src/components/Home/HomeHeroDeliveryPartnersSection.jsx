@@ -22,7 +22,7 @@ const HomeHeroDeliveryPartnersSection = () => {
 
     <div className='w-full h-auto text-center'>
         {
-            partnersData.map(item=> <Image width={150} height={150} className='w-[150px] inline-block p-3' key={item.id} src={item.logo.src} alt={item?.title} />
+            partnersData.map(item=> <Image width={150} height={150} className='w-[150px] inline-block p-3' key={item.id} src={item.logo.src} alt={item?.id} />
             )
         }
 

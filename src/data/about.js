@@ -1,8 +1,8 @@
-import CustomerCareIcon from "../../../public/customar-care.png";
-import NetworkIcon from "../../../public/network.png";
-import ServiceIcon from "../../../public/service.png";
-import VisionIcon from "../../../public/vision.png";
-import StrengthIcon from "../../../public/strength.png";
+import CustomerCareIcon from "../public/customar-care.png";
+import NetworkIcon from "../public/network.png";
+import ServiceIcon from "../public/service.png";
+import VisionIcon from "../public/vision.png";
+import StrengthIcon from "../public/strength.png";
 
 export const aboutData = [
   {
@@ -52,7 +52,7 @@ export const aboutData = [
 
 
 
-import ForhadImg from '../../../public/forhad.png'
+import ForhadImg from '../public/forhad.png'
 
 export const teamMember = [
   {
