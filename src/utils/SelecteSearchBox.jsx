@@ -13,11 +13,8 @@ const SelecteSearchBox = ({ title, datas, setValue, titleStyle, boxStyle,value }
   const filteredPeople =
     query === ""
       ? datas
-      : datas.filter((data) =>
-          data.name
-            .toLowerCase()
-            .replace(/\s+/g, "")
-            .includes(query.toLowerCase().replace(/\s+/g, ""))
+      : datas?.filter((data) =>
+          data?.name?.toLowerCase()?.replace(/\s+/g, "")?.includes(query.toLowerCase().replace(/\s+/g, ""))
         );
 
   return (
@@ -34,7 +31,7 @@ const SelecteSearchBox = ({ title, datas, setValue, titleStyle, boxStyle,value }
           <div className={` relative w-full border border-defult cursor-default overflow-hidden rounded-lg bg-white text-left shadow-4xl focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-teal-300 sm:text-sm`}>
             <Combobox.Input
               className={`${boxStyle ?boxStyle: "py-[12px] pl-3 pr-10 text-sm leading-5"}  w-full border-none  text-gray-900 outline-none focus:ring-0`}
-              displayValue={(data) => data.name}
+              displayValue={(data) => data?.name}
               onChange={(event) => setQuery(event.target.value)}
             />
             <Combobox.Button className="absolute inset-y-0 right-0 flex items-center pr-2">
@@ -52,12 +49,12 @@ const SelecteSearchBox = ({ title, datas, setValue, titleStyle, boxStyle,value }
             afterLeave={() => setQuery("")}
           >
             <Combobox.Options className="absolute mt-1 max-h-60 w-full overflow-auto scrollbar rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm z-50">
-              {filteredPeople.length === 0 && query !== "" ? (
+              {filteredPeople?.length === 0 && query !== "" ? (
                 <div className="relative cursor-default select-none py-2 px-4 text-gray-700">
                   Nothing found.
                 </div>
               ) : (
-                filteredPeople.map((data,indexNum) => (
+                filteredPeople?.map((data,indexNum) => (
                   <Combobox.Option
                   
                     key={indexNum}
@@ -74,9 +71,9 @@ const SelecteSearchBox = ({ title, datas, setValue, titleStyle, boxStyle,value }
                           className={`block truncate ${
                             selected ? "font-medium" : "font-normal"
                           }`}
-                          title={data.name}
+                          title={data?.name}
                         >
-                          {data.name}
+                          {data?.name}
                         </span>
                         {selected ? (
                           <span
