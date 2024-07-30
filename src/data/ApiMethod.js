@@ -4,7 +4,7 @@ dotenv.config("../../");
 
 const envi = process.env.ENVI
 
-export const ROOT_API = `${envi=="DEV"?"http://localhost:3000":"http://faster-in.vercel.app"}`;
+export const ROOT_API = `${envi=="DEV"?"http://localhost:3000":"https://faster-in.vercel.app"}`;
 
 export const ROOT_API_V1 = `${ROOT_API}/api/v1`;
 
