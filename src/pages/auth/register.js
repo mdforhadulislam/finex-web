@@ -38,7 +38,7 @@ const Register = () => {
                   placeholder={"Name"}
                   type={"text"}
                   action={changeHandler}
-                  value={}
+                  
                 />
                 <InputBox
                   title={"E-mail"}
@@ -71,7 +71,7 @@ const Register = () => {
               </div>
 
               <button
-                onClick={submitHandler}
+                // onClick={submitHandler}
                 className="w-full h-auto p-[6px] px-2 border-[2px] border-defult-button bg-defult-button rounded-lg text-white shadow-3xl text-base focus:outline-none "
                 type="submit"
               >
