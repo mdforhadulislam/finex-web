@@ -1,10 +1,19 @@
+import { getRequestSend, SINGLE_COUNTRY_API } from '@/data/ApiMethod';
 import { priceNote } from '@/data/parcel';
 import Modal from '@/utils/Modal'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { FaRegHandPointRight, FaWhatsapp } from 'react-icons/fa'
 
 const HomeHeroPriceingPopup = ({ searchPrice, seletedWeightId, seletedToId }) => {
     const [countryName, setCountryName] = useState("");
+
+
+    useEffect(() => {
+      getRequestSend(SINGLE_COUNTRY_API(seletedToId)).then((res) => {
+        setCountryName(res.data.name);
+      });
+    });
+
   return (
      <Modal>
       <div className="w-full h-auto p-2">
@@ -13,7 +22,7 @@ const HomeHeroPriceingPopup = ({ searchPrice, seletedWeightId, seletedToId }) =>
         </h1>
 
         <h1 className="text-[18px] flex gap-2 py-2 align-middle items-center">
-          For Weight {seletedWeightId.name}{" "}
+          For Weight {seletedWeightId.name}
           <a href="tel:+01577185840">
             <FaWhatsapp className="w-8 h-8 text-emerald-500" />
           </a>
@@ -25,18 +34,28 @@ const HomeHeroPriceingPopup = ({ searchPrice, seletedWeightId, seletedToId }) =>
               <div className="w-full h-auto text-center p-2 border font-semibold">
                 Description
               </div>
+              <div className="w-full h-auto text-center p-2 border font-semibold">
+                Delivery By
+              </div>
               <div className="w-full h-auto text-center p-2 border  font-semibold">
                 Price
               </div>
             </div>
-            <div className="w-full h-auto flex justify-between">
-              <div className="w-full h-auto text-center p-2 border">
-                {searchPrice?.message}
-              </div>
-              <div className="w-full h-auto text-center p-2 border">
-                {searchPrice?.data} TAKA
-              </div>
-            </div>
+            {
+              searchPrice?.price?.map((item,index)=>{
+                return(<div key={index} className="w-full h-auto flex justify-between">
+                  <div className="w-full h-auto text-center p-2 border">
+                  {item?.dhl ? "DHL" : item.fedex? "Fedex": item.ups? "UPS" :item.aramex? "Aramex":"" } {" "} {searchPrice?.message}
+                  </div>
+                  <div className="w-full h-auto text-center p-2 border">
+                    {item?.dhl ? "DHL" : item.fedex? "Fedex": item.ups? "UPS" :item.aramex? "Aramex":"" }
+                  </div>
+                  <div className="w-full h-auto text-center p-2 border">
+                  {item?.dhl ? item?.dhl : item.fedex? item.fedex : item.ups? item.ups :item.aramex? item.aramex:"" } TAKA
+                  </div>
+                </div>)
+              })
+            }
           </div>
 
           <div className="w-full h-auto pt-6 text-[18px] ">

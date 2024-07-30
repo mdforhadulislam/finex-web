@@ -8,7 +8,7 @@ const HeroServiceFeatureSingleBox = ({ title, icon, details }) => {
       <div className="w-full h-full p-2">
         <div className="w-full h-full p-5 shadow-3xl rounded-lg border">
           <div className="w-full h-auto flex justify-center align-middle items-center p-3 pt-1">
-            <Image width={130} height={130} src={icon?.src} alt={title} className="w-[130px] h-[130px]"/>
+            <Image width={130} height={130} src={icon?.src} alt={title}/>
           </div>
           <div className="w-full h-full p-2 ">
             <h1 className={` mb-3 text-gray-900 ${lang.isBangla ? "text-3xl font-semibold bfont"  : "text-xl font-semibold" }`}>{title}</h1>

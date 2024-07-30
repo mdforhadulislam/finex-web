@@ -2,11 +2,9 @@
 
 import configDB from "@/libs/config/db";
 
-
- configDB()
-
+configDB();
 
 export default function handler(req, res) {
-  console.log(req);
-  res.status(200).json({ name: "John Doe" });
+  // console.log(req);
+  res.status(200).json({ status: 200, message: "Success", data: [] });
 }

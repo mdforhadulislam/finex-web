@@ -3,7 +3,7 @@ import configDB from "@/libs/config/db";
 import Price from "@/libs/models/Price.Model";
 import { createPrice } from "@/libs/repositories/price.repositories";
 
-configDB();
+await configDB();
 
 export default async function handler(req, res) {
   if (req.method == "POST") {

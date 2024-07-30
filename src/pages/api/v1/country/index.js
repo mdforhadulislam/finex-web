@@ -8,7 +8,7 @@ export default async function handler(req, res) {
   if (req.method == "POST") {
     const name = req.body.name ? req.body.name : false;
     if (name) {
-      const createCountry = await Country({ name });
+      const createCountry = new Country({ name });
       const newCountry = await createCountry.save();
 
       response(res, 200, "complitely added new country", newCountry);
@@ -17,7 +17,7 @@ export default async function handler(req, res) {
     }
   } else if (req.method == "GET") {
     const allCountry = await Country.find();
-    response(res, 200, "complitely added new country", allCountry);
+    response(res, 200, "find all country", allCountry);
 
 
   } else if (req.method == "DELETE") {
