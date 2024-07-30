@@ -1,35 +1,31 @@
 import { AuthContext } from "@/context/AuthContext";
 import { LoadingContext } from "@/context/LoadingContext";
-import { LOGIN_API, postRequestSend } from "@/data/ApiMethod";
+import { getRequestSend, HEALTH_API, LOGIN_API, postRequestSend } from "@/data/ApiMethod";
 import AuthLayout from "@/utils/AuthLayout";
 import InputBox from "@/utils/InputBox";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
 const Login = () => {
   const [user, setUser] = useState({ phone: "", password: "" });
 
-  const loading = useContext(LoadingContext);
   const auth = useContext(AuthContext);
 
   const router = useRouter();
 
   const changeHandler = (e) => {
-    console.log(e);
     setUser({ ...user, [e.target.name]: e.target.value });
   };
 
   const submitHandler = (e) => {
     e.preventDefault();
-    loading.loadingStart();
     postRequestSend(LOGIN_API, {}, user).then((res) => {
-      loading.loadingEnd();
       if (res.status == 200) {
         toast.success(res.message);
         auth.loginHandler(res.data.token, res.data.user);
-        router.push("/dashboard");
+        router.push("/user");
       } else {
         toast.error(res.message);
       }
@@ -39,7 +35,7 @@ const Login = () => {
 
   return (
     <AuthLayout>
-      <form className="p-4 sm:p-8 pt-6  bg-white mx-auto shadow-4xl rounded-3xl w-full sm:w-96  flex flex-col justify-center align-middle items-center gap-7">
+      <form className="p-6 sm:p-8 pt-6  bg-white mx-auto shadow-4xl rounded-3xl w-full sm:w-96  flex flex-col justify-center align-middle items-center gap-7">
         <h1 className="text-5xl font-bold text-defult">LogIn</h1>
         <div className="w-full h-auto flex flex-col items-center align-middle justify-center gap-2">
           <InputBox

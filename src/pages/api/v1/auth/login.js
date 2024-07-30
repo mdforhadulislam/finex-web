@@ -1,9 +1,9 @@
 import { compareHash } from "@/libs/common/hash";
 import response from "@/libs/common/response";
+import configDB from "@/libs/config/db";
 import { createToken, findUser } from "@/libs/repositories/auth.repositories";
 
-const { default: configDB } = require("@/libs/config/db");
-configDB();
+ configDB();
 
 export default async function handler(req, res) {
   if (req.method == "POST") {

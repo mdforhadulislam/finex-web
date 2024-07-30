@@ -7,11 +7,7 @@ const configDB=()=>{
     const password = process.env.PASSWORD
     
     // database url
-    let url
-    if(process.env.ENVI=="DEV"){ url =`mongodb+srv://mdforhadul44:ekFxmiH72E47vAVH@finex.bpgbkzb.mongodb.net/?retryWrites=true&w=majority&appName=finex`
-    }else{
-      url = `mongodb+srv://mdforhadul44:${password}@cluster0.g9hqkae.mongodb.net/`
-    }
+    let url = `mongodb+srv://mdforhadul44:${password}@cluster0.g9hqkae.mongodb.net/`
     
     mongoose
       .connect(url)

@@ -1,7 +1,6 @@
 import response from "@/libs/common/response";
+import configDB from "@/libs/config/db";
 import { createUser, findUser } from "@/libs/repositories/auth.repositories";
-
-const { default: configDB } = require("@/libs/config/db");
 
 configDB();
 

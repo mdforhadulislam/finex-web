@@ -7,18 +7,15 @@ import Link from "next/link";
 import { useContext } from "react";
 import { toast } from "react-toastify";
 
-const DropDownMenu = ({setIsProfileClick}) => {
+const DropDownMenu = ({ setIsProfileClick }) => {
   const loading = useContext(LoadingContext);
   const authContext = useContext(AuthContext);
 
-
-  
   const logoutHandler = () => {
-    loading.loadingStart()
+    loading.loadingStart();
     postRequestSend(LOGOUT_API, { authorization: authContext.token }).then(
       (res) => {
-        
-    loading.loadingEnd()
+        loading.loadingEnd();
         if (res.status === 200) {
           authContext.logoutHandler();
           toast.success(res.message);
@@ -36,22 +33,22 @@ const DropDownMenu = ({setIsProfileClick}) => {
       className="z-10 absolute top-[270px] lg:right-3 right-2 lg:top-[65px]  bg-white divide-y divide-gray-100 rounded-lg  shadow-4xl w-44 border "
     >
       <ul
-        class="py-2 text-sm text-gray-700 "
+        className="py-2 text-sm text-gray-700 "
         aria-labelledby="dropdownUserAvatarButton"
       >
         <li>
           <IsEnglish>
             <Link
-              href={"/dashboard"}
-              class="block px-4 py-2 hover:bg-gray-100 cursor-pointer"
+              href={"/user"}
+              className="block px-4 py-2 hover:bg-gray-100 cursor-pointer"
             >
               Dashboard
             </Link>
           </IsEnglish>
           <IsBangla>
             <Link
-              href={"/dashboard"}
-              class="block px-4 py-2 hover:bg-gray-100 cursor-pointer bfont text-xl"
+              href={"/user"}
+              className="block px-4 py-2 hover:bg-gray-100 cursor-pointer bfont text-xl"
             >
               ড্যাশবোর্ড
             </Link>
@@ -61,7 +58,7 @@ const DropDownMenu = ({setIsProfileClick}) => {
           <IsEnglish>
             <Link
               href={"/auth/settings"}
-              class="block px-4 py-2 hover:bg-gray-100 cursor-pointer"
+              className="block px-4 py-2 hover:bg-gray-100 cursor-pointer"
             >
               Settings
             </Link>
@@ -69,7 +66,7 @@ const DropDownMenu = ({setIsProfileClick}) => {
           <IsBangla>
             <Link
               href={"/auth/settings"}
-              class="block px-4 py-2 hover:bg-gray-100 cursor-pointer  bfont text-xl"
+              className="block px-4 py-2 hover:bg-gray-100 cursor-pointer  bfont text-xl"
             >
               সেটিংস্‌
             </Link>
@@ -77,12 +74,12 @@ const DropDownMenu = ({setIsProfileClick}) => {
         </li>
         <li onClick={logoutHandler}>
           <IsEnglish>
-            <span class="block px-4 py-2 hover:bg-gray-100 cursor-pointer">
+            <span className="block px-4 py-2 hover:bg-gray-100 cursor-pointer">
               Logout
             </span>
           </IsEnglish>
           <IsBangla>
-            <span class="block px-4 py-2 hover:bg-gray-100 cursor-pointer  bfont text-xl">
+            <span className="block px-4 py-2 hover:bg-gray-100 cursor-pointer  bfont text-xl">
               লগআউট
             </span>
           </IsBangla>

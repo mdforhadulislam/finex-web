@@ -85,21 +85,24 @@ const NavBar = () => {
                     className="flex justify-center align-middle lg:bg-white bg-gray-200 p-1 lg:rounded-full rounded-md lg:block items-center gap-4 cursor-pointer"
                     onClick={() => setIsProfileClick(!isProfileClick)}
                   >
-                    <Image width={40} height={40}
+                    <Image
+                      width={40}
+                      height={40}
                       src={ProfileIcon.src}
                       className="w-[40px] h-[40px] rounded-full shadow-3xl overflow-hidden border-gray-800 border"
-                      alt={authContext?.user?.name}
+                      alt={"User-Profile"}
                     />
                     <span className=" text-lg font-semibold lg:hidden">
                       {authContext?.user?.name}
                     </span>
                   </div>
                 ) : (
-                  <button
+                  <Link
+                    href="/auth/login"
                     className={`px-4 py-2 text-center text-[16.6px] shadow  hover:bg-defult-button bg-defult-button text-white transition duration-300 block rounded-md w-full`}
                   >
-                    <Link href="/auth/login"> Login </Link>
-                  </button>
+                    Login
+                  </Link>
                 )}
               </IsEnglish>
 
@@ -109,30 +112,29 @@ const NavBar = () => {
                     className="flex justify-center align-middle lg:bg-white bg-gray-200 p-1 lg:rounded-full rounded-md lg:block items-center gap-4 cursor-pointer"
                     onClick={() => setIsProfileClick(!isProfileClick)}
                   >
-                    <Image  width={40} height={40}
+                    <Image
+                      width={40}
+                      height={40}
                       src={ProfileIcon.src}
                       className="w-[40px] h-[40px] rounded-full shadow-3xl overflow-hidden border-gray-800 border"
-                      alt={authContext?.user?.name}
+                      alt={"User-Profile"}
                     />
                     <span className=" text-lg font-semibold lg:hidden">
                       {authContext?.user?.name}
                     </span>
                   </div>
                 ) : (
-                  <button
-                    className={`px-4 py-[2px] text-center shadow  hover:bg-defult-button bg-defult-button text-white transition duration-300 block rounded-md w-full `}
+                  <Link
+                    href="/auth/login"
+                    className={`px-4 py-[2px] text-center shadow  hover:bg-defult-button bg-defult-button text-white transition duration-300 block rounded-md w-full bfont text-2xl`}
                   >
-                    <Link href="/auth/login" className="bfont text-2xl py-0">
-                      লগইন
-                    </Link>
-                  </button>
+                    লগইন
+                  </Link>
                 )}
               </IsBangla>
 
               {isProfileClick && (
-                <DropDownMenu
-                  setIsProfileClick={setIsProfileClick}
-                />
+                <DropDownMenu setIsProfileClick={setIsProfileClick} />
               )}
             </ul>
           </div>

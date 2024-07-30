@@ -14,7 +14,7 @@ export default function App({ Component, pageProps }) {
   const { pathname } = useRouter();
   const pathName = pathname.split("/")[1];
 
-  if (pathName == "dashboard" || pathName == "admin" || pathName == "staff") {
+  if (pathName == "user" || pathName == "admin" || pathName == "staff") {
     return (
       <AuthContextProvider>
         <LoadingContextProvider>
