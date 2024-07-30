@@ -12,6 +12,7 @@ import IsEnglish from "@/utils/IsEnglish";
 import IsBangla from "@/utils/IsBangla";
 import LangugeToggolButton from "@/utils/LangugeToggolButton";
 import navBarRouteOption from "@/data/navbar";
+import Image from "next/image";
 
 const NavBar = () => {
   const [navbar, setNavbar] = useState(false);
@@ -84,7 +85,7 @@ const NavBar = () => {
                     className="flex justify-center align-middle lg:bg-white bg-gray-200 p-1 lg:rounded-full rounded-md lg:block items-center gap-4 cursor-pointer"
                     onClick={() => setIsProfileClick(!isProfileClick)}
                   >
-                    <img
+                    <Image width={40} height={40}
                       src={ProfileIcon.src}
                       className="w-[40px] h-[40px] rounded-full shadow-3xl overflow-hidden border-gray-800 border"
                       alt={authContext?.user?.name}
@@ -108,7 +109,7 @@ const NavBar = () => {
                     className="flex justify-center align-middle lg:bg-white bg-gray-200 p-1 lg:rounded-full rounded-md lg:block items-center gap-4 cursor-pointer"
                     onClick={() => setIsProfileClick(!isProfileClick)}
                   >
-                    <img
+                    <Image  width={40} height={40}
                       src={ProfileIcon.src}
                       className="w-[40px] h-[40px] rounded-full shadow-3xl overflow-hidden border-gray-800 border"
                       alt={authContext?.user?.name}
@@ -130,7 +131,6 @@ const NavBar = () => {
 
               {isProfileClick && (
                 <DropDownMenu
-                  isProfileClick={isProfileClick}
                   setIsProfileClick={setIsProfileClick}
                 />
               )}

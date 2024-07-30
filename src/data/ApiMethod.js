@@ -2,7 +2,7 @@ import dotenv from "dotenv";
 
 dotenv.config("../../../");
 
-const envi = ""
+const envi = "DEV"
 
 export const ROOT_API = `${envi=="DEV"?"http://localhost:3000":"https://faster-in.vercel.app"}`;
 

@@ -1,12 +1,35 @@
 import { AuthContext } from "@/context/AuthContext";
+import { LoadingContext } from "@/context/LoadingContext";
+import { LOGOUT_API, postRequestSend } from "@/data/ApiMethod";
 import IsBangla from "@/utils/IsBangla";
 import IsEnglish from "@/utils/IsEnglish";
 import Link from "next/link";
 import { useContext } from "react";
+import { toast } from "react-toastify";
 
-const DropDownMenu = ({ isProfileClick, setIsProfileClick }) => {
+const DropDownMenu = ({setIsProfileClick}) => {
+  const loading = useContext(LoadingContext);
   const authContext = useContext(AuthContext);
 
+
+  
+  const logoutHandler = () => {
+    loading.loadingStart()
+    postRequestSend(LOGOUT_API, { authorization: authContext.token }).then(
+      (res) => {
+        
+    loading.loadingEnd()
+        if (res.status === 200) {
+          authContext.logoutHandler();
+          toast.success(res.message);
+          setIsProfileClick(false);
+        } else {
+          setIsProfileClick(false);
+          toast.error(res.message);
+        }
+      }
+    );
+  };
   return (
     <div
       id="dropdownAvatar"
@@ -52,7 +75,7 @@ const DropDownMenu = ({ isProfileClick, setIsProfileClick }) => {
             </Link>
           </IsBangla>
         </li>
-        <li>
+        <li onClick={logoutHandler}>
           <IsEnglish>
             <span class="block px-4 py-2 hover:bg-gray-100 cursor-pointer">
               Logout

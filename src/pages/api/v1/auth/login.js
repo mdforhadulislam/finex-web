@@ -24,7 +24,7 @@ export default async function handler(req, res) {
                     role: userFindByPhone.role,
                   };
                   
-            response(res,400,"login successfull",{
+            response(res,200,"login successfull",{
                 token:token.token,
                 user
             })
