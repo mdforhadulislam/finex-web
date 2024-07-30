@@ -3,11 +3,10 @@ import IsEnglish from '@/utils/IsEnglish'
 import Link from 'next/link'
 import React from 'react'
 import { FaChevronRight } from 'react-icons/fa'
-import BGCT from '../../assets/ct-bg.png'
 
 const ContactHeaddingSection = () => {
   return (
-    <div className='w-full h-auto ct-bg' style={{backgroundImage:`url('${BGCT.src}')`}}>
+    <div className='w-full h-auto ct-bg' >
     <div className='lg:container sm:p-2 p-4 sm:py-24 h-auto m-auto'>
 
     <IsEnglish><h1 className='font-bold text-3xl sm:text-5xl text-white'>CONTACT WITH US</h1></IsEnglish>
