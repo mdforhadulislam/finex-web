@@ -103,7 +103,7 @@ const AboutDetailsSection = () => {
           >
             <div className="sm:w-[150px] sm:h-[150px] w-[100px] h-[100px] p-3 sm:p-5 flex items-center align-middle justify-center">
               <div className="sm:w-[100px] w-[80px] h-[80px] sm:h-[100px] bg-defult p-4 rounded-full shadow-4xl">
-                <Image width={80} height={80} src={item.icon.src} alt={item.title} className=""  />
+                <Image width={80} height={80} src={item?.icon?.src} alt={item?.title} />
               </div>
             </div>
             <IsEnglish className="w-auto h-auto pl-2">

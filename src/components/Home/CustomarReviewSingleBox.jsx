@@ -13,32 +13,32 @@ const CustomarReviewSingleBox = ({ name, star, details }) => {
           {star == 1 && <Image src={Star} alt="Star" />}
           {star == 2 && (
             <>
-              <Image className="w-6 h-6" src={Star} alt="Star"/>
-              <Image className="w-6 h-6" src={Star} alt="Star" />
+              <Image width={24} height={24}  src={Star} alt="Star"/>
+              <Image width={24} height={24} src={Star} alt="Star" />
             </>
           )}
           {star == 3 && (
             <>
-              <Image className="w-6 h-6" src={Star} alt="Star" />
-              <Image className="w-6 h-6" src={Star} alt="Star" />
-              <Image className="w-6 h-6" src={Star} alt="Star" />
+              <Image width={24} height={24} src={Star} alt="Star" />
+              <Image width={24} height={24} src={Star} alt="Star" />
+              <Image width={24} height={24} src={Star} alt="Star" />
             </>
           )}
           {star == 4 && (
             <>
-              <Image className="w-6 h-6" src={Star} alt="Star" />
-              <Image className="w-6 h-6" src={Star} alt="Star" />
-              <Image className="w-6 h-6" src={Star} alt="Star" />
-              <Image className="w-6 h-6" src={Star} alt="Star" />
+              <Image width={24} height={24} src={Star} alt="Star" />
+              <Image width={24} height={24} src={Star} alt="Star" />
+              <Image width={24} height={24} src={Star} alt="Star" />
+              <Image width={24} height={24} src={Star} alt="Star" />
             </>
           )}
           {star == 5 && (
             <>
-              <Image className="w-6 h-6" src={Star} alt="Star" />
-              <Image className="w-6 h-6" src={Star} alt="Star" />
-              <Image className="w-6 h-6" src={Star} alt="Star" />
-              <Image className="w-6 h-6" src={Star} alt="Star" />
-              <Image className="w-6 h-6" src={Star} alt="Star" />
+              <Image width={24} height={24} src={Star} alt="Star" />
+              <Image width={24} height={24} src={Star} alt="Star" />
+              <Image width={24} height={24} src={Star} alt="Star" />
+              <Image width={24} height={24} src={Star} alt="Star" />
+              <Image width={24} height={24} src={Star} alt="Star" />
             </>
           )}
         </div>

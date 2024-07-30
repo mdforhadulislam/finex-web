@@ -33,7 +33,7 @@ const ContactDetailsSection = () => {
           </div>
         </div>
         <div className="w-full h-auto p-4">
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d912.214058578806!2d90.39848236952292!3d23.85923832515917!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755c50019ecfb45%3A0x97051f8809df19ce!2sRahman%20Villa!5e0!3m2!1sen!2sbd!4v1717447882392!5m2!1sen!2sbd" width="600" height="450"  allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"className="w-full h-full" ></iframe>
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d912.214058578806!2d90.39848236952292!3d23.85923832515917!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755c50019ecfb45%3A0x97051f8809df19ce!2sRahman%20Villa!5e0!3m2!1sen!2sbd!4v1717447882392!5m2!1sen!2sbd" width={600} height={450}  loading="lazy" className="w-full h-full" ></iframe>
 
 
         </div>

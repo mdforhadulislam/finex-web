@@ -13,7 +13,7 @@ const HeroServiceSingleBox = ({ title, icon, details }) => {
         className="cursor-pointer w-full h-full p-4 shadow-3xl rounded-md flex flex-row items-center border"
       >
         <div className="w-[180px] h-auto">
-          <Image width={100} height={100} className="w-[100px] h-[100px]" src={icon.src} alt={title} />
+          <Image width={100} height={100} src={icon.src} alt={title} />
         </div>
         <div className="w-full h-full">
           <h1

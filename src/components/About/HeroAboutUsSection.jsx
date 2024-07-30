@@ -10,8 +10,8 @@ const HeroAboutUsSection = () => {
       <div className="lg:container  sm:p-2 p-4 px-2 pb-10 pt-0 m-auto">
         <div className="w-full h-auto flex flex-col md:flex-row items-center align-middle mb-14">
           <div className="w-full md:w-[50%] lg:w-[35%] h-auto flex justify-center align-middle items-center p-3">
-            <Image
-              src={DeliveryMan}
+            <img
+              src={DeliveryMan?.src}
               alt="Delivery-Man"
               className="w-[300px] h-[400px] md:w-[350px] md:h-[450px] lg:w-[380px] lg:h-[450px] "
             />
