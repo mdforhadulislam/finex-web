@@ -4,7 +4,7 @@ import { Fragment, useContext, useState } from "react";
 import { HiChevronUpDown, HiOutlineCheck } from "react-icons/hi2";
 
 const SelecteSearchBox = ({ title, datas, setValue, titleStyle, boxStyle,value }) => {
-  const [selected, setSelected] = useState(value?datas.find(item=>item.name==value): datas[0]);
+  const [selected, setSelected] = useState(value?datas?.find(item=>item?.name==value): datas[0]);
   const [query, setQuery] = useState("");
 
   
@@ -14,7 +14,7 @@ const SelecteSearchBox = ({ title, datas, setValue, titleStyle, boxStyle,value }
     query === ""
       ? datas
       : datas?.filter((data) =>
-          data?.name?.toLowerCase()?.replace(/\s+/g, "")?.includes(query.toLowerCase().replace(/\s+/g, ""))
+          data?.name?.toLowerCase()?.replace(/\s+/g, "")?.includes(query.toLowerCase()?.replace(/\s+/g, ""))
         );
 
   return (

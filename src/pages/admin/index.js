@@ -1,8 +1,15 @@
+import AdminDashBoardHeaderNavButtonSection from '@/components/Admin/AdminDashBoardHeaderNavButtonSection'
+import AdminDashBoardHeaderSection from '@/components/Admin/AdminDashBoardHeaderSection'
 import React from 'react'
 
 const AdminDashboard = () => {
   return (
-    <div>AdminDashboard</div>
+    <>
+      <AdminDashBoardHeaderSection/>
+      <AdminDashBoardHeaderNavButtonSection />
+
+
+    </>
   )
 }
 

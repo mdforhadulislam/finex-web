@@ -1,26 +1,18 @@
 import AppBar from "@/components/NavBar/AppBar";
 import DragBar from "@/components/NavBar/DragBar";
 import { AuthContext } from "@/context/AuthContext";
-import { LoadingContext } from "@/context/LoadingContext";
-import { getRequestSend, HEALTH_API } from "@/data/ApiMethod";
 import { useRouter } from "next/router";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { ToastContainer } from "react-toastify";
 
 const AppLayout = ({children}) => {
   const [isOpen, setIsOpen] = useState(false);
   const authContext = useContext(AuthContext);
-  const loading = useContext(LoadingContext);
   
   const router = useRouter();
   const { pathname } = useRouter();
   const pathName = pathname.split("/")[1];
 
-  useEffect(() => {
-    getRequestSend(HEALTH_API).then((res) => {
-      loading.loadingEnd()
-    });
-  });
 
   if (!authContext.isUserLogedIn) {
     router.push("/auth/login");

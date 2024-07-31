@@ -12,7 +12,6 @@ const configDB=()=>{
     mongoose
       .connect(url)
       .then((response) => {
-        if(process.env.ENVI=="DEV")console.log(`database connections test database`);
         console.log(`database connections successfull`);
       })
       .catch((error) => {

@@ -8,6 +8,7 @@ import { useContext, useEffect, useState } from "react";
 import HomeHeroPriceingPopup from "./HomeHeroPriceingPopup";
 import { toast } from "react-toastify";
 import { ModalContext } from "@/context/ModalContext";
+import { LoadingContext } from "@/context/LoadingContext";
 
 const HomeHeroPriceingSection = () => {
   const [isExport, setIsExport] = useState(true);
@@ -20,13 +21,16 @@ const HomeHeroPriceingSection = () => {
   const [seletedWeightId, setSeletedWeightId] = useState({});
 
   const modal = useContext(ModalContext);
+  const loading = useContext(LoadingContext);
 
   const submitHendler = (e) => {
     e.preventDefault();
     if (seletedFromId && seletedToId && seletedWeightId) {
+      loading.loadingStart()
       getRequestSend(
         QUOT_PRICE_API(seletedFromId, seletedToId, seletedWeightId?.value)
       ).then((res) => {
+        loading.loadingEnd()
         if (res.status == 200) {
           toast.success(res.message);
           setSearchPrice({

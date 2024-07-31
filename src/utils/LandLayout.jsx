@@ -7,12 +7,9 @@ import { LoadingContext } from "@/context/LoadingContext";
 import { getRequestSend, HEALTH_API } from "@/data/ApiMethod";
 
 const LandLayout = ({ children }) => {
-  const loading = useContext(LoadingContext);
   
   useEffect(() => {
-    getRequestSend(HEALTH_API).then((res) => {
-     loading.loadingEnd()
-    });
+    getRequestSend(HEALTH_API).then((res) => {});
   });
 
 

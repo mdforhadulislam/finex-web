@@ -39,15 +39,15 @@ const DragBar = ({ isOpen, setIsOpen }) => {
             <LuLayoutDashboard className="inline w-8 h-8 text-defult" />
           </DragButton>
 
-          <DragButton title={"Pickup Request"} link={"/admin/pickup"}>
+          <DragButton title={"Pickup Request"} link={"/admin/"}>
             <GiCardPickup className="inline w-8 h-8 text-defult" />
           </DragButton>
 
-          <DragButton title={"Parcel Order"} link={"/admin/order"}>
+          <DragButton title={"Parcel Order"} link={"/admin/"}>
             <FiBox className="inline w-8 h-8 text-defult" />
           </DragButton>
 
-          <DragButton title={"Track Parcel"} link={"/admin/tracking"}>
+          <DragButton title={"Track Parcel"} link={"/admin/"}>
             <FiBox className="inline w-8 h-8 text-defult" />
           </DragButton>
 
@@ -100,11 +100,11 @@ const DragBar = ({ isOpen, setIsOpen }) => {
 
       {authContext?.user?.role == "user" && (
         <div className="grid grid-cols-3 gap-4 p-4 lg:grid-cols-4 max-h-[350px] overflow-auto scrollbar">
-          <DragButton title={"Dashboard"} link={"/dashboard"}>
+          <DragButton title={"Dashboard"} link={"/user"}>
             <LuLayoutDashboard className="inline w-8 h-8 text-defult" />
           </DragButton>
 
-          <DragButton title={"Pickup Request"} link={"dashboard/pickup"}>
+          <DragButton title={"Pickup Request"} link={"user/pickup"}>
             <GiCardPickup className="inline w-8 h-8 text-defult" />
           </DragButton>
 

@@ -12,7 +12,7 @@ export default async function handler(req, res) {
     if (id) {
       const findCountry = await Country.findById({ _id: id });
       if (findCountry) {
-        response(res, 404, "Single Country", findCountry);
+        response(res, 200, "Single Country", findCountry);
       } else {
         response(res, 404, "Not Found", []);
       }
@@ -24,7 +24,7 @@ export default async function handler(req, res) {
     if (id) {
       const deleteCountry = await Country.findByIdAndDelete({ _id: id });
       if (deleteCountry) {
-        response(res, 404, "Single Country", []);
+        response(res, 200, "Successfuly deleted", []);
       } else {
         response(res, 404, "Not Found", []);
       }
@@ -39,7 +39,7 @@ export default async function handler(req, res) {
         if (findCountry) {
           findCountry.name = name;
           await findCountry.save();
-          response(res, 404, "Successfuly updated", []);
+          response(res, 200, "Successfuly updated", []);
         } else {
           response(res, 404, "Not Found", []);
         }
