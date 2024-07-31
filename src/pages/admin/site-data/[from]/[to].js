@@ -1,7 +1,14 @@
 "use client";
 
 import { LoadingContext } from "@/context/LoadingContext";
-import { getRequestSend, postRequestSend, PRICE_API, SINGLE_COUNTRY_API } from "@/data/ApiMethod";
+import {
+  getRequestSend,
+  postRequestSend,
+  PRICE_API,
+  putRequestSend,
+  SINGLE_COUNTRY_API,
+  SINGLE_PRICE_API,
+} from "@/data/ApiMethod";
 import InputBox from "@/utils/InputBox";
 import { useRouter } from "next/router";
 import React, { useContext, useEffect, useState } from "react";
@@ -9,8 +16,8 @@ import { toast } from "react-toastify";
 
 const Single = () => {
   const router = useRouter();
-  let { from, to } = router.query;
-  const loading = useContext(LoadingContext)
+  let { from, to, chartId } = router.query;
+  const loading = useContext(LoadingContext);
 
   const [fromCountry, setFromCountry] = useState({ country: "", id: "" });
   const [toCountry, setToCountry] = useState({ country: "", id: "" });
@@ -143,20 +150,52 @@ const Single = () => {
     });
   };
 
-
-
-  const submitHandler = ()=>{
-    loading.loadingStart()
-    postRequestSend(PRICE_API,{},{fromCountry:fromCountry,toCountry:toCountry,dhlRate:dhlRate,fedexRate:fedexRate,upsRate:upsRate,aramexRate:aramexRate}).then(res=>{
-      loading.loadingEnd()
-      if(res.status=200){
-        toast.error(res.message)
-        router.push("/admin/site-data")
-      }else{
-        toast.error(res.message)
+  const submitHandler = () => {
+    loading.loadingStart();
+    postRequestSend(
+      PRICE_API,
+      {},
+      {
+        fromCountry: fromCountry,
+        toCountry: toCountry,
+        dhlRate: dhlRate,
+        fedexRate: fedexRate,
+        upsRate: upsRate,
+        aramexRate: aramexRate,
       }
-    })
-  }
+    ).then((res) => {
+      loading.loadingEnd();
+      if ((res.status = 200)) {
+        toast.success(res.message);
+        router.push("/admin/site-data");
+      } else {
+        toast.error(res.message);
+      }
+    });
+  };
+  const updateSubmitHandler = () => {
+    loading.loadingStart();
+    putRequestSend(
+      SINGLE_PRICE_API(chartId),
+      {},
+      {
+        fromCountry: fromCountry,
+        toCountry: toCountry,
+        dhlRate: dhlRate,
+        fedexRate: fedexRate,
+        upsRate: upsRate,
+        aramexRate: aramexRate,
+      }
+    ).then((res) => {
+      loading.loadingEnd();
+      if ((res.status = 200)) {
+        toast.success(res.message);
+        router.push("/admin/site-data");
+      } else {
+        toast.error(res.message);
+      }
+    });
+  };
 
   useEffect(() => {
     getRequestSend(SINGLE_COUNTRY_API(from)).then((res) => {
@@ -173,6 +212,21 @@ const Single = () => {
         router.push("/not-found");
       }
     });
+
+    if (chartId) {
+      getRequestSend(SINGLE_PRICE_API(chartId)).then((res) => {
+        if (res.status == 200) {
+          setFromCountry(res.data.from);
+          setToCountry(res.data.to);
+          setDhlRate(res.data.dhl);
+          setFedexRate(res.data.fedex);
+          setUpsRate(res.data.ups);
+          setAramexRate(res.data.aramex);
+        } else {
+          router.push("/not-found");
+        }
+      });
+    }
   }, []);
 
   return (
@@ -989,11 +1043,25 @@ const Single = () => {
           </>
         )}
 
-        
-<div className="w-full h-auto pt-2 pb-6 flex justify-end items-end">
-                        <button className="bg-defult-button text-base rounded-md text-white py-2 px-10 text-center w-full sm:w-auto " onClick={submitHandler}>Submit Rate Chart</button>
-  
-                      </div>
+        <div className="w-full h-auto pt-2 pb-6 flex justify-end items-end">
+          {Boolean(router?.query?.edit) && (
+            <button
+              className="bg-defult-button text-base rounded-md text-white py-2 px-10 text-center w-full sm:w-auto"
+              onClick={updateSubmitHandler}
+            >
+              {console.log()}
+              Update Rate Chart
+            </button>
+          )}
+          {!Boolean(router?.query?.edit) && (
+            <button
+              className="bg-defult-button text-base rounded-md text-white py-2 px-10 text-center w-full sm:w-auto"
+              onClick={submitHandler}
+            >
+              Submit Rate Chart
+            </button>
+          )}
+        </div>
       </div>
     </div>
   );

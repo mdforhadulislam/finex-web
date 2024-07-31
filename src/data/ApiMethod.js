@@ -2,7 +2,7 @@ import dotenv from "dotenv";
 
 dotenv.config("../../../");
 
-const envi = "DEV44"
+const envi = "DEV"
 
 export const ROOT_API = `${envi=="DEV"?"http://localhost:3000":"https://faster-in.vercel.app"}`;
 export const HEALTH_API = `${ROOT_API}/api/health`;
@@ -26,6 +26,9 @@ export const SINGLE_COUNTRY_API =(id)=>{
 
 
 export const PRICE_API = `${ROOT_API_V1}/price`
+export const SINGLE_PRICE_API = (id)=>{
+return `${ROOT_API_V1}/price/${id}`
+}
 
 export const QUOT_PRICE_API =(from,to,weight)=>{
   return `${PRICE_API}/price-quot/?from=${from}&to=${to}&weight=${weight}`
