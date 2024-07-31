@@ -60,11 +60,11 @@ const AdminDashBoardSiteDataRateChart = () => {
     });
   }, []);
   return (
-    <div className="w-full h-auto py-2" id="createratechart">
+    <div className="w-full h-auto py-2" id="rateChart">
       <div className=" w-full h-auto p-2 pb-8 shadow-3xl rounded-md">
         <div className="w-full h-auto py-1 mb-2">
-          <h1 className="font-semibold text-lg justify-center text-center align-middle items-center">
-            Rate Chart
+          <h1 className="font-semibold text-base justify-center text-center align-middle items-center">
+            Rate Chart List
           </h1>
         </div>
 
@@ -73,15 +73,15 @@ const AdminDashBoardSiteDataRateChart = () => {
           {allRateChart?.map((singlePrice) => (
             <div
               key={singlePrice?._id}
-              className="w-full h-auto p-1 py-[6px] text-center hover:bg-gray-100 transition duration-300 rounded-md shadow-3xl relative"
+              className="w-full h-auto p-1 py-2 text-center hover:bg-gray-100 transition duration-300 rounded-md shadow-3xl relative"
             >
-              <h1 className=" text-base font-semibold">
+              <h1 className=" text-base font-semibold w-[calc(100%-35px)] ">
                 {singlePrice?.from?.country.toLocaleUpperCase()} TO{" "}
                 {singlePrice?.to?.country.toLocaleUpperCase()}{" "}
                 <span className="w-[20px] inline-block"></span> Careated Date:-{" "}
                 {new Date(singlePrice?.createdAt).toLocaleDateString()}{" "}
               </h1>
-              <div className="flex gap-1 absolute right-0 z-10 top-[3%] items-center align-middle">
+              <div className="flex flex-col sm:flex-row gap-[1px] absolute right-0 z-10 top-[0px] sm:top-[8%] items-center align-middle">
                 <MdDeleteOutline
                   onClick={() => deleteRateChart(singlePrice?._id)}
                   className="w-8 h-8 p-1 text-red-600 hover:bg-white rounded-md"
@@ -99,14 +99,16 @@ const AdminDashBoardSiteDataRateChart = () => {
           ))}
         </div>
 
+
+
         {/* ratechart create */}
-        <div className="w-full h-auto py-1 pt-5 mb-2">
+        <div className="w-full h-auto py-1 pt-4 mb-1">
           <h1 className="font-semibold text-base justify-center text-center align-middle items-center">
             Create Chart
           </h1>
         </div>
 
-        <div className="w-full h-auto flex-col sm:flex-row  flex gap-3 items-end align-middle justify-center">
+        <div className="w-full h-auto flex-col sm:flex-row  flex gap-3 items-end align-middle justify-center pb-48">
           <div className="w-full sm:flex-row flex-col flex gap-2">
             <SelecteSearchBox
               titleStyle={"text-sm"}

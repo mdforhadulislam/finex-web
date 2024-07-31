@@ -99,7 +99,7 @@ const AdminDashBoardSiteDataCountry = () => {
   }, []);
 
   return (
-    <div className="w-full h-auto py-2" id="sitecountryname">
+    <div className="w-full h-auto py-2" id="Country">
       <div className=" w-full h-auto p-2 shadow-3xl rounded-md">
         <div className="w-full h-auto py-1 mb-2">
           <h1 className="font-semibold text-center text-lg justify-center align-middle items-center">
