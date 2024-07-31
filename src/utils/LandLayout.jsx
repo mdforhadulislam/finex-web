@@ -1,10 +1,9 @@
 import FooterBar from "@/components/Footer/FooterBar";
 import NavBar from "@/components/NavBar/NavBar";
+import { getRequestSend, HEALTH_API } from "@/data/ApiMethod";
+import { useEffect } from "react";
 import { ToastContainer } from "react-toastify";
 import Spinner from "./Spinner";
-import { useContext, useEffect } from "react";
-import { LoadingContext } from "@/context/LoadingContext";
-import { getRequestSend, HEALTH_API } from "@/data/ApiMethod";
 
 const LandLayout = ({ children }) => {
   

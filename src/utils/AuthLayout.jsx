@@ -16,7 +16,6 @@ const AuthLayout = ({ children }) => {
 
 
   useEffect(()=>{
-   
 
     if (authContext.isUserLogedIn) {
       router.push("/user");

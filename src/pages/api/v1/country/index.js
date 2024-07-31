@@ -18,8 +18,6 @@ export default async function handler(req, res) {
   } else if (req.method == "GET") {
     const allCountry = await Country.find();
     response(res, 200, "find all country", allCountry);
-
-
   } else if (req.method == "DELETE") {
     response(res, 500, "Server side error", []);
   } else if (req.method == "PUT" || req.method == "PATCH") {

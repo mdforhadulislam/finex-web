@@ -4,15 +4,15 @@ import { AuthContext } from "@/context/AuthContext";
 import { useRouter } from "next/router";
 import { useContext, useState } from "react";
 import { ToastContainer } from "react-toastify";
+import Spinner from "./Spinner";
 
-const AppLayout = ({children}) => {
+const AppLayout = ({ children }) => {
   const [isOpen, setIsOpen] = useState(false);
   const authContext = useContext(AuthContext);
-  
+
   const router = useRouter();
   const { pathname } = useRouter();
   const pathName = pathname.split("/")[1];
-
 
   if (!authContext.isUserLogedIn) {
     router.push("/auth/login");
@@ -36,12 +36,8 @@ const AppLayout = ({children}) => {
     }
   }
 
-
-
-
-
   return (
-      <div className="scrollbar">
+    <div className="scrollbar">
       <AppBar isOpen={isOpen} setIsOpen={setIsOpen} />
       <div className="w-full h-[55px] lg:h-[65px]"></div>
       <div className="w-full h-auto p-2">
@@ -51,8 +47,9 @@ const AppLayout = ({children}) => {
       </div>
       <DragBar isOpen={isOpen} setIsOpen={setIsOpen} />
       <ToastContainer />
+      <Spinner />
     </div>
-  )
-}
+  );
+};
 
-export default AppLayout
+export default AppLayout;
