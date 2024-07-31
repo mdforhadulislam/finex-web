@@ -227,7 +227,7 @@ const Single = () => {
         }
       });
     }
-  }, []);
+  }, [from,to,router]);
 
   return (
     <div className="w-full h-auto">
