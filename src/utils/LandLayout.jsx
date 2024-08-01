@@ -13,14 +13,14 @@ const LandLayout = ({ children }) => {
 
 
   return (
-    <div className="scrollbar">
+    <>
       <NavBar />
       <div className="w-full h-[55px] lg:h-[60px]"></div>
       {children}
       <FooterBar />
       <ToastContainer />
       <Spinner />
-    </div>
+    </>
   );
 };
 
