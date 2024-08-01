@@ -37,7 +37,7 @@ const AppLayout = ({ children }) => {
   }
 
   return (
-    <div className="scrollbar">
+    <>
       <AppBar isOpen={isOpen} setIsOpen={setIsOpen} />
       <div className="w-full h-[55px] lg:h-[65px]"></div>
       <div className="w-full h-auto p-2">
@@ -48,7 +48,7 @@ const AppLayout = ({ children }) => {
       <DragBar isOpen={isOpen} setIsOpen={setIsOpen} />
       <ToastContainer />
       <Spinner />
-    </div>
+    </>
   );
 };
 
