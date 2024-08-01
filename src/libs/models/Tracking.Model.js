@@ -11,7 +11,7 @@ const trackingSchema = new mongoose.Schema(
       required: true,
       from: {
         type: Object,
-        required: true,
+        required: false,
         default: {
           country: "",
           id: "",
@@ -27,7 +27,7 @@ const trackingSchema = new mongoose.Schema(
       },
       to: {
         type: Object,
-        required: true,
+        required: false,
         default: {
           country: "",
           id: "",
@@ -44,56 +44,56 @@ const trackingSchema = new mongoose.Schema(
       sender: {
         name: {
           type: String,
-          required: true,
+          required: false,
         },
         phone: {
           type: String,
-          required: true,
+          required: false,
         },
         email: {
           type: String,
-          required: true,
+          required: false,
         },
         address: {
           type: String,
-          required: true,
+          required: false,
         },
         zipCode: {
           type: String,
-          required: true,
+          required: false,
         },
       },
       reciver: {
         name: {
           type: String,
-          required: true,
+          required: false,
         },
         phone: {
           type: String,
-          required: true,
+          required: false,
         },
         email: {
           type: String,
-          required: true,
+          required: false,
         },
         address: {
           type: Object,
-          required: true,
+          required: false,
           city: {
             type: String,
-            required: true,
+            required: false,
           },
           country: {
             type: String,
-            required: true,
+            required: false,
           },
           zipCode: {
             type: String,
-            required: true,
+            required: false,
           },
           address: {
             type: String,
-            required: true,
+            required: false,
           },
         },
       },
@@ -118,7 +118,7 @@ const trackingSchema = new mongoose.Schema(
         },
       },
     },
-    customarId: {
+    customarPhone: {
       type: String,
       required: true,
     },

@@ -1,11 +1,11 @@
 const mongoose = require("mongoose");
 
 const orderSchema = new mongoose.Schema({
-  customarId: {
+  customarPhone: {
     type: String,
     required: true,
   },
-  creatorId: {
+  creatorPhone: {
     type: String,
     required: true,
   },
@@ -14,7 +14,7 @@ const orderSchema = new mongoose.Schema({
     required: true,
     from: {
       type: Object,
-      required: true,
+      required: false,
       default: {
         country: "",
         id: "",
@@ -30,7 +30,7 @@ const orderSchema = new mongoose.Schema({
     },
     to: {
       type: Object,
-      required: true,
+      required: false,
       default: {
         country: "",
         id: "",
@@ -47,62 +47,66 @@ const orderSchema = new mongoose.Schema({
     sender: {
       name: {
         type: String,
-        required: true,
+        required: false,
       },
       phone: {
         type: String,
-        required: true,
+        required: false,
       },
       email: {
         type: String,
-        required: true,
+        required: false,
       },
       address: {
         type: String,
-        required: true,
+        required: false,
       },
       zipCode: {
         type: String,
-        required: true,
+        required: false,
       },
     },
     reciver: {
       name: {
         type: String,
-        required: true,
+        required: false,
       },
       phone: {
         type: String,
-        required: true,
+        required: false,
       },
       email: {
         type: String,
-        required: true,
+        required: false,
       },
       address: {
         type: Object,
-        required: true,
+        required: false,
         city: {
           type: String,
-          required: true,
+          required: false,
         },
         country: {
           type: String,
-          required: true,
+          required: false,
         },
         zipCode: {
           type: String,
-          required: true,
+          required: false,
         },
         address: {
           type: String,
-          required: true,
+          required: false,
         },
       },
     },
     weight: {
       type: String,
       required: true,
+    },
+    serviceType: {
+      type: String,
+      required: false,
     },
     item: {
       type: Object,
@@ -120,29 +124,30 @@ const orderSchema = new mongoose.Schema({
   orderDate: {
     type: Date,
     required: true,
+    default: Date.now()
   },
   payment: {
     type: Object,
-    required: true,
+    required: false,
     pType: {
       type: String,
-      required: true,
+      required: false,
     },
     pAmount: {
       type: Number,
-      required: true,
+      required: false,
     },
     pExtraCharge: {
       type: Number,
-      required: true,
+      required: false,
     },
     pDiscount: {
       type: Number,
-      required: true,
+      required: false,
     },
     pRecived: {
       type: Number,
-      required: true,
+      required: false,
     },
   },
   trackingId: {

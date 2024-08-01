@@ -678,28 +678,16 @@ video {
   top: 0.75rem;
 }
 
+.top-\[0px\]{
+  top: 0px;
+}
+
 .top-\[270px\]{
   top: 270px;
 }
 
 .top-\[3\%\]{
   top: 3%;
-}
-
-.top-\[\]{
-  top: ;
-}
-
-.top-\[1px\]{
-  top: 1px;
-}
-
-.top-\[\.5px\]{
-  top: .5px;
-}
-
-.top-\[0px\]{
-  top: 0px;
 }
 
 .z-10{
@@ -1012,8 +1000,8 @@ video {
   width: calc(10% - 120px);
 }
 
-.w-\[calc\(100\%-100px\)\]{
-  width: calc(100% - 100px);
+.w-\[calc\(100\%-35px\)\]{
+  width: calc(100% - 35px);
 }
 
 .w-auto{
@@ -1022,26 +1010,6 @@ video {
 
 .w-full{
   width: 100%;
-}
-
-.w-\[calc\(100\%-60px\)\]{
-  width: calc(100% - 60px);
-}
-
-.w-\[calc\(100\%-70px\)\]{
-  width: calc(100% - 70px);
-}
-
-.w-\[calc\(100\%-50px\)\]{
-  width: calc(100% - 50px);
-}
-
-.w-\[calc\(100\%-350px\)\]{
-  width: calc(100% - 350px);
-}
-
-.w-\[calc\(100\%-35px\)\]{
-  width: calc(100% - 35px);
 }
 
 .-translate-x-1\/2{
@@ -1203,12 +1171,12 @@ video {
   gap: 2rem;
 }
 
-.gap-\[2px\]{
-  gap: 2px;
-}
-
 .gap-\[1px\]{
   gap: 1px;
+}
+
+.gap-\[2px\]{
+  gap: 2px;
 }
 
 .space-x-2 > :not([hidden]) ~ :not([hidden]){
@@ -1562,11 +1530,6 @@ video {
 .py-\[6px\]{
   padding-top: 6px;
   padding-bottom: 6px;
-}
-
-.py-\[7px\]{
-  padding-top: 7px;
-  padding-bottom: 7px;
 }
 
 .pb-0{
@@ -2299,26 +2262,6 @@ th {
 }
 
 @media (min-width: 640px){
-  .sm\:top-\[3\%\]{
-    top: 3%;
-  }
-
-  .sm\:top-\[3\.5\%\]{
-    top: 3.5%;
-  }
-
-  .sm\:top-\[4\%\]{
-    top: 4%;
-  }
-
-  .sm\:top-\[5\%\]{
-    top: 5%;
-  }
-
-  .sm\:top-\[6\%\]{
-    top: 6%;
-  }
-
   .sm\:top-\[8\%\]{
     top: 8%;
   }
@@ -2385,10 +2328,6 @@ th {
 
   .sm\:w-auto{
     width: auto;
-  }
-
-  .sm\:w-full{
-    width: 100%;
   }
 
   .sm\:max-w-md{
