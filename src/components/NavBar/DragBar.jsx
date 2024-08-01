@@ -43,7 +43,7 @@ const DragBar = ({ isOpen, setIsOpen }) => {
             <GiCardPickup className="inline w-8 h-8 text-defult" />
           </DragButton>
 
-          <DragButton title={"Parcel Order"} link={"/admin/"}>
+          <DragButton title={"Parcel Order"} link={"/admin/order/"}>
             <FiBox className="inline w-8 h-8 text-defult" />
           </DragButton>
 

@@ -5,9 +5,6 @@ export const createOrder = async (
   customarPhone,
   creatorPhone,
   parcel,
-  serviceType,
-  weight,
-  item,
   orderDate,
   payment,
   trackingId
@@ -17,8 +14,6 @@ export const createOrder = async (
     creatorPhone: creatorPhone,
     parcel,
     serviceType,
-    weight,
-    item,
     orderDate,
     payment,
     trackingId,

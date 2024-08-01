@@ -213,7 +213,7 @@ const Single = () => {
       }
     });
 
-    if (chartId) {
+    if (router.query.chartId) {
       getRequestSend(SINGLE_PRICE_API(chartId)).then((res) => {
         if (res.status == 200) {
           setFromCountry(res.data.from);

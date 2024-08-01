@@ -13,14 +13,14 @@ configDB();
 
 export default async function handler(req, res) {
   if (req.method == "POST") {
-    const parcelFromAndToPricingId = req.body.parcelFromAndToPricingId ?? false;
+    const parcelFromAndToId = req.body.parcelFromAndToId ?? false;
 
     const customarPhone = req.body.customarPhone ?? false;
     const creatorPhone = req.body.creatorPhone ?? false;
     const parcel = req.body.parcel ?? false;
     const weight = req.body.weight ?? false;
     const serviceType = req.body.serviceType ?? false;
-    const item = req.body.item ?? false;
+    const itemType = req.body.itemType  ?? false;
     const orderDate = req.body.orderDate ?? false;
     const payment = req.body.payment ?? false;
 
@@ -32,15 +32,13 @@ export default async function handler(req, res) {
       parcel &&
       serviceType &&
       weight &&
-      item &&
-      orderDate &&
       payment &&
       box
     ) {
       const findCustomer = await User.findOne({ phone: customarPhone });
       if (findCustomer) {
         const findPrice = await Price.findOne({
-          _id: parcelFromAndToPricingId,
+          _id: parcelFromAndToId,
         });
         if (findPrice) {
           let price;
@@ -344,9 +342,6 @@ export default async function handler(req, res) {
             customarPhone,
             creatorPhone,
             parcel,
-            serviceType,
-            weight,
-            item,
             orderDate,
             payment,
             (trackingId = trackingGenarator())
