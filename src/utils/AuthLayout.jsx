@@ -1,13 +1,10 @@
-import React, { useContext, useEffect } from "react";
-import { ToastContainer } from "react-toastify";
-import Spinner from "./Spinner";
 import Image from "next/image";
+import { useContext, useEffect } from "react";
+import { ToastContainer } from "react-toastify";
 
-import DeliveryMan from "../public/delivery-man.png";
 import AuthContextProvider, { AuthContext } from "@/context/AuthContext";
-import LoadingContextProvider, { LoadingContext } from "@/context/LoadingContext";
 import { useRouter } from "next/router";
-import { getRequestSend, HEALTH_API } from "@/data/ApiMethod";
+import DeliveryMan from "../public/delivery-man.png";
 
 const AuthLayout = ({ children }) => {
 

@@ -2,7 +2,7 @@ import dotenv from "dotenv";
 
 dotenv.config("../../../");
 
-const envi = "DEV"
+const envi = "DEVyy"
 
 export const ROOT_API = `${envi=="DEV"?"http://localhost:3000":"https://faster-in.vercel.app"}`;
 export const HEALTH_API = `${ROOT_API}/api/health`;
@@ -52,7 +52,6 @@ export const getRequestSend = async (url, header) => {
     return { message: "Error", status: 200, data: "Error" };
   }
 };
-
 export const postRequestSend = async (url, header, dataSend) => {
   try {
     const response = await fetch(url, {
@@ -69,7 +68,6 @@ export const postRequestSend = async (url, header, dataSend) => {
     return { message: "Error", status: 200, data: "Error" };
   }
 };
-
 export const putRequestSend = async (url, header, dataSend) => {
   try {
     const response = await fetch(url, {
@@ -86,7 +84,6 @@ export const putRequestSend = async (url, header, dataSend) => {
     return { message: "Error", status: 200, data: "Error" };
   }
 };
-
 export const deleteRequestSend = async (url, header) => {
   try {
     const response = await fetch(url, {
