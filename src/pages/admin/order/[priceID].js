@@ -151,8 +151,10 @@ const OrderCreate = () => {
     loading.loadingStart()
     putRequestSend(SINGLE_ORDER_API(router.query.trackID),{},parcel).then(res=>{
       if(res.status==200){
-        console.log(res);
         
+        toast.success(res.message)
+    loading.loadingStart()
+    router.push("/admin/order")
       }
     })
   }
