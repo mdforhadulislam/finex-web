@@ -153,7 +153,7 @@ const OrderCreate = () => {
       if(res.status==200){
         
         toast.success(res.message)
-    loading.loadingStart()
+    loading.loadingEnd()
     router.push("/admin/order")
       }
     })
