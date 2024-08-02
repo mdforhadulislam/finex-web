@@ -5,17 +5,14 @@ export const createOrder = async (
   customarPhone,
   creatorPhone,
   parcel,
-  orderDate,
-  payment,
+  orderDate,payment,
   trackingId
 ) => {
   const newOrder = new Order({
     customarPhone: customarPhone,
     creatorPhone: creatorPhone,
     parcel,
-    serviceType,
-    orderDate,
-    payment,
+    orderDate,payment,
     trackingId,
   });
 
@@ -28,16 +25,12 @@ export const createTracking = async (
   ourTrackingId,
   parcel,
   box,
-  weight,
-  item,
   customarPhone
 ) => {
   const newTracking = new Tracking({
     ourTrackingId,
     parcel,
     box,
-    weight,
-    item,
     customarPhone,
 
     handoverBy: {

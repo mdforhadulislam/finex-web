@@ -1,3 +1,4 @@
+"use client"
 import AdminDashBoardOrderCreateSection from '@/components/Admin/AdminDashBoardOrderCreateSection'
 import AdminDashBoardOrderHeaderNavButtonSection from '@/components/Admin/AdminDashBoardOrderHeaderNavButtonSection'
 import AdminDashBoardOrderListSection from '@/components/Admin/AdminDashBoardOrderListSection'
@@ -7,8 +8,8 @@ const Order = () => {
   return (
     <>
         <AdminDashBoardOrderHeaderNavButtonSection />
-        <AdminDashBoardOrderCreateSection />
         <AdminDashBoardOrderListSection />
+        <AdminDashBoardOrderCreateSection />
     </>
   )
 }

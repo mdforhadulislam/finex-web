@@ -124,30 +124,35 @@ const orderSchema = new mongoose.Schema({
   orderDate: {
     type: Date,
     required: true,
-    default: Date.now()
+    default: Date.now(),
   },
   payment: {
     type: Object,
-    required: false,
+    required: true,
     pType: {
       type: String,
-      required: false,
+      required: true,
+      default: "",
     },
     pAmount: {
       type: Number,
-      required: false,
+      required: true,
+      default: 0,
     },
     pExtraCharge: {
       type: Number,
-      required: false,
+      required: true,
+      default: 0,
     },
     pDiscount: {
       type: Number,
-      required: false,
+      required: true,
+      default: 0,
     },
     pRecived: {
       type: Number,
-      required: false,
+      required: true,
+      default: 0,
     },
   },
   trackingId: {

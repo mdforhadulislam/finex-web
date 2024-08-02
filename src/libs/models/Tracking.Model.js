@@ -97,10 +97,7 @@ const trackingSchema = new mongoose.Schema(
           },
         },
       },
-      box: {
-        type: Array,
-        required: false,
-      },
+   
       weight: {
         type: String,
         required: true,
@@ -117,6 +114,10 @@ const trackingSchema = new mongoose.Schema(
           required: false,
         },
       },
+    },
+    box: {
+      type: Array,
+      required: false,
     },
     customarPhone: {
       type: String,

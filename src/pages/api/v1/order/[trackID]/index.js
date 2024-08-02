@@ -9,11 +9,11 @@ export default async function handler(req, res) {
   if (req.method == "POST") {
     response(res, 400, "Server side error", []);
   } else if (req.method == "GET") {
-    const TrackID = req.params.trackID;
+    const TrackID = req.query?.trackID;
     if (TrackID) {
       const findTracking = await Order.findOne({ trackingId: TrackID });
       if (findTracking) {
-        response(res, 200, "Tracking Details", findTracking);
+        response(res, 200, "Order Details", findTracking);
       } else {
         response(res, 400, "Not Found", []);
       }
@@ -21,7 +21,7 @@ export default async function handler(req, res) {
       response(res, 400, "Not Allow to access", []);
     }
   } else if (req.method == "DELETE") {
-    const TrackID = req.params.trackID;
+    const TrackID = req.query?.trackID;
     if (TrackID) {
       const findTracking = await Order.findOne({ trackingId: TrackID });
       if (findTracking) {
@@ -29,7 +29,7 @@ export default async function handler(req, res) {
           _id: findTracking._id,
         });
 
-        response(res, 400, "Successfuly Deleted", []);
+        response(res, 200, "Successfuly Deleted", []);
       } else {
         response(res, 400, "Not Found", []);
       }
@@ -37,15 +37,15 @@ export default async function handler(req, res) {
       response(res, 400, "Not Allow to access", []);
     }
   } else if (req.method == "PUT" || req.method == "PATCH") {
-    const TrackID = req.params.trackID;
+    const TrackID = req.query?.trackID;
     if (TrackID) {
       const findOrder = await Order.findOne({ trackingId: TrackID });
       const findTracking = await Tracking.findOne({ ourTrackingId: TrackID });
       if (findOrder && findTracking) {
-        const parcel = req.body.parcel ?? false;
+        const parcel = req.body ?? false;
 
-        findOrder.parcel = parcel;
-        findTracking.parcel = parcel;
+        findOrder.parcel = parcel ?? findOrder.parcel;
+        findTracking.parcel = parcel?? findTracking.parcel;
 
         await findOrder.save();
         await findTracking.save();

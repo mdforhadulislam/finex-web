@@ -1,16 +1,42 @@
-import { getRequestSend, postRequestSend, SINGLE_PRICE_API } from "@/data/ApiMethod";
+import AdminDashBoardOrderCreatedPopup from "@/components/Admin/AdminDashBoardOrderCreatedPopup";
+import { AuthContext } from "@/context/AuthContext";
+import { LoadingContext } from "@/context/LoadingContext";
+import { ModalContext } from "@/context/ModalContext";
+import {
+  getRequestSend,
+  ORDER_API,
+  ORDER_PAYMENT_API,
+  postRequestSend,
+  putRequestSend,
+  SINGLE_ORDER_API,
+  SINGLE_PRICE_API,
+} from "@/data/ApiMethod";
 import InputBox from "@/utils/InputBox";
 import SelecteSearchBox from "@/utils/SelecteSearchBox";
 import { useRouter } from "next/router";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { MdDeleteOutline } from "react-icons/md";
 import { toast } from "react-toastify";
 
 const OrderCreate = () => {
   const router = useRouter();
   const { priceID } = router.query;
+  const loading = useContext(LoadingContext);
+  const authContext = useContext(AuthContext);
+  const modal = useContext(ModalContext)
+  const [isEdit, setIsEdit]= useState(false)
+
+  const [createdOrderTrackingId, setCreatedOrderTrackingId] = useState("");
+  const [getOrderfullData,setGetOrderfullData] = useState({})
 
   const [nextStep, setNextStep] = useState(false);
+  const [weightCalculate, setWeightCalculate] = useState({
+    weight: "",
+    length: "",
+    width: "",
+    height: "",
+  });
+
   const [parcelFromAndToId, setParcelFromAndToId] = useState({
     from: {
       country: "",
@@ -23,17 +49,10 @@ const OrderCreate = () => {
     priceID: "",
   });
   const [itemName, setItemName] = useState("");
-  const [weightCalculate, setWeightCalculate] = useState({
-    weight: "",
-    length: "",
-    width: "",
-    height: "",
-  });
-
-  const [creatorPhone, setCreatorPhone] = useState("");
+  const [creatorPhone, setCreatorPhone] = useState(authContext.user.phone);
   const [customarPhone, setCustomarPhone] = useState("");
   const [weight, setWeight] = useState("");
-  const [serviceType, setServiceType] = useState("");
+  const [serviceType, setServiceType] = useState("dhl");
 
   const [parcel, setParcel] = useState({
     from: {
@@ -44,6 +63,7 @@ const OrderCreate = () => {
       country: parcelFromAndToId.to.country,
       id: parcelFromAndToId.to.id,
     },
+
     sender: {
       name: "",
       phone: "",
@@ -62,20 +82,80 @@ const OrderCreate = () => {
         address: "",
       },
     },
-    weight: 0,
-    serviceType: "",
+    weight: "",
+    serviceType: "dhl",
     item: {
-      types: "",
+      types: "Gift",
       list: [],
     },
   });
-  const [payment, setPayment] = useState({});
+  const [payment, setPayment] = useState({
+    pAmount: 0,
+    pType: "",
+    pDiscount: 0,
+    pExtraCharge: 0,
+    pRecived: 0,
+  });
   const [box, setBox] = useState([]);
 
-  const nextStepHandler =()=>{
-    postRequestSend()
-  }
+  const nextStepHandler = () => {
+    loading.loadingStart();
+    postRequestSend(
+      ORDER_API,
+      {},
+      {
+        parcelFromAndToId: parcelFromAndToId.priceID,
+        customarPhone,
+        creatorPhone,
+        parcel: {
+          ...parcel,
+          from: parcelFromAndToId.from,
+          to: parcelFromAndToId.to,
+        },
+        weight,
+        serviceType,
+        itemType: parcel.item.types,
+        box,
+      }
+    ).then((res) => {
+      loading.loadingEnd();
+      if (res.status == 200) {
+        setCreatedOrderTrackingId(res.data.trackingId);
+        setPayment(res.data.payment);
+        setNextStep(true);
+      } else {
+        toast.error(res.message);
+      }
+    });
+  };
 
+  const submitHandler = () => {
+    loading.loadingStart();
+    putRequestSend(ORDER_PAYMENT_API(createdOrderTrackingId), {}, payment).then(
+      (res) => {
+        loading.loadingEnd();
+        if (res.status == 200) {
+          toast.success("Complite Order");
+          setNextStep(false);
+
+          setGetOrderfullData(res.data)
+          modal.open()
+        } else {
+          toast.error(res.message);
+        }
+      }
+    );
+  };
+
+  const updateHandler = ()=>{
+    loading.loadingStart()
+    putRequestSend(SINGLE_ORDER_API(router.query.trackID),{},parcel).then(res=>{
+      if(res.status==200){
+        console.log(res);
+        
+      }
+    })
+  }
 
   useEffect(() => {
     getRequestSend(SINGLE_PRICE_API(priceID)).then((res) => {
@@ -93,6 +173,15 @@ const OrderCreate = () => {
         });
       }
     });
+    if(router.query.trackID){
+      getRequestSend(SINGLE_ORDER_API(router.query.trackID)).then(res=>{
+        if(res.status==200){
+          setIsEdit(true)
+          setParcel(res.data.parcel)
+          toast.success("Only Updated Parcel related Data (Sender Details,Reciver Details)")
+        }
+      })
+    }
   }, [priceID, router]);
 
   return (
@@ -128,7 +217,7 @@ const OrderCreate = () => {
               type={"text"}
               title={"Sender Name"}
               name={"senderName"}
-              value={parcel?.sender.name}
+              value={parcel?.sender?.name}
               action={(e) =>
                 setParcel({
                   ...parcel,
@@ -142,7 +231,7 @@ const OrderCreate = () => {
               type={"text"}
               title={"Sender Phone"}
               name={"senderPhone"}
-              value={parcel?.sender.phone}
+              value={parcel?.sender?.phone}
               action={(e) =>
                 setParcel({
                   ...parcel,
@@ -156,7 +245,7 @@ const OrderCreate = () => {
               type={"text"}
               title={"Sender Email"}
               name={"senderEmail"}
-              value={parcel?.sender.email}
+              value={parcel?.sender?.email}
               action={(e) =>
                 setParcel({
                   ...parcel,
@@ -170,7 +259,7 @@ const OrderCreate = () => {
               type={"text"}
               title={"Sender Zip Code"}
               name={"senderZipCode"}
-              value={parcel?.sender.zipCode}
+              value={parcel?.sender?.zipCode}
               action={(e) =>
                 setParcel({
                   ...parcel,
@@ -185,7 +274,7 @@ const OrderCreate = () => {
               title={"Sender Address"}
               name={"senderAddress"}
               isTextArea={true}
-              value={parcel?.sender.address}
+              value={parcel?.sender?.address}
               action={(e) =>
                 setParcel({
                   ...parcel,
@@ -206,7 +295,7 @@ const OrderCreate = () => {
               type={"text"}
               title={"Reciver Name"}
               name={"reciverName"}
-              value={parcel?.reciver.name}
+              value={parcel?.reciver?.name}
               action={(e) =>
                 setParcel({
                   ...parcel,
@@ -220,7 +309,7 @@ const OrderCreate = () => {
               type={"text"}
               title={"Reciver Phone"}
               name={"reciverPhone"}
-              value={parcel?.reciver.phone}
+              value={parcel?.reciver?.phone}
               action={(e) =>
                 setParcel({
                   ...parcel,
@@ -234,7 +323,7 @@ const OrderCreate = () => {
               type={"text"}
               title={"Reciver Email"}
               name={"reciverEmail"}
-              value={parcel?.reciver.email}
+              value={parcel?.reciver?.email}
               action={(e) =>
                 setParcel({
                   ...parcel,
@@ -248,7 +337,7 @@ const OrderCreate = () => {
               type={"text"}
               title={"Reciver Address Country"}
               name={"reciverAddressCountry"}
-              value={parcel?.reciver.address.country}
+              value={parcel?.reciver?.address?.country}
               action={(e) =>
                 setParcel({
                   ...parcel,
@@ -268,7 +357,7 @@ const OrderCreate = () => {
               type={"text"}
               title={"Reciver Address City"}
               name={"reciverAddressCity"}
-              value={parcel?.reciver.address.city}
+              value={parcel?.reciver?.address?.city}
               action={(e) =>
                 setParcel({
                   ...parcel,
@@ -288,7 +377,7 @@ const OrderCreate = () => {
               type={"text"}
               title={"Reciver Address"}
               name={"reciverAddress"}
-              value={parcel?.reciver.address.address}
+              value={parcel?.reciver?.address?.address}
               action={(e) =>
                 setParcel({
                   ...parcel,
@@ -308,7 +397,7 @@ const OrderCreate = () => {
               type={"text"}
               title={"Reciver Zip Code"}
               name={"reciverZipCode"}
-              value={parcel?.reciver.address.zipCode}
+              value={parcel?.reciver?.address?.zipCode}
               action={(e) =>
                 setParcel({
                   ...parcel,
@@ -329,13 +418,17 @@ const OrderCreate = () => {
           <h1 className="text-base font-medium text-gray-800 mb-1">
             Parcel Details:
           </h1>
-          <div  className="w-full h-auto grid grid-cols-1 grid-rows-2 sm:grid-cols-2 sm:grid-rows-1 gap-3 pb-3">
+          <div className="w-full h-auto grid grid-cols-1 grid-rows-2 sm:grid-cols-2 sm:grid-rows-1 gap-3 pb-3">
             <InputBox
               placeholder={"percel Weight"}
               type={"text"}
               title={"percel Weight"}
               name={"percelWeight"}
-              value={parcel.weight}
+              value={parcel?.weight}
+              action={(e) => {
+                setParcel({ ...parcel, weight: e.target.value });
+                setWeight(e.target.value);
+              }}
             />
 
             <SelecteSearchBox
@@ -351,6 +444,21 @@ const OrderCreate = () => {
                   ...parcel,
                   item: { ...parcel.item, types: e.name },
                 });
+              }}
+            />
+            <SelecteSearchBox
+              title={"Service Type"}
+              datas={[
+                { id: 1, name: "dhl" },
+                { id: 2, name: "fedex" },
+                { id: 3, name: "ups" },
+                { id: 4, name: "aramex" },
+              ]}
+              titleStyle={"text-base font-medium text-gray-800 pl-2"}
+              boxStyle={"px-3 py-[6px] text-sm"}
+              setValue={(e) => {
+                setServiceType(e.name);
+                setParcel({ ...parcel, serviceType: e.name });
               }}
             />
           </div>
@@ -479,12 +587,12 @@ const OrderCreate = () => {
                 title={"Weight"}
                 name={"name"}
                 value={weightCalculate.weight}
-                action={(e) =>
+                action={(e) => {
                   setWeightCalculate({
                     ...weightCalculate,
                     weight: Math.round(e.target.value),
-                  })
-                }
+                  });
+                }}
               />
             </div>
 
@@ -504,8 +612,8 @@ const OrderCreate = () => {
                       weightCalculate.height;
 
                     const cbmWeightCalculate = Math.round(
-                      (cbmWeight / 5000 )+.5
-                    ) ;
+                      cbmWeight / 5000 + 0.5
+                    );
 
                     if (cbmWeightCalculate >= weightCalculate.weight) {
                       setBox([
@@ -513,7 +621,7 @@ const OrderCreate = () => {
                         {
                           id: Date.now(),
                           name: `box weight=${cbmWeightCalculate}. cbm weight(${cbmWeightCalculate}) is calculable because cbm weight is greater than actual weight(${weightCalculate.weight})`,
-                          weight:cbmWeightCalculate
+                          weight: cbmWeightCalculate,
                         },
                       ]);
 
@@ -523,14 +631,13 @@ const OrderCreate = () => {
                         width: "",
                         height: "",
                       });
-
-                      setParcel({...parcel,weight:parcel.weight+cbmWeightCalculate})
                     } else if (cbmWeightCalculate <= weightCalculate.weight) {
                       setBox([
                         ...box,
                         {
                           id: Date.now(),
-                          name: `box weight=${weightCalculate.weight}. actual weight(${weightCalculate.weight}) is calculable because actual weight is greater than cbm weight(${cbmWeightCalculate})`,  weight:cbmWeightCalculate
+                          name: `box weight=${weightCalculate.weight}. actual weight(${weightCalculate.weight}) is calculable because actual weight is greater than cbm weight(${cbmWeightCalculate})`,
+                          weight: cbmWeightCalculate,
                         },
                       ]);
 
@@ -540,8 +647,6 @@ const OrderCreate = () => {
                         width: "",
                         height: "",
                       });
-                      
-                      setParcel({...parcel,weight:parcel.weight+weightCalculate.weight})
                     }
                   } else {
                     toast.error("Enter Valid Data");
@@ -553,7 +658,7 @@ const OrderCreate = () => {
             </div>
 
             <div className="w-full h-auto flex flex-col gap-2">
-              {box?.map((item,index) => (
+              {box?.map((item, index) => (
                 <h1
                   key={item?.id}
                   className="w-full h-auto px-2 py-1 shadow-3xl rounded-md border relative bg-gray-100"
@@ -565,9 +670,7 @@ const OrderCreate = () => {
                         "w-[30px] h-[30px] p-1 text-red-600 hover:bg-white rounded-md"
                       }
                       onClick={() => {
-                        setBox([
-                          ...box.filter((fitem) => fitem.id != item.id),
-                        ]);
+                        setBox([...box.filter((fitem) => fitem.id != item.id)]);
                       }}
                     />
                   </div>
@@ -576,66 +679,101 @@ const OrderCreate = () => {
             </div>
           </div>
         </div>
+        {
+          isEdit && <div className="w-full h-auto flex justify-end items-end py-3">
+          <button
+            className="bg-defult-button text-base rounded-md text-white py-2 px-12 text-center w-full sm:w-auto"
+            onClick={updateHandler}
+          >
+            Update Order
+          </button>
+        </div>
+        }
 
-        {!nextStep ? (
-          <div className="w-full h-auto flex justify-end items-end py-3">
-            <button
-              className="bg-defult-button text-base rounded-md text-white py-2 px-[62px] text-center w-full sm:w-auto"
-              onClick={() => setNextStep(true)}
-            >
-              Next Step
-            </button>
-          </div>
-        ) : (
-          <>
-            <div className="w-full h-auto 5st-box-style">
-              <h1 className="text-base font-medium text-gray-800 mb-1">
-                Payments Details:
-              </h1>
-              <div className="w-full h-auto grid grid-cols-1 grid-rows-2 sm:grid-cols-2 sm:grid-rows-1 gap-3 pb-3">
-                <InputBox
-                  placeholder={
-                    "If Cash(write Cash) / If Bank of Any Mobile Banking(write Type/Account No)"
-                  }
-                  type={"text"}
-                  title={"Payment Type"}
-                  name={"paymentType"}
-                />
+{
+  !isEdit  && (!nextStep ? (
+    <div className="w-full h-auto flex justify-end items-end py-3">
+      <button
+        className="bg-defult-button text-base rounded-md text-white py-2 px-[62px] text-center w-full sm:w-auto"
+        onClick={nextStepHandler}
+      >
+        Next Step
+      </button>
+    </div>
+  ) : (
+    <>
+      <div className="w-full h-auto 5st-box-style">
+        <h1 className="text-base font-medium text-gray-800 mb-1">
+          Payments Details:
+        </h1>
+        <div className="w-full h-auto grid grid-cols-1 grid-rows-2 sm:grid-cols-2 sm:grid-rows-1 gap-3 pb-3">
+          <InputBox
+            type={"number"}
+            title={"Weight Charge Amount"}
+            name={"pAmount"}
+            value={payment.pAmount}
+          />
+          <InputBox
+            placeholder={
+              "If Cash(write Cash) / If Bank of Any Mobile Banking(write Type/Account No)"
+            }
+            type={"text"}
+            title={"Payment Type"}
+            name={"paymentType"}
+            value={payment.pType}
+            action={(e) => {
+              setPayment({ ...payment, pType: e.target.value });
+            }}
+          />
 
-                <InputBox
-                  placeholder={"Extra Declaration Charge"}
-                  type={"text"}
-                  title={"Extra Declaration Charge"}
-                  name={"extraDeclarationCharge"}
-                />
+          <InputBox
+            placeholder={"Extra Declaration Charge"}
+            type={"number"}
+            title={"Extra Declaration Charge"}
+            name={"extraDeclarationCharge"}
+            value={payment.pExtraCharge}
+            action={(e) => {
+              setPayment({ ...payment, pExtraCharge: e.target.value });
+            }}
+          />
 
-                <InputBox
-                  placeholder={"payment Discount"}
-                  type={"text"}
-                  title={"Payment Discount"}
-                  name={"paymentDiscount"}
-                />
+          <InputBox
+            placeholder={"payment Discount"}
+            type={"number"}
+            title={"Payment Discount"}
+            name={"paymentDiscount"}
+            value={payment.pDiscount}
+            action={(e) => {
+              setPayment({ ...payment, pDiscount: e.target.value });
+            }}
+          />
 
-                <InputBox
-                  placeholder={"Total Payment Recived From Customar"}
-                  type={"text"}
-                  title={"Payment Recived"}
-                  name={"paymentRecived"}
-                />
-              </div>
-            </div>
-
-            <div className="w-full h-auto flex justify-end items-end py-3">
-              <button
-                className="bg-defult-button text-base rounded-md text-white py-2 px-12 text-center w-full sm:w-auto"
-                onClick={() => setNextStep(false)}
-              >
-                Create Order
-              </button>
-            </div>
-          </>
-        )}
+          <InputBox
+            placeholder={"Total Payment Recived From Customar"}
+            type={"number"}
+            title={"Payment Recived"}
+            name={"paymentRecived"}
+            value={payment.pRecived}
+            action={(e) => {
+              setPayment({ ...payment, pRecived: e.target.value });
+            }}
+          />
+        </div>
       </div>
+
+      <div className="w-full h-auto flex justify-end items-end py-3">
+        <button
+          className="bg-defult-button text-base rounded-md text-white py-2 px-12 text-center w-full sm:w-auto"
+          onClick={submitHandler}
+        >
+          Create Order
+        </button>
+      </div>
+    </>
+  ))
+}
+      </div>
+      <AdminDashBoardOrderCreatedPopup orderData={getOrderfullData} />
     </div>
   );
 };

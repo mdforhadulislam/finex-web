@@ -18,21 +18,20 @@ export default async function handler(req, res) {
     const customarPhone = req.body.customarPhone ?? false;
     const creatorPhone = req.body.creatorPhone ?? false;
     const parcel = req.body.parcel ?? false;
-    const weight = req.body.weight ?? false;
+    const percelWeight = req.body.weight ?? false;
     const serviceType = req.body.serviceType ?? false;
     const itemType = req.body.itemType  ?? false;
-    const orderDate = req.body.orderDate ?? false;
-    const payment = req.body.payment ?? false;
+    const orderDate = req.body.orderDate ?? new Date();
+    const payment = {pType:"",pAmount:0,pExtraCharge:0,pDiscount:0,pRecived:0};
 
     const box = req.body.box ?? false;
-
+    
     if (
       customarPhone &&
       creatorPhone &&
       parcel &&
       serviceType &&
-      weight &&
-      payment &&
+      percelWeight &&
       box
     ) {
       const findCustomer = await User.findOne({ phone: customarPhone });
@@ -327,14 +326,7 @@ export default async function handler(req, res) {
               giftedParcentis = (price / 100) * 15;
             }
           }
-          if (payment.pExtraCharge) {
-            price = price + payment.pExtraCharge;
-          }
           price = price + giftedParcentis;
-
-          if (payment.pDiscount) {
-            price = price - payment.pDiscount;
-          }
 
           payment.pAmount = price;
 
@@ -342,24 +334,18 @@ export default async function handler(req, res) {
             customarPhone,
             creatorPhone,
             parcel,
-            orderDate,
-            payment,
-            (trackingId = trackingGenarator())
+            orderDate,payment,
+             trackingGenarator()
           );
 
           const createNewTracking = await createTracking(
             createNewOrder.trackingId,
             parcel,
             box,
-            weight,
-            item,
             customarPhone
           );
 
-          response(res, 200, "Order creation completed", {
-            tracking: createNewTracking,
-            details: createNewOrder,
-          });
+          response(res, 200, "Order creation completed",createNewOrder);
         } else {
           response(res, 404, "Provide precel country data", []);
         }
@@ -371,7 +357,7 @@ export default async function handler(req, res) {
     }
   } else if (req.method == "GET") {
     const allOrder =await Order.find()
-    response(res, 400, "All Order",allOrder);
+    response(res, 200, "All Order",allOrder);
   } else if (req.method == "DELETE") {
     response(res, 400, "Server side error", []);
   } else if (req.method == "PUT" || req.method == "PATCH") {

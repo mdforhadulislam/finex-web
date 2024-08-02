@@ -15,17 +15,17 @@ export default async function handler(req, res) {
     
     response(res, 400, "Server side error", []);
   } else if (req.method == "PUT" || req.method == "PATCH") {
-    const TrackID = req.params.trackID;
+    const TrackID = req.query?.trackID;
     if (TrackID) {
       const findOrder = await Order.findOne({ trackingId: TrackID });
       if (findOrder ) {
-        const payment = req.body.payment ?? false;
-
+        const payment = req.body ?? findOrder.payment;
+        
         findOrder.payment = payment;
 
         await findOrder.save();
 
-        response(res, 200, "Successfuly Updated", []);
+        response(res, 200, "Successfuly Updated",findOrder);
       } else {
         response(res, 400, "Not Found", []);
       }
