@@ -49,7 +49,7 @@ const OrderCreate = () => {
     priceID: "",
   });
   const [itemName, setItemName] = useState("");
-  const [creatorPhone, setCreatorPhone] = useState(authContext.user.phone);
+  const [creatorPhone, setCreatorPhone] = useState(authContext?.user?.phone);
   const [customarPhone, setCustomarPhone] = useState("");
   const [weight, setWeight] = useState("");
   const [serviceType, setServiceType] = useState("dhl");
