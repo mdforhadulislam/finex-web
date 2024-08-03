@@ -47,7 +47,7 @@ const DragBar = ({ isOpen, setIsOpen }) => {
             <FiBox className="inline w-8 h-8 text-defult" />
           </DragButton>
 
-          <DragButton title={"Track Parcel"} link={"/admin/"}>
+          <DragButton title={"Track Parcel"} link={"/admin/track/"}>
             <FiBox className="inline w-8 h-8 text-defult" />
           </DragButton>
 

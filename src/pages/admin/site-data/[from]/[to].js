@@ -237,9 +237,9 @@ const Single = () => {
       </div>
 
       <div className="w-full h-auto px-2 py-2">
-        <div class="sm:hidden">
+        <div className="sm:hidden">
           <select
-            class="w-full px-3 py-[6px] bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg "
+            className="w-full px-3 py-[6px] bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg "
             onChange={(e) => {
               if (e.target.value == "dhl") {
                 setTab({ dhl: true, fedex: false, ups: false, aramex: false });
@@ -258,44 +258,44 @@ const Single = () => {
             <option value={"aramex"}>Aramex</option>
           </select>
         </div>
-        <ul class="hidden text-sm font-medium text-center text-gray-500 rounded-lg shadow sm:flex ">
+        <ul className="hidden text-sm font-medium text-center text-gray-500 rounded-lg shadow sm:flex ">
           <li
-            class="w-full focus-within:z-10 cursor-pointer"
+            className="w-full focus-within:z-10 cursor-pointer"
             onClick={() => {
               setTab({ dhl: true, fedex: false, ups: false, aramex: false });
             }}
           >
-            <span class="inline-block w-full p-2  bg-defult-button hover:bg-[#f78009] text-white border-r rounded-s-lg">
+            <span className="inline-block w-full p-2  bg-defult-button hover:bg-[#f78009] text-white border-r rounded-s-lg">
               Dhl
             </span>
           </li>
           <li
-            class="w-full focus-within:z-10 cursor-pointer "
+            className="w-full focus-within:z-10 cursor-pointer "
             onClick={() => {
               setTab({ dhl: false, fedex: true, ups: false, aramex: false });
             }}
           >
-            <span class="inline-block w-full p-2  bg-defult-button hover:bg-[#f78009] text-white border-r">
+            <span className="inline-block w-full p-2  bg-defult-button hover:bg-[#f78009] text-white border-r">
               Fedex
             </span>
           </li>
           <li
-            class="w-full focus-within:z-10 cursor-pointer"
+            className="w-full focus-within:z-10 cursor-pointer"
             onClick={() => {
               setTab({ dhl: false, fedex: false, ups: true, aramex: false });
             }}
           >
-            <span class="inline-block w-full p-2  bg-defult-button hover:bg-[#f78009] text-white border-r">
+            <span className="inline-block w-full p-2  bg-defult-button hover:bg-[#f78009] text-white border-r">
               Ups
             </span>
           </li>
           <li
-            class="w-full focus-within:z-10 cursor-pointer"
+            className="w-full focus-within:z-10 cursor-pointer"
             onClick={() => {
               setTab({ dhl: false, fedex: false, ups: false, aramex: true });
             }}
           >
-            <span class="inline-block w-full p-2  bg-defult-button hover:bg-[#f78009] text-white  rounded-e-lg ">
+            <span className="inline-block w-full p-2  bg-defult-button hover:bg-[#f78009] text-white  rounded-e-lg ">
               Aramex
             </span>
           </li>

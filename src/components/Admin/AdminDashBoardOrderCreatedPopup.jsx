@@ -32,7 +32,7 @@ const AdminDashBoardOrderCreatedPopup = ({ orderData }) => {
             <Logo isFooter={true} imageStyle={"w-[130px] h-[130px]"} />
           </div>
           <div className="w-auto h-auto p-3">
-            <table class="table-auto border-[2px]">
+            <table className="table-auto border-[2px]">
               <tbody>
               <tr>
                 <td>Date:</td>

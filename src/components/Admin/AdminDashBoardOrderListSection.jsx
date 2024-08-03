@@ -1,5 +1,10 @@
 import { LoadingContext } from "@/context/LoadingContext";
-import { deleteRequestSend, getRequestSend, ORDER_API, SINGLE_PRICE_LIST } from "@/data/ApiMethod";
+import {
+  deleteRequestSend,
+  getRequestSend,
+  ORDER_API,
+  SINGLE_PRICE_LIST,
+} from "@/data/ApiMethod";
 import InputBox from "@/utils/InputBox";
 import { useContext, useEffect, useState } from "react";
 import { IoEyeOutline } from "react-icons/io5";
@@ -12,12 +17,11 @@ import { FiEdit } from "react-icons/fi";
 import { useRouter } from "next/router";
 
 const AdminDashBoardOrderListSection = () => {
-  const router = useRouter()
+  const router = useRouter();
   const [orderData, setOrderData] = useState([]);
   const [filteringData, setFilteringData] = useState([]);
 
   const [viewOrderData, setViewOrderData] = useState({});
-
 
   const loading = useContext(LoadingContext);
   const modal = useContext(ModalContext);
@@ -100,27 +104,35 @@ const AdminDashBoardOrderListSection = () => {
               <AdminDashBoardOrderListSectionBox orderData={item} />
 
               <div className="flex gap-2 absolute right-1 z-10 top-[3%] flex-col">
-
-<IoEyeOutline
-  className="w-8 h-8 p-[6px] text-green-600 hover:bg-gray-100 rounded-md"
-  onClick={() => {
-    setViewOrderData(item);
-    modal.open();
-  }}
-/>
-<FiEdit className="w-8 h-8 p-[6px] text-blue-600 hover:bg-gray-100 rounded-md" onClick={()=>{
-getRequestSend(SINGLE_PRICE_LIST(item?.parcel?.from?.id,item?.parcel?.to?.id)).then(res=>{
-
-  if(res.status==200){
-router.push(`/admin/order/${res?.data?._id}/?trackID=${item?.trackingId}`)
-  }
-})
-}} />
+                <IoEyeOutline
+                  className="w-8 h-8 p-[6px] text-green-600 hover:bg-gray-100 rounded-md"
+                  onClick={() => {
+                    setViewOrderData(item);
+                    modal.open();
+                  }}
+                />
+                <FiEdit
+                  className="w-8 h-8 p-[6px] text-blue-600 hover:bg-gray-100 rounded-md"
+                  onClick={() => {
+                    getRequestSend(
+                      SINGLE_PRICE_LIST(
+                        item?.parcel?.from?.id,
+                        item?.parcel?.to?.id
+                      )
+                    ).then((res) => {
+                      if (res.status == 200) {
+                        router.push(
+                          `/admin/order/${res?.data?._id}/?trackID=${item?.trackingId}`
+                        );
+                      }
+                    });
+                  }}
+                />
                 <MdDeleteOutline
                   className="w-8 h-8 p-1 text-red-600 hover:bg-gray-100 rounded-md"
                   onClick={() => {
                     loading.loadingStart();
-                    deleteRequestSend(`${ORDER_API}${item?.trackingId}`).then(
+                    deleteRequestSend(`${ORDER_API}/${item?.trackingId}`).then(
                       (res) => {
                         loading.loadingEnd();
                         toast.success(res.message);

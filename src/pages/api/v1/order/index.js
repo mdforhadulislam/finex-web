@@ -357,7 +357,7 @@ export default async function handler(req, res) {
     }
   } else if (req.method == "GET") {
     const allOrder =await Order.find()
-    response(res, 200, "All Order",allOrder);
+    response(res, 200, "All Order",allOrder); 
   } else if (req.method == "DELETE") {
     response(res, 400, "Server side error", []);
   } else if (req.method == "PUT" || req.method == "PATCH") {

@@ -2,6 +2,7 @@ import response from "@/libs/common/response";
 import configDB from "@/libs/config/db";
 import Order from "@/libs/models/Order.Model";
 import Tracking from "@/libs/models/Tracking.Model";
+import Track from "@/pages/admin/track";
 
 configDB();
 
@@ -27,6 +28,9 @@ export default async function handler(req, res) {
       if (findTracking) {
         const deletedOrder = await Order.findByIdAndDelete({
           _id: findTracking._id,
+        });
+        const deletedTracking = await Track.findByIdAndDelete({
+          ourTrackingId: findTracking.trackingId,
         });
 
         response(res, 200, "Successfuly Deleted", []);
