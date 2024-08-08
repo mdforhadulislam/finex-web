@@ -104,19 +104,19 @@ const DragBar = ({ isOpen, setIsOpen }) => {
             <LuLayoutDashboard className="inline w-8 h-8 text-defult" />
           </DragButton>
 
-          <DragButton title={"Pickup Request"} link={"user/pickup"}>
+          <DragButton title={"Pickup Request"} link={"/user/pickup"}>
             <GiCardPickup className="inline w-8 h-8 text-defult" />
           </DragButton>
 
-          <DragButton title={"Parcel Order"} link={"/setting"}>
+          <DragButton title={"Parcel Order"} link={"/user/order"}>
             <FiBox className="inline w-8 h-8 text-defult" />
           </DragButton>
 
-          <DragButton title={"Track Parcel"} link={"/setting"}>
+          <DragButton title={"Track Parcel"} link={"/user/track"}>
             <FiBox className="inline w-8 h-8 text-defult" />
           </DragButton>
 
-          <DragButton title={"Profile Setting"} link={"/setting"}>
+          <DragButton title={"Profile Setting"} link={"/user/setting"}>
             <GrUserSettings className="inline w-8 h-8 text-defult" />
           </DragButton>
 

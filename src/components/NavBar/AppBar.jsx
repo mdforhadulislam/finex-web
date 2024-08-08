@@ -18,8 +18,8 @@ const AppBar = ({ isOpen, setIsOpen }) => {
               href={` ${
                 authContext?.user?.role == "admin"
                   ? "/admin"
-                  : authContext?.user?.role == "customer"
-                  ? "/dashboard"
+                  : authContext?.user?.role == "user"
+                  ? "/user"
                   : authContext?.user?.role == "staff"
                   ? "/staff"
                   : "/"
@@ -33,8 +33,8 @@ const AppBar = ({ isOpen, setIsOpen }) => {
             {authContext?.user?.role == "admin" && (
               <Logo link={"/admin"} imageStyle={"w-[120px] h-[45px]"} />
             )}
-            {authContext?.user?.role == "customer" && (
-              <Logo link={"/dashboard"} imageStyle={"w-[120px] h-[45px]"} />
+            {authContext?.user?.role == "user" && (
+              <Logo link={"/user"} imageStyle={"w-[120px] h-[45px]"} />
             )}
             {authContext?.user?.role == "staff" && (
               <Logo link={"/staff"} imageStyle={"w-[120px] h-[45px]"} />
