@@ -39,7 +39,7 @@ const DragBar = ({ isOpen, setIsOpen }) => {
             <LuLayoutDashboard className="inline w-8 h-8 text-defult" />
           </DragButton>
 
-          <DragButton title={"Pickup Request"} link={"/admin/"}>
+          <DragButton title={"Pickup Request"} link={"/admin/pickup/"}>
             <GiCardPickup className="inline w-8 h-8 text-defult" />
           </DragButton>
 
