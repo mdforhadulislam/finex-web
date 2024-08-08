@@ -1,8 +1,7 @@
 
+import { AuthContext } from "@/context/AuthContext";
 import { LoadingContext } from "@/context/LoadingContext";
 import { ModalContext } from "@/context/ModalContext";
-import React, { useContext, useEffect, useState } from "react";
-import AdminDashBoardPickupListBox from "./AdminDashBoardPickupListBox";
 import {
   deleteRequestSend,
   getRequestSend,
@@ -11,12 +10,11 @@ import {
   putRequestSend,
   SINGLE_PICKUP_API,
 } from "@/data/ApiMethod";
-import AdminDashBoardPickupListViewPopup from "./AdminDashBoardPickupListViewPopup";
-import AdminDashBoardPickupListUpdatePopup from "./AdminDashBoardPickupListUpdatePopup";
-import { LiaHandPointRight } from "react-icons/lia";
-import { AuthContext } from "@/context/AuthContext";
-import { toast } from "react-toastify";
 import { useRouter } from "next/router";
+import { useContext, useEffect, useState } from "react";
+import { toast } from "react-toastify";
+import AdminDashBoardPickupListBox from "./AdminDashBoardPickupListBox";
+import AdminDashBoardPickupListViewPopup from "./AdminDashBoardPickupListViewPopup";
 
 const AdminDashBoardPickupListSection = () => {
   const loading = useContext(LoadingContext);
@@ -90,7 +88,6 @@ const AdminDashBoardPickupListSection = () => {
                   if (res.status == 200) {
                     toast.success(res.message);
                     getRequestSend(PICKUP_API).then((res) => {
-                      console.log(res);
                       if (res.status == 200) {
                         setAllPickup(res.data);
                       }

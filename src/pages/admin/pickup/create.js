@@ -59,8 +59,6 @@ const CreatePick = () => {
               }
               value={pickupData.dateTime}
             />
-            {console.log(pickupData)
-            }
           </div>
 
           <MainAddress isAddress={isAddress} setIsAddress={setIsAddress} />
