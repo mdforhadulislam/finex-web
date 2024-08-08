@@ -30,7 +30,7 @@ export default async function handler(req, res) {
     }
   } else if (req.method == "GET") {
     const allPickup = await Pickup.find();
-    response(res, 200, "All Pickup", allPickup);
+    response(res, 200, "All Pickup", allPickup.reverse());
   } else if (req.method == "DELETE") {
     response(res, 400, "Send Valid Data", []);
   } else if (req.method == "PUT" || req.method == "PATCH") {
