@@ -23,17 +23,28 @@ const userSchema = new mongoose.Schema(
     },
     password: {
       type: String,
-      required: true,
+      required: false,
     },
     role: {
       type: String,
-      required: true,
+      required: false,
       default: "user",
     },
     nationalID: {
-      type: Array,
+      type: Object,
       required: false,
-      default: [],
+      default: {
+        front: "",
+        back: "",
+      },
+      front: {
+        type: String,
+        required: false,
+      },
+      back: {
+        type: String,
+        required: false,
+      },
     },
   },
   { timestamps: true }

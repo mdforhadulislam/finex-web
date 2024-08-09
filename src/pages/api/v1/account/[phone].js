@@ -39,11 +39,12 @@ export default async function handler(req, res) {
     if (phone) {
       const findUser = await User.findOne({ phone: phone });
       if (findUser) {
-        const name = req.body.name ? req.body.name : false;
-        const phone = req.body.phone ? req.body.phone : false;
-        const email = req.body.email ? req.body.email : false;
-        const profile = req.body.profile ? req.body.profile : false;
-        const nationalID = req.body.nationalID ? req.body.nationalID : false;
+        const name = req.body.name ? req.body.name : "";
+        const phone = req.body.phone ? req.body.phone : "";
+        const email = req.body.email ? req.body.email : "";
+        const profile = req.body.profile ? req.body.profile : "";
+        const nationalID = req.body.nationalID ? req.body.nationalID : "";
+console.log(req.body);
 
         if (name || phone || email || email || profile || nationalID) {
           findUser.name = name ?? findUser.name;

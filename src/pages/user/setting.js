@@ -1,15 +1,81 @@
-"use client";
+"use client"
 import Image from "next/image";
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 import ProfileImage from "../../public/profile.svg";
-import ReactApexChart from "react-apexcharts";
+import { AuthContext } from "@/context/AuthContext";
+import InputBox from "@/utils/InputBox";
+import { MdOutlineCloudUpload, MdOutlineFileDownload } from "react-icons/md";
+import { getRequestSend, putRequestSend, USER_ACCOUNT_PHONE } from "@/data/ApiMethod";
 
 const UserSetting = () => {
+  const authContext = useContext(AuthContext); 
+  const [profileImages, setProfileImages] = useState([]);
+  const [nidFront, setNidFront] = useState([]);
+  const [nidBack, setNidBack] = useState([]);
+  const [userData, setUserData] = useState({
+    name:"",
+    phone:"",
+    email:"",
+    password:""
+  })
+
+  const profileImageHendler = (e) => {
+    // const fromData = new FormData();
+    // fromData.append("image", e.target.files);
+    const reader = new FileReader();
+    reader.onload = () => {
+      setProfileImages( reader.result );
+    };
+    reader?.readAsDataURL(e.target.files[0]);
+  };
+  const nidFrontImageHendler = (e) => {
+    // const fromData = new FormData();
+    // fromData.append("image", e.target.files);
+    const reader = new FileReader();
+    reader.onload = () => {
+      setNidFront( reader.result );
+    };
+    reader?.readAsDataURL(e.target.files[0]);
+  };
+  const nidBackImageHendler = (e) => {
+    // const fromData = new FormData();
+    // fromData.append("image", e.target.files);
+    const reader = new FileReader();
+    reader.onload = () => {
+      setNidBack( reader.result );
+    };
+    reader?.readAsDataURL(e.target.files[0]);
+  };
+
+  const uploadUpdatedHandler = (e)=>{
+    putRequestSend(USER_ACCOUNT_PHONE(authContext?.user?.phone),{},{
+      profile:profileImages,
+      ...userData,
+      nationalID:{
+        front:nidFront,
+        back:nidBack
+      }
+    }).then(res=>{
+      console.log(res);
+      
+    })
+  }
+
+  useEffect(()=>{
+    getRequestSend(USER_ACCOUNT_PHONE(authContext?.user?.phone)).then((res)=>{
+      console.log(userData);
+      
+      if(res.status=200){
+        setUserData({...res.data})
+      }
+    })
+  },[])
+
   return (
     <div className="w-full h-auto p-3 ">
       <div className="w-full h-auto bg-defult transition-all duration-300 rounded-md p-5 md:flex-row flex-col flex align-middle items-center justify-between gap-2">
-        <div className="w-full md:w-auto h-auto flex justify-start align-middle items-start gap-5 md:gap-3 flex-col md:flex-row">
-          <div className="w-full flex justify-center align-middle items-center md:block md:w-auto h-auto p-2 bg-white rounded-md">
+        <div className="w-full sm:w-auto h-auto flex justify-start align-middle items-start gap-5 sm:gap-3 flex-col sm:flex-row">
+          <div className="w-full flex justify-center align-middle items-center sm:block sm:w-auto h-auto p-2 bg-white rounded-md">
             <Image
               width={180}
               height={180}
@@ -24,34 +90,75 @@ const UserSetting = () => {
             </h1>
             <div className="w-full md:w-auto flex-col justify-center items-start align-baseline mt-3">
               <div className="w-auto flex justify-start items-center align-middle gap-3">
-                <span className="w-[56px]">Role</span>: <span>User</span>
+                <span className="w-[56px]">Role</span>:
+                <span>{authContext?.user?.role}</span>
               </div>
               <div className="w-auto flex justify-start items-center align-middle gap-3">
-                <span className="w-[56px]">Email</span>:{" "}
-                <span>mdforhadul44@gmail.com</span>
+                <span className="w-[56px]">Email</span>:
+                <span>{authContext?.user?.email}</span>
               </div>
               <div className="w-auto flex justify-start items-center align-middle gap-3">
-                <span className="w-[56px]">Phone</span>:{" "}
-                <span>+880193063191*</span>
+                <span className="w-[56px]">Phone</span>:
+                <span>{authContext?.user?.phone}</span>
               </div>
             </div>
           </div>
         </div>
-        <div
-          id="chart"
-          className="w-full md:w-[260px] h-auto shadow-3xl rounded-md bg-white flex flex-col justify-center align-middle items-center"
-        >
-          <ReactApexChart
-            options={{
-              chart: {
-                height: 220,
-                type: "radialBar",
-              },
-            }}
-            series={[67]}
-            type="radialBar"
-            height={220}
-          />
+      </div>
+
+      <div className="w-full h-auto p-3">
+        <div className="w-full h-auto flex flex-col gap-2">
+          <label className="" htmlFor="profilePic">
+            <span className="w-full block h-auto text-base font-medium text-gray-800 pl-2 p-[2px]">
+              Profile
+            </span>
+            <div className="w-full h-auto flex flex-col sm:flex-row cursor-pointer gap-3">
+              <input type="file" id="profilePic" className="hidden" onChange={profileImageHendler} />
+              <MdOutlineFileDownload className="w-36 h-36 p-5 border shadow-3xl text-gray-400 rounded-md"/>
+              <Image width={150} height={150}  src={profileImages} alt="PROFILE PIC" className="w-36 h-36 border shadow-3xl text-gray-400 rounded-md"></Image>
+            </div>
+          </label>
+
+          <InputBox title={"Name"} value={userData.name} action={(e)=>{
+            setUserData({...userData,name:e.target.value})
+          }} />
+          <InputBox title={"Phone"}  value={userData.phone} action={(e)=>{
+            setUserData({...userData,phone:e.target.value})
+          }}/>
+          <InputBox title={"Email"}  value={userData.email} action={(e)=>{
+            setUserData({...userData,email:e.target.value})
+          }} />
+
+          <label className="" htmlFor="nidFront">
+            <span className="w-full block h-auto text-base font-medium text-gray-800 pl-2 p-[2px]">
+              NID Front
+            </span>
+            <div className="w-full h-auto flex flex-col sm:flex-row cursor-pointer gap-3">
+              <input type="file" id="nidFront" className="hidden" onChange={nidFrontImageHendler} />
+              <MdOutlineFileDownload className="w-36 h-36 p-5 border shadow-3xl text-gray-400 rounded-md"/>
+              <Image width={150} height={150}  src={nidFront} alt="NID FRONT" className="w-36 h-36 border shadow-3xl text-gray-400 rounded-md"></Image>
+            </div>
+          </label>
+
+
+          <label className="" htmlFor="nidBanck">
+            <span className="w-full block h-auto text-base font-medium text-gray-800 pl-2 p-[2px]">
+              NID Back
+            </span>
+            <div className="w-full h-auto flex flex-col sm:flex-row cursor-pointer gap-3">
+              <input type="file" id="nidBanck" className="hidden" onChange={nidBackImageHendler} />
+              <MdOutlineFileDownload className="w-36 h-36 p-5 border shadow-3xl text-gray-400 rounded-md"/>
+              <Image width={150} height={150} src={nidBack} alt="NID BACK" className="w-36 h-36 border shadow-3xl text-gray-400 rounded-md"></Image>
+            </div>
+          </label>
+
+          <InputBox title={"Password"} action={(e)=>{
+            setUserData({...userData,password:e.target.value})
+          }} />
+
+          <button className="inline-flex items-center p-1 py-2 px-[6px] bg-defult-button rounded-lg text-white shadow-3xl justify-center  text-center focus:outline-none  text-base mt-4" onClick={uploadUpdatedHandler}>
+            Update Profile
+          </button>
         </div>
       </div>
     </div>
