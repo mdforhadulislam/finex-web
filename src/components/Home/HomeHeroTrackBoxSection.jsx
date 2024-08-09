@@ -1,3 +1,4 @@
+import { getRequestSend } from '@/data/ApiMethod';
 import IsBangla from '@/utils/IsBangla';
 import IsEnglish from '@/utils/IsEnglish';
 import { useRouter } from 'next/router';
