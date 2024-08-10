@@ -1,7 +1,7 @@
 import Logo from "@/utils/Logo";
 import LogoBn from "@/utils/LogoBn";
 import Link from "next/link";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import MenuButton from "./MenuButton";
 import NavButton from "./NavButton";
 // import { CgProfile } from "react-icons/cg";
@@ -13,11 +13,22 @@ import IsBangla from "@/utils/IsBangla";
 import LangugeToggolButton from "@/utils/LangugeToggolButton";
 import navBarRouteOption from "@/data/navbar";
 import Image from "next/image";
+import { getRequestSend, USER_ACCOUNT_PHONE } from "@/data/ApiMethod";
 
 const NavBar = () => {
   const [navbar, setNavbar] = useState(false);
   const authContext = useContext(AuthContext);
   const [isProfileClick, setIsProfileClick] = useState(false);
+  const [profilePic,setProfilePic] = useState("")
+
+
+  useEffect(()=>{
+    getRequestSend(USER_ACCOUNT_PHONE(authContext?.user?.phone)).then(res=>{
+      if(res.status==200){
+        setProfilePic(res?.data?.profile)
+      }
+    })
+  },[authContext])
 
   return (
     <header className="w-full block">
@@ -88,7 +99,7 @@ const NavBar = () => {
                     <Image
                       width={40}
                       height={40}
-                      src={ProfileIcon.src}
+                      src={ profilePic}
                       className="w-[40px] h-[40px] rounded-full shadow-3xl overflow-hidden border-gray-800 border"
                       alt={"User-Profile"}
                     />
@@ -119,6 +130,7 @@ const NavBar = () => {
                       className="w-[40px] h-[40px] rounded-full shadow-3xl overflow-hidden border-gray-800 border"
                       alt={"User-Profile"}
                     />
+
                     <span className=" text-lg font-semibold lg:hidden">
                       {authContext?.user?.name}
                     </span>

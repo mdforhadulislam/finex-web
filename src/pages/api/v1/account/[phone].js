@@ -14,8 +14,13 @@ export default async function handler(req, res) {
           phone: findUser.phone,
           email: findUser.email,
           role: findUser.role,
+          profile: findUser.profile,
+          nationalID: {
+            front: findUser.nationalID.front,
+            back: findUser.nationalID.back,
+          },
         };
-        response(res, 500, "find user", user);
+        response(res, 200, "find user", user);
       } else {
         response(res, 500, "User Not Found", []);
       }
@@ -44,7 +49,7 @@ export default async function handler(req, res) {
         const email = req.body.email ? req.body.email : "";
         const profile = req.body.profile ? req.body.profile : "";
         const nationalID = req.body.nationalID ? req.body.nationalID : "";
-console.log(req.body);
+        const role = req.body.role ? req.body.role : "";
 
         if (name || phone || email || email || profile || nationalID) {
           findUser.name = name ?? findUser.name;
@@ -52,6 +57,7 @@ console.log(req.body);
           findUser.email = email ?? findUser.email;
           findUser.profile = profile ?? findUser.profile;
           findUser.nationalID = nationalID ?? findUser.nationalID;
+          findUser.role = role ?? findUser.role;
 
           await findUser.save();
 

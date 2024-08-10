@@ -29,7 +29,7 @@ export default async function handler(req, res) {
         const deletedOrder = await Order.findByIdAndDelete({
           _id: findTracking._id,
         });
-        const deletedTracking = await Track.findByIdAndDelete({
+        const deletedTracking = await Tracking.findByIdAndDelete({
           ourTrackingId: findTracking.trackingId,
         });
 

@@ -1,30 +1,35 @@
-"use client"
-import Image from "next/image";
-import React, { useContext, useEffect, useState } from "react";
-import ProfileImage from "../../public/profile.svg";
+"use client";
 import { AuthContext } from "@/context/AuthContext";
+import {
+  getRequestSend,
+  putRequestSend,
+  USER_ACCOUNT_PHONE,
+} from "@/data/ApiMethod";
 import InputBox from "@/utils/InputBox";
-import { MdOutlineCloudUpload, MdOutlineFileDownload } from "react-icons/md";
-import { getRequestSend, putRequestSend, USER_ACCOUNT_PHONE } from "@/data/ApiMethod";
+import Image from "next/image";
+import { useContext, useEffect, useState } from "react";
+import { MdOutlineFileDownload } from "react-icons/md";
+import ProfileImage from "../../public/profile.svg";
+import { toast } from "react-toastify";
 
 const UserSetting = () => {
-  const authContext = useContext(AuthContext); 
+  const authContext = useContext(AuthContext);
   const [profileImages, setProfileImages] = useState([]);
   const [nidFront, setNidFront] = useState([]);
   const [nidBack, setNidBack] = useState([]);
   const [userData, setUserData] = useState({
-    name:"",
-    phone:"",
-    email:"",
-    password:""
-  })
+    name: "",
+    phone: "",
+    email: "",
+    password: "",
+  });
 
   const profileImageHendler = (e) => {
     // const fromData = new FormData();
     // fromData.append("image", e.target.files);
     const reader = new FileReader();
     reader.onload = () => {
-      setProfileImages( reader.result );
+      setProfileImages(reader.result);
     };
     reader?.readAsDataURL(e.target.files[0]);
   };
@@ -33,7 +38,7 @@ const UserSetting = () => {
     // fromData.append("image", e.target.files);
     const reader = new FileReader();
     reader.onload = () => {
-      setNidFront( reader.result );
+      setNidFront(reader.result);
     };
     reader?.readAsDataURL(e.target.files[0]);
   };
@@ -42,34 +47,45 @@ const UserSetting = () => {
     // fromData.append("image", e.target.files);
     const reader = new FileReader();
     reader.onload = () => {
-      setNidBack( reader.result );
+      setNidBack(reader.result);
     };
     reader?.readAsDataURL(e.target.files[0]);
   };
 
-  const uploadUpdatedHandler = (e)=>{
-    putRequestSend(USER_ACCOUNT_PHONE(authContext?.user?.phone),{},{
-      profile:profileImages,
-      ...userData,
-      nationalID:{
-        front:nidFront,
-        back:nidBack
+  const uploadUpdatedHandler = (e) => {
+    putRequestSend(
+      USER_ACCOUNT_PHONE(authContext?.user?.phone),
+      {},
+      {
+        profile: profileImages,
+        ...userData,
+        nationalID: {
+          front: nidFront,
+          back: nidBack,
+        },
       }
-    }).then(res=>{
-      console.log(res);
-      
-    })
-  }
+    ).then((res) => {
+      if (res.status == 200) {
+        toast.success(res.message);
+     
+      }
+    });
+  };
 
-  useEffect(()=>{
-    getRequestSend(USER_ACCOUNT_PHONE(authContext?.user?.phone)).then((res)=>{
+  useEffect(() => {
+    getRequestSend(USER_ACCOUNT_PHONE(authContext?.user?.phone)).then((res) => {
       console.log(userData);
-      
-      if(res.status=200){
-        setUserData({...res.data})
+
+      if ((res.status = 200)) {
+        setUserData({ ...res.data });
+        console.log(res.data);
+        
+        setProfileImages(res.data?.profile)
+        setNidFront(res.data?.nationalID?.front)
+        setNidBack(res.data?.nationalID?.back)
       }
-    })
-  },[])
+    });
+  }, []);
 
   return (
     <div className="w-full h-auto p-3 ">
@@ -80,7 +96,7 @@ const UserSetting = () => {
               width={180}
               height={180}
               className={"w-[180px] h-[180px] rounded-md shadow-3xl"}
-              src={ProfileImage.src}
+              src={profileImages}
               alt="Profile Image"
             />
           </div>
@@ -108,55 +124,104 @@ const UserSetting = () => {
 
       <div className="w-full h-auto p-3">
         <div className="w-full h-auto flex flex-col gap-2">
+
+          <div className="w-full h-auto flex gap-3  sm:flex-row flex-col">
           <label className="" htmlFor="profilePic">
             <span className="w-full block h-auto text-base font-medium text-gray-800 pl-2 p-[2px]">
               Profile
             </span>
             <div className="w-full h-auto flex flex-col sm:flex-row cursor-pointer gap-3">
-              <input type="file" id="profilePic" className="hidden" onChange={profileImageHendler} />
-              <MdOutlineFileDownload className="w-36 h-36 p-5 border shadow-3xl text-gray-400 rounded-md"/>
-              <Image width={150} height={150}  src={profileImages} alt="PROFILE PIC" className="w-36 h-36 border shadow-3xl text-gray-400 rounded-md"></Image>
+              <input
+                type="file"
+                id="profilePic"
+                className="hidden"
+                onChange={profileImageHendler}
+              />
+              <MdOutlineFileDownload className="w-36 h-36 p-5 border shadow-3xl text-gray-400 rounded-md" />
+              <Image
+                width={150}
+                height={150}
+                src={profileImages}
+                alt="PROFILE PIC"
+                className="w-36 h-36 border shadow-3xl text-gray-400 rounded-md"
+              ></Image>
             </div>
           </label>
-
-          <InputBox title={"Name"} value={userData.name} action={(e)=>{
-            setUserData({...userData,name:e.target.value})
-          }} />
-          <InputBox title={"Phone"}  value={userData.phone} action={(e)=>{
-            setUserData({...userData,phone:e.target.value})
-          }}/>
-          <InputBox title={"Email"}  value={userData.email} action={(e)=>{
-            setUserData({...userData,email:e.target.value})
-          }} />
-
+          
           <label className="" htmlFor="nidFront">
             <span className="w-full block h-auto text-base font-medium text-gray-800 pl-2 p-[2px]">
               NID Front
             </span>
             <div className="w-full h-auto flex flex-col sm:flex-row cursor-pointer gap-3">
-              <input type="file" id="nidFront" className="hidden" onChange={nidFrontImageHendler} />
-              <MdOutlineFileDownload className="w-36 h-36 p-5 border shadow-3xl text-gray-400 rounded-md"/>
-              <Image width={150} height={150}  src={nidFront} alt="NID FRONT" className="w-36 h-36 border shadow-3xl text-gray-400 rounded-md"></Image>
+              <input
+                type="file"
+                id="nidFront"
+                className="hidden"
+                onChange={nidFrontImageHendler}
+              />
+              <MdOutlineFileDownload className="w-36 h-36 p-5 border shadow-3xl text-gray-400 rounded-md" />
+              <Image
+                width={150}
+                height={150}
+                src={nidFront}
+                alt="NID FRONT"
+                className="w-36 h-36 border shadow-3xl text-gray-400 rounded-md"
+              ></Image>
             </div>
           </label>
-
 
           <label className="" htmlFor="nidBanck">
             <span className="w-full block h-auto text-base font-medium text-gray-800 pl-2 p-[2px]">
               NID Back
             </span>
             <div className="w-full h-auto flex flex-col sm:flex-row cursor-pointer gap-3">
-              <input type="file" id="nidBanck" className="hidden" onChange={nidBackImageHendler} />
-              <MdOutlineFileDownload className="w-36 h-36 p-5 border shadow-3xl text-gray-400 rounded-md"/>
-              <Image width={150} height={150} src={nidBack} alt="NID BACK" className="w-36 h-36 border shadow-3xl text-gray-400 rounded-md"></Image>
+              <input
+                type="file"
+                id="nidBanck"
+                className="hidden"
+                onChange={nidBackImageHendler}
+              />
+              <MdOutlineFileDownload className="w-36 h-36 p-5 border shadow-3xl text-gray-400 rounded-md" />
+              <Image
+                width={150}
+                height={150}
+                src={nidBack}
+                alt="NID BACK"
+                className="w-36 h-36 border shadow-3xl text-gray-400 rounded-md"
+              ></Image>
             </div>
           </label>
+          </div>
 
-          <InputBox title={"Password"} action={(e)=>{
-            setUserData({...userData,password:e.target.value})
-          }} />
 
-          <button className="inline-flex items-center p-1 py-2 px-[6px] bg-defult-button rounded-lg text-white shadow-3xl justify-center  text-center focus:outline-none  text-base mt-4" onClick={uploadUpdatedHandler}>
+          <InputBox
+            title={"Name"}
+            value={userData.name}
+            action={(e) => {
+              setUserData({ ...userData, name: e.target.value });
+            }}
+          />
+          <InputBox
+            title={"Phone"}
+            value={userData.phone}
+            action={(e) => {
+              setUserData({ ...userData, phone: e.target.value });
+            }}
+          />
+          <InputBox
+            title={"Email"}
+            value={userData.email}
+            action={(e) => {
+              setUserData({ ...userData, email: e.target.value });
+            }}
+          />
+
+
+
+          <button
+            className="inline-flex items-center p-1 py-2 px-[6px] bg-defult-button rounded-lg text-white shadow-3xl justify-center  text-center focus:outline-none  text-base mt-4"
+            onClick={uploadUpdatedHandler}
+          >
             Update Profile
           </button>
         </div>
