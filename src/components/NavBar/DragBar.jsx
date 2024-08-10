@@ -51,11 +51,11 @@ const DragBar = ({ isOpen, setIsOpen }) => {
             <FiBox className="inline w-8 h-8 text-defult" />
           </DragButton>
 
-          <DragButton title={"Profile Setting"} link={"/setting"}>
+          <DragButton title={"Profile Setting"} link={"/admin/setting"}>
             <GrUserSettings className="inline w-8 h-8 text-defult" />
           </DragButton>
 
-          <DragButton title={"Staff"} link={"/user"}>
+          <DragButton title={"Staff"} link={"/admin/staff"}>
             <AiOutlineUserAdd className="inline w-8 h-8 text-defult" />
           </DragButton>
 

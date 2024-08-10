@@ -6,11 +6,7 @@ const UserDashBoardPickupHeaderNavButtonSection = () => {
     <div className="w-full h-auto py-1">
       <DashBoardLinkButton
         link={"/user/pickup/create"}
-        title={"Create Pickup"}
-      />
-      <DashBoardLinkButton
-        link={"/admin/#Alltracking"}
-        title={"All Tracking"}
+        title={"Create Pickup Request"}
       />
     </div>
   );

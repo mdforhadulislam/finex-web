@@ -1,4 +1,3 @@
-
 import { AuthContext } from "@/context/AuthContext";
 import { LoadingContext } from "@/context/LoadingContext";
 import { ModalContext } from "@/context/ModalContext";
@@ -21,7 +20,7 @@ const AdminDashBoardPickupListSection = () => {
   const modal = useContext(ModalContext);
   const auth = useContext(AuthContext);
 
-  const router = useRouter()
+  const router = useRouter();
 
   const [allPickup, setAllPickup] = useState([]);
 
@@ -42,6 +41,56 @@ const AdminDashBoardPickupListSection = () => {
           <h1 className="text-center text-lg font-semibold">PickUp List</h1>
         </div>
 
+        <div className="w-full flex gap-3 flex-col sm:flex-row">
+          
+
+        <button
+            className="w-auto px-4 py-2 bg-defult-button text-white rounded-md"
+            onClick={() => {
+              getRequestSend(PICKUP_API).then((res) => {
+                if (res.status == 200) {
+                  setAllPickup(res.data);
+                }
+              });
+            }}
+          >
+            All Pickup
+          </button>
+          
+          <button
+            className="w-auto px-4 py-2 bg-green-600 text-white rounded-md"
+            onClick={() => {
+              getRequestSend(PICKUP_API).then((res) => {
+                if (res.status == 200) {
+                  setAllPickup([
+                    ...res.data.filter(
+                      (item) => item?.isConfirm?.confirm == true
+                    ),
+                  ]);
+                }
+              });
+            }}
+          >
+            Accept
+          </button>
+          <button
+            className="w-auto px-4 py-2 bg-defult-button text-white rounded-md"
+            onClick={() => {
+              getRequestSend(PICKUP_API).then((res) => {
+                if (res.status == 200) {
+                  setAllPickup([
+                    ...res.data.filter(
+                      (item) => item?.isConfirm?.confirm != true
+                    ),
+                  ]);
+                }
+              });
+            }}
+          >
+            Pending
+          </button>
+        </div>
+
         <div className="w-full h-auto py-2 flex flex-col gap-3">
           {allPickup.map((pickupData, index) => (
             <AdminDashBoardPickupListBox
@@ -52,13 +101,13 @@ const AdminDashBoardPickupListSection = () => {
                 modal.open();
               }}
               editAction={() => {
-                router.push(`/admin/pickup/${pickupData._id}`)
+                router.push(`/admin/pickup/${pickupData._id}`);
               }}
               deleteAction={() => {
-                loading.loadingStart()
+                loading.loadingStart();
                 deleteRequestSend(SINGLE_PICKUP_API(pickupData._id)).then(
                   (res) => {
-                    loading.loadingEnd()
+                    loading.loadingEnd();
                     if (res.status == 200) {
                       toast.success(res.message);
                       getRequestSend(PICKUP_API).then((res) => {
@@ -73,7 +122,7 @@ const AdminDashBoardPickupListSection = () => {
                 );
               }}
               acceptAction={() => {
-                loading.loadingStart()
+                loading.loadingStart();
                 putRequestSend(
                   PICKUP_CONFIRM_API(pickupData._id),
                   {},
@@ -84,7 +133,7 @@ const AdminDashBoardPickupListSection = () => {
                     cost: 1,
                   }
                 ).then((res) => {
-                  loading.loadingEnd()
+                  loading.loadingEnd();
                   if (res.status == 200) {
                     toast.success(res.message);
                     getRequestSend(PICKUP_API).then((res) => {
@@ -100,12 +149,8 @@ const AdminDashBoardPickupListSection = () => {
             />
           ))}
         </div>
-     
-          <AdminDashBoardPickupListViewPopup pickupData={selectedPickupData} />
-   
 
-      
-     
+        <AdminDashBoardPickupListViewPopup pickupData={selectedPickupData} />
       </div>
     </div>
   );
