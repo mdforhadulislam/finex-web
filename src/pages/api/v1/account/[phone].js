@@ -88,5 +88,5 @@ export const config = {
     },
     responseLimit: "5mb",
   },
-  maxDuration: 1000,
+  maxDuration: 10,
 };

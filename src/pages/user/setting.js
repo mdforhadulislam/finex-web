@@ -121,12 +121,12 @@ const UserSetting = () => {
 
       <div className="w-full h-auto p-3">
         <div className="w-full h-auto flex flex-col gap-2">
-          <div className="w-full h-auto flex gap-3  sm:flex-row flex-col">
+          <div className="w-full h-auto flex gap-3  md:flex-row flex-col">
             <label className="" htmlFor="profilePic">
               <span className="w-full block h-auto text-base font-medium text-gray-800 pl-2 p-[2px]">
                 Profile
               </span>
-              <div className="w-full h-auto flex flex-col sm:flex-row cursor-pointer gap-3">
+              <div className="w-full h-auto flex flex-row cursor-pointer gap-3">
                 <input
                   type="file"
                   id="profilePic"
@@ -148,7 +148,7 @@ const UserSetting = () => {
               <span className="w-full block h-auto text-base font-medium text-gray-800 pl-2 p-[2px]">
                 NID Front
               </span>
-              <div className="w-full h-auto flex flex-col sm:flex-row cursor-pointer gap-3">
+              <div className="w-full h-auto flex flex-row cursor-pointer gap-3">
                 <input
                   type="file"
                   id="nidFront"
@@ -170,7 +170,7 @@ const UserSetting = () => {
               <span className="w-full block h-auto text-base font-medium text-gray-800 pl-2 p-[2px]">
                 NID Back
               </span>
-              <div className="w-full h-auto flex flex-col sm:flex-row cursor-pointer gap-3">
+              <div className="w-full h-auto flex flex-row cursor-pointer gap-3">
                 <input
                   type="file"
                   id="nidBanck"
