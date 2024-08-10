@@ -8,6 +8,8 @@ export default async function handler(req, res) {
     const phone = req.query?.phone;
     if (phone) {
       const findUser = await User.findOne({ phone: phone });
+
+      console.log(phone);
       if (findUser) {
         const user = {
           name: findUser.name,
@@ -43,21 +45,24 @@ export default async function handler(req, res) {
     const phone = req.query?.phone;
     if (phone) {
       const findUser = await User.findOne({ phone: phone });
+
       if (findUser) {
-        const name = req.body.name ? req.body.name : "";
-        const phone = req.body.phone ? req.body.phone : "";
-        const email = req.body.email ? req.body.email : "";
-        const profile = req.body.profile ? req.body.profile : "";
-        const nationalID = req.body.nationalID ? req.body.nationalID : "";
-        const role = req.body.role ? req.body.role : "";
+        const name = req.body.name ? req.body.name : findUser.name;
+        const phone = req.body.phone ? req.body.phone : findUser.phone;
+        const email = req.body.email ? req.body.email : findUser.email;
+        const profile = req.body.profile ? req.body.profile : findUser.profile;
+        const nationalID = req.body.nationalID
+          ? req.body.nationalID
+          : findUser.nationalID;
+        const role = req.body.role ? req.body.role : findUser.role;
 
         if (name || phone || email || email || profile || nationalID) {
-          findUser.name = name ?? findUser.name;
-          findUser.phone = phone ?? findUser.phone;
-          findUser.email = email ?? findUser.email;
-          findUser.profile = profile ?? findUser.profile;
-          findUser.nationalID = nationalID ?? findUser.nationalID;
-          findUser.role = role ?? findUser.role;
+          findUser.name = name;
+          findUser.phone = phone;
+          findUser.email = email;
+          findUser.profile = profile;
+          findUser.nationalID = nationalID;
+          findUser.role = role;
 
           await findUser.save();
 
@@ -69,9 +74,19 @@ export default async function handler(req, res) {
         response(res, 404, "User Not Found", []);
       }
     } else {
-      response(res, 500, "Server side error", []);
+      response(res, 404, "User Not Found", []);
     }
   } else {
     response(res, 500, "Server side error", []);
   }
 }
+
+export const config = {
+  api: {
+    bodyParser: {
+      sizeLimit: "5mb",
+    },
+    responseLimit: "5mb",
+  },
+  maxDuration: 1000,
+};

@@ -9,16 +9,16 @@ const userSchema = new mongoose.Schema(
     },
     name: {
       type: String,
-      required: true,
+      required: false,
     },
     email: {
       type: String,
-      required: true,
+      required: false,
       unique: true,
     },
     phone: {
       type: String,
-      required: true,
+      required: false,
       unique: true,
     },
     password: {

@@ -57,8 +57,8 @@ const UserSetting = () => {
       USER_ACCOUNT_PHONE(authContext?.user?.phone),
       {},
       {
-        profile: profileImages,
         ...userData,
+        profile: profileImages,
         nationalID: {
           front: nidFront,
           back: nidBack,
@@ -67,22 +67,19 @@ const UserSetting = () => {
     ).then((res) => {
       if (res.status == 200) {
         toast.success(res.message);
-     
+      } else {
+        toast.success(res.message);
       }
     });
   };
 
   useEffect(() => {
     getRequestSend(USER_ACCOUNT_PHONE(authContext?.user?.phone)).then((res) => {
-      console.log(userData);
-
       if ((res.status = 200)) {
         setUserData({ ...res.data });
-        console.log(res.data);
-        
-        setProfileImages(res.data?.profile)
-        setNidFront(res.data?.nationalID?.front)
-        setNidBack(res.data?.nationalID?.back)
+        setProfileImages(res.data?.profile);
+        setNidFront(res.data?.nationalID?.front);
+        setNidBack(res.data?.nationalID?.back);
       }
     });
   }, []);
@@ -124,75 +121,73 @@ const UserSetting = () => {
 
       <div className="w-full h-auto p-3">
         <div className="w-full h-auto flex flex-col gap-2">
-
           <div className="w-full h-auto flex gap-3  sm:flex-row flex-col">
-          <label className="" htmlFor="profilePic">
-            <span className="w-full block h-auto text-base font-medium text-gray-800 pl-2 p-[2px]">
-              Profile
-            </span>
-            <div className="w-full h-auto flex flex-col sm:flex-row cursor-pointer gap-3">
-              <input
-                type="file"
-                id="profilePic"
-                className="hidden"
-                onChange={profileImageHendler}
-              />
-              <MdOutlineFileDownload className="w-36 h-36 p-5 border shadow-3xl text-gray-400 rounded-md" />
-              <Image
-                width={150}
-                height={150}
-                src={profileImages}
-                alt="PROFILE PIC"
-                className="w-36 h-36 border shadow-3xl text-gray-400 rounded-md"
-              ></Image>
-            </div>
-          </label>
-          
-          <label className="" htmlFor="nidFront">
-            <span className="w-full block h-auto text-base font-medium text-gray-800 pl-2 p-[2px]">
-              NID Front
-            </span>
-            <div className="w-full h-auto flex flex-col sm:flex-row cursor-pointer gap-3">
-              <input
-                type="file"
-                id="nidFront"
-                className="hidden"
-                onChange={nidFrontImageHendler}
-              />
-              <MdOutlineFileDownload className="w-36 h-36 p-5 border shadow-3xl text-gray-400 rounded-md" />
-              <Image
-                width={150}
-                height={150}
-                src={nidFront}
-                alt="NID FRONT"
-                className="w-36 h-36 border shadow-3xl text-gray-400 rounded-md"
-              ></Image>
-            </div>
-          </label>
+            <label className="" htmlFor="profilePic">
+              <span className="w-full block h-auto text-base font-medium text-gray-800 pl-2 p-[2px]">
+                Profile
+              </span>
+              <div className="w-full h-auto flex flex-col sm:flex-row cursor-pointer gap-3">
+                <input
+                  type="file"
+                  id="profilePic"
+                  className="hidden"
+                  onChange={profileImageHendler}
+                />
+                <MdOutlineFileDownload className="w-36 h-36 p-5 border shadow-3xl text-gray-400 rounded-md" />
+                <Image
+                  width={150}
+                  height={150}
+                  src={profileImages}
+                  alt="PROFILE PIC"
+                  className="w-36 h-36 border shadow-3xl text-gray-400 rounded-md"
+                ></Image>
+              </div>
+            </label>
 
-          <label className="" htmlFor="nidBanck">
-            <span className="w-full block h-auto text-base font-medium text-gray-800 pl-2 p-[2px]">
-              NID Back
-            </span>
-            <div className="w-full h-auto flex flex-col sm:flex-row cursor-pointer gap-3">
-              <input
-                type="file"
-                id="nidBanck"
-                className="hidden"
-                onChange={nidBackImageHendler}
-              />
-              <MdOutlineFileDownload className="w-36 h-36 p-5 border shadow-3xl text-gray-400 rounded-md" />
-              <Image
-                width={150}
-                height={150}
-                src={nidBack}
-                alt="NID BACK"
-                className="w-36 h-36 border shadow-3xl text-gray-400 rounded-md"
-              ></Image>
-            </div>
-          </label>
+            <label className="" htmlFor="nidFront">
+              <span className="w-full block h-auto text-base font-medium text-gray-800 pl-2 p-[2px]">
+                NID Front
+              </span>
+              <div className="w-full h-auto flex flex-col sm:flex-row cursor-pointer gap-3">
+                <input
+                  type="file"
+                  id="nidFront"
+                  className="hidden"
+                  onChange={nidFrontImageHendler}
+                />
+                <MdOutlineFileDownload className="w-36 h-36 p-5 border shadow-3xl text-gray-400 rounded-md" />
+                <Image
+                  width={150}
+                  height={150}
+                  src={nidFront}
+                  alt="NID FRONT"
+                  className="w-36 h-36 border shadow-3xl text-gray-400 rounded-md"
+                ></Image>
+              </div>
+            </label>
+
+            <label className="" htmlFor="nidBanck">
+              <span className="w-full block h-auto text-base font-medium text-gray-800 pl-2 p-[2px]">
+                NID Back
+              </span>
+              <div className="w-full h-auto flex flex-col sm:flex-row cursor-pointer gap-3">
+                <input
+                  type="file"
+                  id="nidBanck"
+                  className="hidden"
+                  onChange={nidBackImageHendler}
+                />
+                <MdOutlineFileDownload className="w-36 h-36 p-5 border shadow-3xl text-gray-400 rounded-md" />
+                <Image
+                  width={150}
+                  height={150}
+                  src={nidBack}
+                  alt="NID BACK"
+                  className="w-36 h-36 border shadow-3xl text-gray-400 rounded-md"
+                ></Image>
+              </div>
+            </label>
           </div>
-
 
           <InputBox
             title={"Name"}
@@ -215,8 +210,6 @@ const UserSetting = () => {
               setUserData({ ...userData, email: e.target.value });
             }}
           />
-
-
 
           <button
             className="inline-flex items-center p-1 py-2 px-[6px] bg-defult-button rounded-lg text-white shadow-3xl justify-center  text-center focus:outline-none  text-base mt-4"
