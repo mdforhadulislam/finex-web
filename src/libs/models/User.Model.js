@@ -5,7 +5,7 @@ const userSchema = new mongoose.Schema(
     profile: {
       type: String,
       required: false,
-      default: "/profile.svg",
+      default: "/_next/static/media/profile.892b3632.svg",
     },
     name: {
       type: String,

@@ -1186,6 +1186,10 @@ video {
   cursor: pointer;
 }
 
+.cursor-not-allowed{
+  cursor: not-allowed;
+}
+
 .select-none{
   -webkit-user-select: none;
      -moz-user-select: none;
@@ -1312,12 +1316,6 @@ video {
 
 .gap-\[2px\]{
   gap: 2px;
-}
-
-.space-x-2 > :not([hidden]) ~ :not([hidden]){
-  --tw-space-x-reverse: 0;
-  margin-right: calc(0.5rem * var(--tw-space-x-reverse));
-  margin-left: calc(0.5rem * calc(1 - var(--tw-space-x-reverse)));
 }
 
 .space-x-4 > :not([hidden]) ~ :not([hidden]){
@@ -1467,6 +1465,11 @@ video {
   border-color: rgb(31 41 55 / var(--tw-border-opacity));
 }
 
+.border-red-500{
+  --tw-border-opacity: 1;
+  border-color: rgb(239 68 68 / var(--tw-border-opacity));
+}
+
 .bg-defult{
   --tw-bg-opacity: 1;
   background-color: rgb(47 48 145 / var(--tw-bg-opacity));
@@ -1497,6 +1500,11 @@ video {
   background-color: rgb(249 250 251 / var(--tw-bg-opacity));
 }
 
+.bg-green-600{
+  --tw-bg-opacity: 1;
+  background-color: rgb(22 163 74 / var(--tw-bg-opacity));
+}
+
 .bg-slate-50{
   --tw-bg-opacity: 1;
   background-color: rgb(248 250 252 / var(--tw-bg-opacity));
@@ -1513,21 +1521,6 @@ video {
 
 .bg-white\/60{
   background-color: rgb(255 255 255 / 0.6);
-}
-
-.bg-green-500{
-  --tw-bg-opacity: 1;
-  background-color: rgb(34 197 94 / var(--tw-bg-opacity));
-}
-
-.bg-green-700{
-  --tw-bg-opacity: 1;
-  background-color: rgb(21 128 61 / var(--tw-bg-opacity));
-}
-
-.bg-green-600{
-  --tw-bg-opacity: 1;
-  background-color: rgb(22 163 74 / var(--tw-bg-opacity));
 }
 
 .bg-gradient-to-b{
@@ -1825,10 +1818,6 @@ video {
   text-align: justify;
 }
 
-.align-baseline{
-  vertical-align: baseline;
-}
-
 .align-top{
   vertical-align: top;
 }
@@ -2068,6 +2057,11 @@ video {
   color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 
+.text-red-500{
+  --tw-text-opacity: 1;
+  color: rgb(239 68 68 / var(--tw-text-opacity));
+}
+
 .antialiased{
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -2087,6 +2081,10 @@ video {
 
 .opacity-40{
   opacity: 0.4;
+}
+
+.opacity-50{
+  opacity: 0.5;
 }
 
 .shadow{
@@ -2847,10 +2845,6 @@ th {
 
   .lg\:block{
     display: block;
-  }
-
-  .lg\:inline-block{
-    display: inline-block;
   }
 
   .lg\:hidden{
