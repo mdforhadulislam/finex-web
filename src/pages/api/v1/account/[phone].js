@@ -8,8 +8,6 @@ export default async function handler(req, res) {
     const phone = req.query?.phone;
     if (phone) {
       const findUser = await User.findOne({ phone: phone });
-
-      console.log(phone);
       if (findUser) {
         const user = {
           name: findUser.name,
@@ -88,5 +86,5 @@ export const config = {
     },
     responseLimit: "5mb",
   },
-  maxDuration: 10,
+  maxDuration: 5,
 };

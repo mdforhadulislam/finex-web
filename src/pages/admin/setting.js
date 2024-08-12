@@ -73,7 +73,9 @@ const AdminSetting = () => {
   };
 
   useEffect(() => {
+    loading.loadingStart()
     getRequestSend(USER_ACCOUNT_PHONE(authContext?.user?.phone)).then((res) => {
+    loading.loadingEnd()
       if ((res.status = 200)) {
         setUserData({ ...res.data });
         setProfileImages(res.data?.profile);

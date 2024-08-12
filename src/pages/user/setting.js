@@ -11,9 +11,11 @@ import { useContext, useEffect, useState } from "react";
 import { MdOutlineFileDownload } from "react-icons/md";
 import ProfileImage from "../../public/profile.svg";
 import { toast } from "react-toastify";
+import { LoadingContext } from "@/context/LoadingContext";
 
 const UserSetting = () => {
   const authContext = useContext(AuthContext);
+  const loading = useContext(LoadingContext);
   const [profileImages, setProfileImages] = useState([]);
   const [nidFront, setNidFront] = useState([]);
   const [nidBack, setNidBack] = useState([]);
@@ -53,6 +55,7 @@ const UserSetting = () => {
   };
 
   const uploadUpdatedHandler = (e) => {
+    loading.loadingStart();
     putRequestSend(
       USER_ACCOUNT_PHONE(authContext?.user?.phone),
       {},
@@ -65,6 +68,7 @@ const UserSetting = () => {
         },
       }
     ).then((res) => {
+      loading.loadingEnd();
       if (res.status == 200) {
         toast.success(res.message);
       } else {
@@ -74,7 +78,9 @@ const UserSetting = () => {
   };
 
   useEffect(() => {
+    loading.loadingStart();
     getRequestSend(USER_ACCOUNT_PHONE(authContext?.user?.phone)).then((res) => {
+      loading.loadingEnd();
       if ((res.status = 200)) {
         setUserData({ ...res.data });
         setProfileImages(res.data?.profile);
