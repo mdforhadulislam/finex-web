@@ -34,8 +34,8 @@ const userSchema = new mongoose.Schema(
       type: Object,
       required: false,
       default: {
-        front: "",
-        back: "",
+        front:  "/_next/static/media/profile.892b3632.svg",
+        back:  "/_next/static/media/profile.892b3632.svg",
       },
       front: {
         type: String,

@@ -11,7 +11,7 @@ const AdminDashBoardPickupListBox = ({
   editAction,
   deleteAction,
   viewAction,
-  acceptAction
+  acceptAction,staffPopup
 }) => {
   return (
     <div className="w-full h-auto p-2 shadow-3xl border rounded-md">
@@ -51,7 +51,9 @@ const AdminDashBoardPickupListBox = ({
             onClick={viewAction}
             className="w-8 h-8 p-[6px] text-green-600 hover:bg-gray-100 rounded-md"
           />
-          <FiEdit
+          {
+            !staffPopup &&<>
+            <FiEdit
             onClick={editAction}
             className="w-8 h-8 p-[6px] text-blue-600 hover:bg-gray-100 rounded-md"
           />
@@ -59,7 +61,9 @@ const AdminDashBoardPickupListBox = ({
             onClick={deleteAction}
             className="w-8 h-8 p-1 text-red-600 hover:bg-gray-100 rounded-md"
           /
-          >
+          ></>
+          }
+          
           {!pData?.isConfirm?.confirm && <LiaHandPointRight 
           onClick={acceptAction}
             className="w-8 h-8 p-[6px] text-green-600 hover:bg-gray-100 rounded-md" />}

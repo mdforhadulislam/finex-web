@@ -1,18 +1,22 @@
 "use client";
-import { AuthContext } from '@/context/AuthContext';
-import { LoadingContext } from '@/context/LoadingContext';
-import { getRequestSend, putRequestSend, USER_ACCOUNT_PHONE } from '@/data/ApiMethod';
-import InputBox from '@/utils/InputBox';
-import Image from 'next/image';
-import React, { useContext, useEffect, useState } from 'react';
-import { MdOutlineFileDownload } from 'react-icons/md';
-import { toast } from 'react-toastify';
-import Profile from '@/public/profile.svg'
+import { AuthContext } from "@/context/AuthContext";
+import { LoadingContext } from "@/context/LoadingContext";
+import {
+  getRequestSend,
+  putRequestSend,
+  USER_ACCOUNT_PHONE,
+} from "@/data/ApiMethod";
+import InputBox from "@/utils/InputBox";
+import Image from "next/image";
+import React, { useContext, useEffect, useState } from "react";
+import { MdOutlineFileDownload } from "react-icons/md";
+import { toast } from "react-toastify";
+import Profile from "@/public/profile.svg";
 
 const AdminSetting = () => {
   const authContext = useContext(AuthContext);
   const loading = useContext(LoadingContext);
-  
+
   const [profileImage, setProfileImage] = useState("");
   const [nidFront, setNidFront] = useState("");
   const [nidBack, setNidBack] = useState("");
@@ -23,16 +27,6 @@ const AdminSetting = () => {
     password: "",
   });
 
-  const handleImageChange = (setter) => (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = () => {
-        setter(reader.result);
-      };
-      reader.readAsDataURL(file);
-    }
-  };
 
   const uploadUpdatedHandler = async () => {
     loading.loadingStart();
@@ -40,14 +34,7 @@ const AdminSetting = () => {
       const response = await putRequestSend(
         USER_ACCOUNT_PHONE(authContext?.user?.phone),
         {},
-        {
-          ...userData,
-          profile: profileImage,
-          nationalID: {
-            front: nidFront,
-            back: nidBack,
-          },
-        }
+        userData
       );
 
       if (response.status === 200) {
@@ -63,10 +50,12 @@ const AdminSetting = () => {
   };
 
   useEffect(() => {
-    const fetchUserData = async () => {
+    const fetchUserData = async () => { 
       loading.loadingStart();
       try {
-        const response = await getRequestSend(USER_ACCOUNT_PHONE(authContext?.user?.phone));
+        const response = await getRequestSend(
+          USER_ACCOUNT_PHONE(authContext?.user?.phone)
+        );
         if (response.status === 200) {
           setUserData({ ...response.data });
           setProfileImage(response.data?.profile);
@@ -98,20 +87,20 @@ const AdminSetting = () => {
           </div>
           <div className="w-auto h-auto flex flex-col items-start font-sans text-white mb-5">
             <h1 className="text-2xl font-bold text-white uppercase">
-              {userData.name || 'User Name'}
+              {userData.name || "User Name"}
             </h1>
             <div className="w-full md:w-auto flex-col mt-3">
               <div className="w-auto flex items-center gap-3">
                 <span className="w-[56px]">Role</span>:
-                <span>{authContext?.user?.role || 'N/A'}</span>
+                <span>{authContext?.user?.role || "N/A"}</span>
               </div>
               <div className="w-auto flex items-center gap-3">
                 <span className="w-[56px]">Email</span>:
-                <span>{authContext?.user?.email || 'N/A'}</span>
+                <span>{authContext?.user?.email || "N/A"}</span>
               </div>
               <div className="w-auto flex items-center gap-3">
                 <span className="w-[56px]">Phone</span>:
-                <span>{authContext?.user?.phone || 'N/A'}</span>
+                <span>{authContext?.user?.phone || "N/A"}</span>
               </div>
             </div>
           </div>
@@ -130,7 +119,38 @@ const AdminSetting = () => {
                   type="file"
                   id="profilePic"
                   className="hidden"
-                  onChange={handleImageChange(setProfileImage)}
+                  onChange={(e) => {
+                    const file = e.target.files[0];
+                    if (file) {
+                      const reader = new FileReader();
+                      reader.onload = async () => {
+                        loading.loadingStart();
+                        try {
+                          const response = await putRequestSend(
+                            USER_ACCOUNT_PHONE(authContext?.user?.phone),
+                            {},
+                            {
+                              profile: reader.result,
+                            }
+                          );
+
+                          if (response.status === 200) {
+                            setProfileImage(reader.result);
+                            toast.success(response.message);
+                          } else {
+                            toast.error(response.message);
+                          }
+                        } catch (error) {
+                          toast.error(
+                            "An error occurred while updating the profile."
+                          );
+                        } finally {
+                          loading.loadingEnd();
+                        }
+                      };
+                      reader.readAsDataURL(file);
+                    }
+                  }}
                 />
                 <MdOutlineFileDownload className="w-36 h-36 p-5 border shadow-3xl text-gray-400 rounded-md" />
                 <Image
@@ -152,7 +172,41 @@ const AdminSetting = () => {
                   type="file"
                   id="nidFront"
                   className="hidden"
-                  onChange={handleImageChange(setNidFront)}
+                  onChange={(e) => {
+                    const file = e.target.files[0];
+                    if (file) {
+                      const reader = new FileReader();
+                      reader.onload = async () => {
+                        loading.loadingStart();
+                        try {
+                          const response = await putRequestSend(
+                            USER_ACCOUNT_PHONE(authContext?.user?.phone),
+                            {},
+                            {
+                              nationalID: {
+                                front: reader.result,
+                                back: nidBack,
+                              },
+                            }
+                          );
+
+                          if (response.status === 200) {
+                            setNidFront(reader.result);
+                            toast.success(response.message);
+                          } else {
+                            toast.error(response.message);
+                          }
+                        } catch (error) {
+                          toast.error(
+                            "An error occurred while updating the profile."
+                          );
+                        } finally {
+                          loading.loadingEnd();
+                        }
+                      };
+                      reader.readAsDataURL(file);
+                    }
+                  }}
                 />
                 <MdOutlineFileDownload className="w-36 h-36 p-5 border shadow-3xl text-gray-400 rounded-md" />
                 <Image
@@ -174,7 +228,41 @@ const AdminSetting = () => {
                   type="file"
                   id="nidBack"
                   className="hidden"
-                  onChange={handleImageChange(setNidBack)}
+                  onChange={(e) => {
+                    const file = e.target.files[0];
+                    if (file) {
+                      const reader = new FileReader();
+                      reader.onload = async () => {
+                        loading.loadingStart();
+                        try {
+                          const response = await putRequestSend(
+                            USER_ACCOUNT_PHONE(authContext?.user?.phone),
+                            {},
+                            {
+                              nationalID: {
+                                front: nidFront,
+                                back: reader.result,
+                              },
+                            }
+                          );
+
+                          if (response.status === 200) {
+                            setNidBack(reader.result);
+                            toast.success(response.message);
+                          } else {
+                            toast.error(response.message);
+                          }
+                        } catch (error) {
+                          toast.error(
+                            "An error occurred while updating the profile."
+                          );
+                        } finally {
+                          loading.loadingEnd();
+                        }
+                      };
+                      reader.readAsDataURL(file);
+                    }
+                  }}
                 />
                 <MdOutlineFileDownload className="w-36 h-36 p-5 border shadow-3xl text-gray-400 rounded-md" />
                 <Image

@@ -698,6 +698,18 @@ video {
   top: 50%;
 }
 
+.top-\[3\.5\%\]{
+  top: 3.5%;
+}
+
+.top-\[4\%\]{
+  top: 4%;
+}
+
+.top-\[5\%\]{
+  top: 5%;
+}
+
 .z-10{
   z-index: 10;
 }
@@ -1182,12 +1194,12 @@ video {
   cursor: default;
 }
 
-.cursor-pointer{
-  cursor: pointer;
-}
-
 .cursor-not-allowed{
   cursor: not-allowed;
+}
+
+.cursor-pointer{
+  cursor: pointer;
 }
 
 .select-none{
@@ -1802,6 +1814,10 @@ video {
   padding-top: 1.5rem;
 }
 
+.pl-4{
+  padding-left: 1rem;
+}
+
 .text-left{
   text-align: left;
 }
@@ -2042,6 +2058,11 @@ video {
   color: rgb(22 163 74 / var(--tw-text-opacity));
 }
 
+.text-red-500{
+  --tw-text-opacity: 1;
+  color: rgb(239 68 68 / var(--tw-text-opacity));
+}
+
 .text-red-600{
   --tw-text-opacity: 1;
   color: rgb(220 38 38 / var(--tw-text-opacity));
@@ -2055,11 +2076,6 @@ video {
 .text-white{
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
-}
-
-.text-red-500{
-  --tw-text-opacity: 1;
-  color: rgb(239 68 68 / var(--tw-text-opacity));
 }
 
 .antialiased{
@@ -2607,6 +2623,10 @@ th {
     justify-content: space-around;
   }
 
+  .sm\:justify-evenly{
+    justify-content: space-evenly;
+  }
+
   .sm\:gap-2{
     gap: 0.5rem;
   }
@@ -2653,6 +2673,18 @@ th {
 
   .sm\:pt-14{
     padding-top: 3.5rem;
+  }
+
+  .sm\:pl-0{
+    padding-left: 0px;
+  }
+
+  .sm\:pr-5{
+    padding-right: 1.25rem;
+  }
+
+  .sm\:pr-8{
+    padding-right: 2rem;
   }
 
   .sm\:text-2xl{

@@ -6,7 +6,7 @@ import React, { useContext, useState } from "react";
 import { toast } from "react-toastify";
 
 const AddNewStaff = () => {
-  const loading = useContext(LoadingContext)
+  const loading = useContext(LoadingContext);
   const [staffData, setStaffData] = useState({
     name: "",
     phone: "",
@@ -21,17 +21,17 @@ const AddNewStaff = () => {
   };
 
   const submitHandler = (e) => {
-    loading.loadingStart()
-    postRequestSend(REGISTER_API,{},{...staffData,role:"staff"}).then(res=>{
-        loading.loadingEnd()
-        if(res.status==200){
-            console.log(res);
-            
-            toast.success(res.message)
+    loading.loadingStart();
+    postRequestSend(REGISTER_API, {}, { ...staffData, role: "staff" }).then(
+      (res) => {
+        loading.loadingEnd();
+        if (res.status == 200) {
+          router.push("/admin/staff")
+
+          toast.success(res.message);
         }
-    })
-
-
+      }
+    );
   };
 
   return (
@@ -71,7 +71,10 @@ const AddNewStaff = () => {
             action={changeHandler}
           />
 
-          <button className="bg-defult-button text-base rounded-md text-white py-2 px-12 text-center w-full sm:w-auto" onClick={submitHandler}>
+          <button
+            className="bg-defult-button text-base rounded-md text-white py-2 px-12 text-center w-full sm:w-auto"
+            onClick={submitHandler}
+          >
             Submit
           </button>
         </div>
