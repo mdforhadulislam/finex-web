@@ -2,26 +2,35 @@ import response from "@/libs/common/response";
 import User from "@/libs/models/User.Model";
 
 export default async function handler(req, res) {
-  if (req.method == "POST") {
-    response(res, 500, "Server side error", []);
-  } else if (req.method == "GET") {
-    let allUser = await User.find();
-    allUser = allUser.map((user) => {
-      return {
-        _id: user._id,
-        name: user.name,
-        phone: user.phone,
-        email: user.email,
-        role: user.role,
-        profile: user.profile,
-      };
-    });
-    response(res, 200, "all User", allUser);
-  } else if (req.method == "DELETE") {
-    response(res, 500, "Server side error", []);
-  } else if (req.method == "PUT" || req.method == "PATCH") {
-    response(res, 500, "Server side error", []);
-  } else {
-    response(res, 500, "Server side error", []);
+  try {
+    switch (req.method) {
+      case "POST":
+        // Implement logic for creating a new user or return a more appropriate error message
+        response(res, 405, "POST method not implemented", []);
+        break;
+
+      case "GET":
+        const allUsers = await User.find().select('_id name phone email role profile'); 
+        response(res, 200, "All users retrieved successfully", allUsers);
+        break;
+
+      case "DELETE":
+        // Implement logic for deleting a user or return a more appropriate error message
+        response(res, 405, "DELETE method not implemented", []);
+        break;
+
+      case "PUT":
+      case "PATCH":
+        // Implement logic for updating a user or return a more appropriate error message
+        response(res, 405, "PUT/PATCH methods not implemented", []);
+        break;
+
+      default:
+        response(res, 405, "Method Not Allowed", []);
+        break;
+    }
+  } catch (error) {
+    console.error("Server Error:", error);
+    response(res, 500, "Internal Server Error", []);
   }
 }

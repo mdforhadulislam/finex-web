@@ -2,80 +2,70 @@ import response from "@/libs/common/response";
 import User from "@/libs/models/User.Model";
 
 export default async function handler(req, res) {
-  if (req.method == "POST") {
-    response(res, 500, "Server side error", []);
-  } else if (req.method == "GET") {
-    const phone = req.query?.phone;
-    if (phone) {
-      const findUser = await User.findOne({ phone: phone });
-      if (findUser) {
-        const user = {
-          name: findUser.name,
-          phone: findUser.phone,
-          email: findUser.email,
-          role: findUser.role,
-          profile: findUser.profile,
-          nationalID: {
-            front: findUser.nationalID.front,
-            back: findUser.nationalID.back,
-          },
-        };
-        response(res, 200, "find user", user);
-      } else {
-        response(res, 500, "User Not Found", []);
-      }
-    } else {
-      response(res, 500, "Server side error", []);
-    }
-  } else if (req.method == "DELETE") {
-    const phone = req.query?.phone;
-    if (phone) {
-      const findUser = await User.findByIdAndDelete({ phone: phone });
-      if (findUser) {
-        response(res, 500, "successfuly delete user", []);
-      } else {
-        response(res, 500, "User Not Found", []);
-      }
-    } else {
-      response(res, 500, "Server side error", []);
-    }
-  } else if (req.method == "PUT" || req.method == "PATCH") {
-    const phone = req.query?.phone;
-    if (phone) {
-      const findUser = await User.findOne({ phone: phone });
+  const { method, query, body } = req;
+  const phone = query?.phone;
 
-      if (findUser) {
-        const name = req.body.name ? req.body.name : findUser.name;
-        const phone = req.body.phone ? req.body.phone : findUser.phone;
-        const email = req.body.email ? req.body.email : findUser.email;
-        const profile = req.body.profile ? req.body.profile : findUser.profile;
-        const nationalID = req.body.nationalID
-          ? req.body.nationalID
-          : findUser.nationalID;
-        const role = req.body.role ? req.body.role : findUser.role;
+  if (!phone) {
+    return response(res, 400, "Phone number is required", []);
+  }
 
-        if (name || phone || email || email || profile || nationalID) {
-          findUser.name = name;
-          findUser.phone = phone;
-          findUser.email = email;
-          findUser.profile = profile;
-          findUser.nationalID = nationalID;
-          findUser.role = role;
+  try {
+    let findUser;
+    switch (method) {
+      case "POST":
+        return response(res, 405, "Method Not Allowed", []); // 405 for unsupported method
 
+      case "GET":
+        findUser = await User.findOne({ phone });
+        if (findUser) {
+          const user = {
+            name: findUser.name,
+            phone: findUser.phone,
+            email: findUser.email,
+            role: findUser.role,
+            profile: findUser.profile,
+            nationalID: findUser.nationalID,
+          };
+          return response(res, 200, "User found", user);
+        } else {
+          return response(res, 404, "User Not Found", []);
+        }
+
+      case "DELETE":
+        findUser = await User.findOneAndDelete({ phone });
+        if (findUser) {
+          return response(res, 200, "User successfully deleted", []);
+        } else {
+          return response(res, 404, "User Not Found", []);
+        }
+
+      case "PUT":
+      case "PATCH":
+        findUser = await User.findOne({ phone });
+        if (findUser) {
+          const updatedData = {
+            name: body.name || findUser.name,
+            phone: body.phone || findUser.phone,
+            email: body.email || findUser.email,
+            profile: body.profile || findUser.profile,
+            nationalID: body.nationalID || findUser.nationalID,
+            role: body.role || findUser.role,
+          };
+
+          Object.assign(findUser, updatedData);
           await findUser.save();
 
-          response(res, 200, "successfuly update accounts Data", []);
+          return response(res, 200, "Successfully updated user data", []);
         } else {
-          response(res, 400, "provide valid data", []);
+          return response(res, 404, "User Not Found", []);
         }
-      } else {
-        response(res, 404, "User Not Found", []);
-      }
-    } else {
-      response(res, 404, "User Not Found", []);
+
+      default:
+        return response(res, 405, "Method Not Allowed", []);
     }
-  } else {
-    response(res, 500, "Server side error", []);
+  } catch (error) {
+    console.error("Server Error:", error);
+    return response(res, 500, "Internal Server Error", []);
   }
 }
 
@@ -86,5 +76,4 @@ export const config = {
     },
     responseLimit: "5mb",
   },
-  maxDuration: 5,
 };
