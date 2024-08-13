@@ -2,7 +2,7 @@ import ContactDetailsSection from '@/components/Contact/ContactDetailsSection'
 import ContactHeaddingSection from '@/components/Contact/ContactHeaddingSection'
 import React from 'react'
 
-const contact = () => {
+const Contact = () => {
   return (
     <>
       <ContactHeaddingSection />
@@ -13,4 +13,4 @@ const contact = () => {
   )
 }
 
-export default contact
+export default Contact

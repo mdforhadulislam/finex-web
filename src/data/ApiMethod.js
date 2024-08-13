@@ -1,7 +1,7 @@
 import dotenv from "dotenv";
 dotenv.config("../../../");
 
-const envi = "DEVdd";
+const envi = "DEVff";
 
 export const ROOT_API = `${envi == "DEV" ? "http://localhost:3000" : "https://faster-in.vercel.app"}`;
 export const HEALTH_API = `${ROOT_API}/api/health`;
@@ -34,6 +34,7 @@ export const PICKUP_API = `${ROOT_API_V1}/pickup`;
 export const PICKUP_CONFIRM_API = (id) => `${ROOT_API_V1}/pickup/${id}/confirm`;
 export const SINGLE_PICKUP_API = (id) => `${ROOT_API_V1}/pickup/${id}`;
 
+export const CONTACT_API = `${ROOT_API_V1}/contact`;
 
 
 

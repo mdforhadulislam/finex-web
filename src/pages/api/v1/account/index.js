@@ -35,3 +35,10 @@ export default async function handler(req, res) {
     response(res, 500, "Internal Server Error", []);
   }
 }
+
+
+export const config = {
+  api: {
+    responseLimit: false,
+  },
+}

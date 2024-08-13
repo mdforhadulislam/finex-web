@@ -59,11 +59,11 @@ const DragBar = ({ isOpen, setIsOpen }) => {
             <AiOutlineUserAdd className="inline w-8 h-8 text-defult" />
           </DragButton>
 
-          <DragButton title={"Contact"} link={"/user"}>
+          <DragButton title={"Contact"} link={"/admin/contact"}>
             <RiContactsLine className="inline w-8 h-8 text-defult" />
           </DragButton>
 
-          <DragButton title={"Site User"} link={"/user"}>
+          <DragButton title={"Site User"} link={"/admin/site-user"}>
             <AiOutlineUserAdd className="inline w-8 h-8 text-defult" />
           </DragButton>
 
