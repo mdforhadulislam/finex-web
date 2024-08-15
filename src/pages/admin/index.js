@@ -1,16 +1,12 @@
-import AdminDashBoardHeaderNavButtonSection from '@/components/Admin/AdminDashBoardHeaderNavButtonSection'
-import AdminDashBoardHeaderSection from '@/components/Admin/AdminDashBoardHeaderSection'
-import React from 'react'
+import AdminDashBoardHeaderNavButtonSection from "@/components/Admin/AdminDashBoardHeaderNavButtonSection";
+import AdminDashBoardHeaderSection from "@/components/Admin/AdminDashBoardHeaderSection";
 
-const AdminDashboard = () => {
+
+export default function AdminPage() {
   return (
     <>
-      <AdminDashBoardHeaderSection/>
+      <AdminDashBoardHeaderSection />
       <AdminDashBoardHeaderNavButtonSection />
-
-
     </>
-  )
+  );
 }
-
-export default AdminDashboard

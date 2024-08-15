@@ -3,38 +3,60 @@ import configDB from "@/libs/config/db";
 import Order from "@/libs/models/Order.Model";
 import Tracking from "@/libs/models/Tracking.Model";
 
-configDB();
+configDB(); // Initialize the database connection
 
 export default async function handler(req, res) {
-  if (req.method == "POST") {
-    response(res, 400, "Server side error", []);
-  } else if (req.method == "GET") {
-    
-    response(res, 400, "Server side error", []);
-  } else if (req.method == "DELETE") {
-    
-    response(res, 400, "Server side error", []);
-  } else if (req.method == "PUT" || req.method == "PATCH") {
-    const TrackID = req.query?.trackID;
-    if (TrackID) {
-      const findOrder = await Order.findOne({ trackingId: TrackID });
-      if (findOrder ) {
-        const payment = req.body ?? findOrder.payment;
-        
-        findOrder.payment = payment;
+  const { method, query, body } = req; // Destructure request properties
+  const TrackID = query?.trackID; // Extract tracking ID from query parameters
 
-        await findOrder.save();
+  switch (method) {
+    case "POST":
+      // POST request: Not supported for this endpoint
+      return response(res, 405, "Method Not Allowed", []); // Return a 405 error
 
-        response(res, 200, "Successfuly Updated",findOrder);
+    case "GET":
+      // GET request: Not supported for this endpoint
+      return response(res, 405, "Method Not Allowed", []); // Return a 405 error
+
+    case "DELETE":
+      // DELETE request: Not supported for this endpoint
+      return response(res, 405, "Method Not Allowed", []); // Return a 405 error
+
+    case "PUT":
+    case "PATCH":
+      // PUT/PATCH request: Update payment information by tracking ID
+      if (TrackID) {
+        try {
+          // Find the order by tracking ID
+          const findOrder = await Order.findOne({ trackingId: TrackID });
+          if (findOrder) {
+            // Get payment information from request body or use existing value
+            const payment = body.payment ?? findOrder.payment;
+
+            // Update the payment information
+            findOrder.payment = payment;
+
+            // Save the updated order
+            await findOrder.save();
+
+            // Return a success response with the updated order
+            return response(res, 200, "Successfully Updated", findOrder);
+          } else {
+            // Return a 404 status if no order is found
+            return response(res, 404, "Not Found", []);
+          }
+        } catch (error) {
+          // Log and return a 500 status for server-side errors
+          console.error("Error updating order:", error);
+          return response(res, 500, "Server side error", []);
+        }
       } else {
-        response(res, 400, "Not Found", []);
+        // Return a 400 status if tracking ID is missing
+        return response(res, 400, "Tracking ID is required", []);
       }
-    } else {
-      response(res, 400, "Not Allow to access", []);
-    }
 
-    response(res, 400, "Server side error", []);
-  } else {
-    response(res, 400, "Server side error", []);
+    default:
+      // Handle unsupported HTTP methods
+      return response(res, 405, "Method Not Allowed", []);
   }
 }

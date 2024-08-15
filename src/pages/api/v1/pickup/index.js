@@ -2,40 +2,48 @@ import response from "@/libs/common/response";
 import configDB from "@/libs/config/db";
 import Pickup from "@/libs/models/Pickup.Model";
 
-configDB();
+configDB(); // Initialize the database connection
 
 export default async function handler(req, res) {
-  if (req.method == "POST") {
-    const name = req.body.name ?? false;
-    const phone = req.body.phone ?? false;
-    const dateTime = req.body.dateTime ?? new Date();
-    const address = req.body.address ?? false;
-    const weight = req.body.weight ?? false;
+  try {
+    switch (req.method) {
+      case "POST":
+        // Handle POST request to create a new pickup
+        const { name, phone, dateTime, address, weight } = req.body;
+        
+        if (name && phone && dateTime && address) {
+          const newPickupRequest = new Pickup({
+            name,
+            phone,
+            dateTime: new Date(dateTime), // Ensure dateTime is a Date object
+            address,
+            weight
+          });
 
-    if (name && phone && dateTime && address) {
-      
-      const newPickupRequest = new Pickup({
-        name,
-        phone,
-        dateTime,
-        address,
-        weight,
-      });
+          await newPickupRequest.save(); // Save the new pickup to the database
 
-      const savePickupRequest = await newPickupRequest.save();
+          return response(res, 201, "Pickup Created", []); // Success response with status 201 Created
+        } else {
+          return response(res, 400, "Invalid Data Provided", []); // Bad request response
+        }
 
-      response(res, 200, "Save Pickup", []);
-    } else {
-      response(res, 400, "Send Valid Data", []);
+      case "GET":
+        // Handle GET request to retrieve all pickups
+        const allPickups = await Pickup.find(); // Find all pickups
+        return response(res, 200, "All Pickups", allPickups.reverse()); // Success response with reversed array
+
+      case "DELETE":
+      case "PUT":
+      case "PATCH":
+        // Return 405 error for unsupported methods
+        return response(res, 405, "Method Not Allowed", []);
+
+      default:
+        // Return 405 error for unsupported methods
+        return response(res, 405, "Method Not Allowed", []);
     }
-  } else if (req.method == "GET") {
-    const allPickup = await Pickup.find();
-    response(res, 200, "All Pickup", allPickup.reverse());
-  } else if (req.method == "DELETE") {
-    response(res, 400, "Send Valid Data", []);
-  } else if (req.method == "PUT" || req.method == "PATCH") {
-    response(res, 400, "Send Valid Data", []);
-  } else {
-    response(res, 400, "Send Valid Data", []);
+  } catch (error) {
+    console.error("Server error:", error);
+    return response(res, 500, "Server Side Error", []); // Internal server error response
   }
 }

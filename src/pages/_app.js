@@ -14,6 +14,8 @@ export default function App({ Component, pageProps }) {
   const { pathname } = useRouter();
   const pathName = pathname.split("/")[1];
 
+
+
   if (pathName == "user" || pathName == "admin" || pathName == "staff") {
     return (
       <AuthContextProvider>

@@ -2,80 +2,73 @@ import response from "@/libs/common/response";
 import configDB from "@/libs/config/db";
 import Price from "@/libs/models/Price.Model";
 
-
-configDB()
+configDB(); // Initialize the database connection
 
 export default async function handler(req, res) {
-  if (req.method == "POST") {
-    response(res, 500, "Server side error", []);
-  } else if (req.method == "GET") {
-    const id = req.query?.id;
-    if (id) {
-      const findPriceList = await Price.findById({ _id: id });
-      if (findPriceList) {
-        response(res, 200, `${findPriceList.from.country} to ${findPriceList.to.country} Price List`, findPriceList);
-      } else {
-        response(res, 404, "Not found", []);
-      }
-    } else {
-      response(res, 401, "Not allow to access", []);
-    }
+  try {
+    const { id } = req.query;
 
+    switch (req.method) {
+      case "POST":
+        return response(res, 405, "Method Not Allowed", []); // POST not supported
 
-  } else if (req.method == "DELETE") {
-    const id = req.query?.id;
-    if (id) {
-      const findPriceList = await Price.findByIdAndDelete({ _id: id });
-      console.log(findPriceList);
-      if (findPriceList) {
-        response(res, 200, "Successfuly delete price list", []);
-      } else {
-        response(res, 404, "Not found", []);
-      }
-    } else {
-      response(res, 401, "Not allow to access", []);
-    }
-  } else if (req.method == "PUT" || req.method == "PATCH") {
-    const id = req.query?.id;
-    if (id) {
-      const findPriceList = await Price.findById({ _id: id });
-      if (findPriceList) {
-        const fromCountry = req.body.fromCountry ? req.body.fromCountry : false;
-        const toCountry = req.body.toCountry ? req.body.toCountry : false;
-
-        const dhlRate = req.body.dhlRate ? req.body.dhlRate : false;
-        const fedexRate = req.body.fedexRate ? req.body.fedexRate : false;
-        const upsRate = req.body.upsRate ? req.body.upsRate : false;
-        const aramexRate = req.body.aramexRate ? req.body.aramexRate : false;
-
-        if (
-          fromCountry ||
-          toCountry ||
-          dhlRate ||
-          fedexRate ||
-          upsRate ||
-          aramexRate
-        ) {
-          findPriceList.from = fromCountry ?? findPriceList.from;
-          findPriceList.to = toCountry ?? findPriceList.to;
-          findPriceList.dhl = dhlRate ?? findPriceList.dhl;
-          findPriceList.fedex = fedexRate ?? findPriceList.fedex;
-          findPriceList.ups = upsRate ?? findPriceList.ups;
-          findPriceList.aramex = aramexRate ?? findPriceList.aramex;
-
-          await findPriceList.save();
-
-          response(res, 200, "Successfuly update price list", []);
+      case "GET":
+        if (id) {
+          const findPriceList = await Price.findById(id);
+          if (findPriceList) {
+            return response(res, 200, `${findPriceList.from.country} to ${findPriceList.to.country} Price List`, findPriceList);
+          } else {
+            return response(res, 404, "Not Found", []); // Not found
+          }
         } else {
-          response(res, 200, "Provied update Data", []);
+          return response(res, 400, "ID query parameter is required", []); // Bad request
         }
-      } else {
-        response(res, 200, "Not Found", []);
-      }
-    } else {
-      response(res, 401, "Not allow to access", []);
+
+      case "DELETE":
+        if (id) {
+          const findPriceList = await Price.findByIdAndDelete(id);
+          if (findPriceList) {
+            return response(res, 200, "Successfully deleted price list", []);
+          } else {
+            return response(res, 404, "Not Found", []); // Not found
+          }
+        } else {
+          return response(res, 400, "ID query parameter is required", []); // Bad request
+        }
+
+      case "PUT":
+      case "PATCH":
+        if (id) {
+          const findPriceList = await Price.findById(id);
+          if (findPriceList) {
+            const { fromCountry, toCountry, dhlRate, fedexRate, upsRate, aramexRate } = req.body;
+
+            if (fromCountry || toCountry || dhlRate || fedexRate || upsRate || aramexRate) {
+              findPriceList.from = fromCountry ?? findPriceList.from;
+              findPriceList.to = toCountry ?? findPriceList.to;
+              findPriceList.dhl = dhlRate ?? findPriceList.dhl;
+              findPriceList.fedex = fedexRate ?? findPriceList.fedex;
+              findPriceList.ups = upsRate ?? findPriceList.ups;
+              findPriceList.aramex = aramexRate ?? findPriceList.aramex;
+
+              await findPriceList.save();
+
+              return response(res, 200, "Successfully updated price list", []);
+            } else {
+              return response(res, 400, "No update data provided", []); // Bad request
+            }
+          } else {
+            return response(res, 404, "Not Found", []); // Not found
+          }
+        } else {
+          return response(res, 400, "ID query parameter is required", []); // Bad request
+        }
+
+      default:
+        return response(res, 405, "Method Not Allowed", []); // Method not allowed
     }
-  } else {
-    response(res, 500, "Server side error", []);
+  } catch (error) {
+    console.error("Server error:", error);
+    return response(res, 500, "Server Error", []); // Internal server error
   }
 }

@@ -16,7 +16,7 @@ const SiteUser = () => {
   },[]);
   return (
     <div className="w-full h-auto p-2">
-      <div className="w-full h-auto grid lg:grid-cols-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
+      <div className="w-full h-auto grid lg:grid-cols-3 grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-3">
         {allUser?.map((sUser) => (
           <div
             key={sUser?._id}

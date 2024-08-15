@@ -3,107 +3,159 @@ import configDB from "@/libs/config/db";
 import Price from "@/libs/models/Price.Model";
 import { createPrice } from "@/libs/repositories/price.repositories";
 
+// Initialize database connection
 await configDB();
 
 export default async function handler(req, res) {
-  if (req.method == "POST") {
-    const fromCountry = req.body.fromCountry ? req.body.fromCountry : false;
-    const toCountry = req.body.toCountry ? req.body.toCountry : false;
+  try {
+    // Extract query parameters
+    const { from, to } = req.query;
 
-    const dhlRate = req.body.dhlRate ? req.body.dhlRate : false;
-    const fedexRate = req.body.fedexRate ? req.body.fedexRate : false;
-    const upsRate = req.body.upsRate ? req.body.upsRate : false;
-    const aramexRate = req.body.aramexRate ? req.body.aramexRate : false;
-    if (
-      fromCountry &&
-      toCountry &&
-      dhlRate &&
-      fedexRate &&
-      upsRate &&
-      aramexRate
-    ) {
-      const createPriceList = await createPrice(
-        fromCountry,
-        toCountry,
-        dhlRate,
-        fedexRate,
-        upsRate,
-        aramexRate
-      );
+    // Handle different HTTP methods
+    switch (req.method) {
+      case "POST":
+        // Handle POST request to create a new price list
+        const {
+          fromCountry,
+          toCountry,
+          dhlRate,
+          fedexRate,
+          upsRate,
+          aramexRate,
+        } = req.body;
 
-      response(res, 200, "Price List Created", createPriceList);
-    } else {
-      response(res, 400, "Provied Valid Data", []);
-    }
-  } else if (req.method == "GET") {
-    const fromCountryId = req.query.from;
-    const toCountryId = req.query.to;
-    if (fromCountryId && toCountryId) {
-      const allPriceList = await Price.find();
-      const findPriceList = allPriceList.find(
-        (price) => price.from.id == fromCountryId && price.to.id == toCountryId
-      );
-      if (findPriceList) {
-        response(
-          res,
-          200,
-          `${findPriceList.from.country} to ${findPriceList.to.country} Price List`,
-          findPriceList
-        );
-      } else {
-        response(res, 200, "Not Found", []);
-      }
-    } else {
-      const allPriceList = await Price.find();
-      response(res, 200, "All Price List", allPriceList);
-    }
-  } else if (req.method == "PUT" || req.method == "PATCH") {
-    const fromCountryId = req.query.from;
-    const toCountryId = req.query.to;
-    if (fromCountryId && toCountryId) {
-      const allPriceList = await Price.find();
-      const findPriceList = allPriceList.find(
-        (price) => price.from.id == fromCountryId && price.to.id == toCountryId
-      );
-      if (findPriceList) {
-        const fromCountry = req.body.fromCountry ? req.body.fromCountry : false;
-        const toCountry = req.body.toCountry ? req.body.toCountry : false;
-
-        const dhlRate = req.body.dhlRate ? req.body.dhlRate : false;
-        const fedexRate = req.body.fedexRate ? req.body.fedexRate : false;
-        const upsRate = req.body.upsRate ? req.body.upsRate : false;
-        const aramexRate = req.body.aramexRate ? req.body.aramexRate : false;
-
+        // Validate request body
         if (
-          fromCountry ||
-          toCountry ||
-          dhlRate ||
-          fedexRate ||
-          upsRate ||
+          fromCountry &&
+          toCountry &&
+          dhlRate &&
+          fedexRate &&
+          upsRate &&
           aramexRate
         ) {
-          findPriceList.from = fromCountry ?? findPriceList.from;
-          findPriceList.to = toCountry ?? findPriceList.to;
-          findPriceList.dhl = dhlRate ?? findPriceList.dhl;
-          findPriceList.fedex = fedexRate ?? findPriceList.fedex;
-          findPriceList.ups = upsRate ?? findPriceList.ups;
-          findPriceList.aramex = aramexRate ?? findPriceList.aramex;
-
-          await findPriceList.save();
-
-          response(res, 200, "Successfuly update price list", []);
+          // Create a new price list entry
+          const createPriceList = await createPrice(
+            fromCountry,
+            toCountry,
+            dhlRate,
+            fedexRate,
+            upsRate,
+            aramexRate
+          );
+          // Return success response with 201 Created status
+          return response(res, 201, "Price List Created", createPriceList);
         } else {
-          response(res, 200, "Provied update Data", []);
+          // Return error response for missing or invalid data
+          return response(res, 400, "Provide Valid Data", []);
         }
-      } else {
-        response(res, 200, "Not Found", []);
-      }
-    } else {
-      response(res, 401, "Not allow to access", []);
+
+      case "GET":
+        // Handle GET request to fetch price list details
+        if (from && to) {
+          // Fetch price list for specific from and to country IDs
+          const findPriceList = await Price.findOne({
+            "from.id": from,
+            "to.id": to,
+          });
+          if (findPriceList) {
+            // Return success response with price list details
+            return response(
+              res,
+              200,
+              `${findPriceList.from.country} to ${findPriceList.to.country} Price List`,
+              findPriceList
+            );
+          } else {
+            // Return error response if price list not found
+            return response(res, 404, "Not Found", []);
+          }
+        } else {
+          // Fetch all price lists if no specific from and to country IDs are provided
+          const allPriceList = await Price.find();
+          // Return success response with all price lists
+          return response(res, 200, "All Price List", allPriceList);
+        }
+
+      case "PUT":
+      case "PATCH":
+        // Handle PUT and PATCH requests to update existing price list
+        if (from && to) {
+          // Fetch price list for specific from and to country IDs
+          const findPriceList = await Price.findOne({
+            "from.id": from,
+            "to.id": to,
+          });
+          if (findPriceList) {
+            // Extract update data from request body
+            const {
+              fromCountry,
+              toCountry,
+              dhlRate,
+              fedexRate,
+              upsRate,
+              aramexRate,
+            } = req.body;
+
+            // Update price list with provided data
+            if (
+              fromCountry ||
+              toCountry ||
+              dhlRate ||
+              fedexRate ||
+              upsRate ||
+              aramexRate
+            ) {
+              findPriceList.from = fromCountry ?? findPriceList.from;
+              findPriceList.to = toCountry ?? findPriceList.to;
+              findPriceList.dhl = dhlRate ?? findPriceList.dhl;
+              findPriceList.fedex = fedexRate ?? findPriceList.fedex;
+              findPriceList.ups = upsRate ?? findPriceList.ups;
+              findPriceList.aramex = aramexRate ?? findPriceList.aramex;
+
+              // Save the updated price list
+              await findPriceList.save();
+              // Return success response
+              return response(res, 200, "Successfully Updated Price List", []);
+            } else {
+              // Return error response if no update data is provided
+              return response(res, 400, "Provide Data to Update", []);
+            }
+          } else {
+            // Return error response if price list not found
+            return response(res, 404, "Not Found", []);
+          }
+        } else {
+          // Return error response if required query parameters are missing
+          return response(res, 400, "ID query parameters are required", []);
+        }
+
+      case "DELETE":
+        // Handle DELETE request to remove a price list
+        if (from && to) {
+          // Delete price list for specific from and to country IDs
+          const deletePriceList = await Price.findOneAndDelete({
+            "from.id": from,
+            "to.id": to,
+          });
+          if (deletePriceList) {
+            // Return success response
+            return response(res, 200, "Successfully Deleted Price List", []);
+          } else {
+            // Return error response if price list not found
+            return response(res, 404, "Not Found", []);
+          }
+        } else {
+          // Return error response if required query parameters are missing
+          return response(res, 400, "ID query parameters are required", []);
+        }
+
+      default:
+        // Return error response for unsupported HTTP methods
+        return response(res, 405, "Method Not Allowed", []);
     }
-  } else if (req.method == "DELETE") {
-    response(res, 500, "Server side error", []);
-  } else {
-    response(res, 500, "Server side error", []);
+  } catch (error) {
+    // Log and return error response for server-side errors
+    console.error("Server error:", error);
+    return response(res, 500, "Server Error", []);
   }
 }

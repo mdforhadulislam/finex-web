@@ -1,57 +1,73 @@
-import { compareHash } from "@/libs/common/hash";
-import response from "@/libs/common/response";
-import configDB from "@/libs/config/db";
-import { createToken, findUser } from "@/libs/repositories/auth.repositories";
+import { compareHash } from "@/libs/common/hash"; // Utility for comparing hashed passwords
+import response from "@/libs/common/response"; // Utility for standardized API responses
+import configDB from "@/libs/config/db"; // Database configuration and connection
+import { createToken, findUser } from "@/libs/repositories/auth.repositories"; // Functions to find users and create tokens
 
- configDB();
+// Initialize the database connection
+configDB();
 
 export default async function handler(req, res) {
-  if (req.method == "POST") {
-    const password = req.body.password ? req.body.password : false;
-    const phone = req.body.phone ? req.body.phone : false;
+  const { method, body } = req;
 
-    if(phone && password){
-        const userFindByPhone = await findUser({phone:phone})
-        if(userFindByPhone){
-            if(compareHash(password,userFindByPhone.password)){
+  // Extract password and phone from the request body, or set to false if not provided
+  const password = body?.password || false;
+  const phone = body?.phone || false;
 
-                const token= await createToken(userFindByPhone._id)
+  switch (method) {
+    case "POST":
+      // Handle POST requests
+      if (phone && password) {
+        try {
+          // Find the user by phone number
+          const userFindByPhone = await findUser({ phone });
 
-                const user = {
-                    name: userFindByPhone.name,
-                    phone: userFindByPhone.phone,
-                    email: userFindByPhone.email,
-                    role: userFindByPhone.role,
-                  };
-                  
-            response(res,200,"login successfull",{
-                token:token.token,
-                user
-            })
+          if (userFindByPhone) {
+            // Compare the provided password with the stored hashed password
+            if (compareHash(password, userFindByPhone.password)) {
+              // Create a token for the authenticated user
+              const token = await createToken(userFindByPhone._id);
 
-            }else{
-                
-            response(res,400,"Incorrect password",[])
+              // Prepare the user information to send in the response
+              const user = {
+                name: userFindByPhone.name,
+                phone: userFindByPhone.phone,
+                email: userFindByPhone.email,
+                role: userFindByPhone.role,
+              };
+
+              // Send a success response with the token and user information
+              return response(res, 200, "Login successful", {
+                token: token.token,
+                user,
+              });
+            } else {
+              // If the password is incorrect, send an error response
+              return response(res, 400, "Incorrect password", []);
             }
-
-
-
-        }else{
-
-            response(res,400,"Phone number is not valid",[])
+          } else {
+            // If no user is found with the provided phone number, send an error response
+            return response(res, 400, "Phone number is not valid", []);
+          }
+        } catch (error) {
+          // Handle any errors that occur during the process
+          return response(res, 500, "Internal Server Error", []);
         }
-    }else{
-        
-    response(res,400,"plz! provied phone number and password",[])
-    }
+      } else {
+        // If phone or password is missing, send an error response
+        return response(
+          res,
+          400,
+          "Please provide phone number and password",
+          []
+        );
+      }
 
-  } else if (req.method == "GET") {
-    response(res,400,"Only open for post request",[])
-  } else if (req.method == "PUT" || req.method == "PATCH") {
-    response(res,400,"Only open for post request",[])
-  } else if (req.method == "DELETE") {
-    response(res,400,"Only open for post request",[])
-  }else{
-    response(res,400,"Only open for post request",[])
+    case "GET":
+    case "PUT":
+    case "PATCH":
+    case "DELETE":
+    default:
+      // For GET, PUT, PATCH, DELETE, or any other request methods, send a response indicating that only POST is allowed
+      return response(res, 400, "Only open for POST requests", []);
   }
 }

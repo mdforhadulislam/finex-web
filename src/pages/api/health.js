@@ -1,10 +1,13 @@
-// Next.js API route support: https://nextjs.org/docs/api-routes/introduction
-
 import configDB from "@/libs/config/db";
 
-configDB();
+// Initialize database connection
+await configDB();
 
 export default function handler(req, res) {
-  // console.log(req);
-  res.status(200).json({ status: 200, message: "Success", data: [] });
+  // Send a JSON response with status 200 and a success message
+  res.status(200).json({
+    status: 200, // HTTP status code
+    message: "Success", // Message indicating success
+    data: [], // Empty data array
+  });
 }
