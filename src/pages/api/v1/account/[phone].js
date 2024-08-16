@@ -96,8 +96,7 @@ export default async function handler(req, res) {
           if (err) {
             return response(res, 500, "Image upload failed", []); // Return a 500 error if image upload fails
           }
-
-          findUser = await User.findOne({ phone }); // Find user by phone number
+          let findUser = await User.findOne({ phone }); // Find user by phone number
           if (!findUser) {
             return response(res, 404, "User Not Found", []); // Return a 404 error if user is not found
           }
@@ -123,8 +122,10 @@ export default async function handler(req, res) {
           Object.assign(findUser, updatedData);
           await findUser.save(); // Save the updated user
 
-          return response(res, 200, "Successfully updated user data", findUser); // Return success message
+          return response(res, 200, "Successfully updated user data", []); // Return success message
         });
+
+        break;
 
       default:
         return response(res, 405, "Method Not Allowed", []); // Return a 405 error for unsupported methods

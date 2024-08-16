@@ -4,18 +4,21 @@ import { LoadingContext } from "@/context/LoadingContext";
 import {
   getRequestSend,
   putRequestSend,
+  USER_ACCOUNT_API,
   USER_ACCOUNT_PHONE,
 } from "@/data/ApiMethod";
+import Profile from "@/public/profile.svg";
 import InputBox from "@/utils/InputBox";
 import Image from "next/image";
-import React, { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { MdOutlineFileDownload } from "react-icons/md";
 import { toast } from "react-toastify";
-import Profile from "@/public/profile.svg";
 
 const AdminSetting = () => {
   const authContext = useContext(AuthContext);
   const loading = useContext(LoadingContext);
+
+  const formData = new FormData();
 
   const [profileImage, setProfileImage] = useState("");
   const [nidFront, setNidFront] = useState("");
@@ -24,18 +27,17 @@ const AdminSetting = () => {
     name: "",
     phone: "",
     email: "",
-    password: "",
   });
-
 
   const uploadUpdatedHandler = async () => {
     loading.loadingStart();
     try {
       const response = await putRequestSend(
-        USER_ACCOUNT_PHONE(authContext?.user?.phone),
+        `${USER_ACCOUNT_API}/?phone=${authContext.user.phone}`,
         {},
         userData
       );
+      console.log(response);
 
       if (response.status === 200) {
         toast.success(response.message);
@@ -50,14 +52,18 @@ const AdminSetting = () => {
   };
 
   useEffect(() => {
-    const fetchUserData = async () => { 
+    const fetchUserData = async () => {
       loading.loadingStart();
       try {
         const response = await getRequestSend(
           USER_ACCOUNT_PHONE(authContext?.user?.phone)
         );
         if (response.status === 200) {
-          setUserData({ ...response.data });
+          setUserData({
+            name: response.data.name,
+            phone: response.data.phone,
+            email: response.data.email,
+          });
           setProfileImage(response.data?.profile);
           setNidFront(response.data?.nationalID?.front);
           setNidBack(response.data?.nationalID?.back);
@@ -120,35 +126,38 @@ const AdminSetting = () => {
                   id="profilePic"
                   className="hidden"
                   onChange={(e) => {
+                    loading.loadingStart();
                     const file = e.target.files[0];
-                    if (file) {
-                      const reader = new FileReader();
-                      reader.onload = async () => {
-                        loading.loadingStart();
-                        try {
-                          const response = await putRequestSend(
-                            USER_ACCOUNT_PHONE(authContext?.user?.phone),
-                            {},
-                            {
-                              profile: reader.result,
-                            }
-                          );
 
-                          if (response.status === 200) {
-                            setProfileImage(reader.result);
-                            toast.success(response.message);
-                          } else {
-                            toast.error(response.message);
-                          }
-                        } catch (error) {
-                          toast.error(
-                            "An error occurred while updating the profile."
-                          );
-                        } finally {
+                    if (file) {
+                      formData.append("profile", e.target.files[0]);
+                      fetch(USER_ACCOUNT_PHONE(authContext?.user?.phone), {
+                        method: "PUT",
+                        body: formData,
+                      })
+                        .then((res) => res.json())
+                        .then((res2) => {
                           loading.loadingEnd();
-                        }
-                      };
-                      reader.readAsDataURL(file);
+                          if (res2.status == 200) {
+                            toast.success(res2.message);
+                            getRequestSend(
+                              USER_ACCOUNT_PHONE(authContext?.user?.phone)
+                            ).then((getData) => {
+                              if (getData.status == 200) {
+                                setUserData({
+                                  name: getData.data.name,
+                                  phone: getData.data.phone,
+                                  email: getData.data.email,
+                                });
+                                setProfileImage(getData.data?.profile);
+                                setNidFront(getData.data?.nationalID?.front);
+                                setNidBack(getData.data?.nationalID?.back);
+                              }
+                            });
+                          } else {
+                            toast.error(res2.message);
+                          }
+                        });
                     }
                   }}
                 />
@@ -173,38 +182,38 @@ const AdminSetting = () => {
                   id="nidFront"
                   className="hidden"
                   onChange={(e) => {
+                    loading.loadingStart();
                     const file = e.target.files[0];
-                    if (file) {
-                      const reader = new FileReader();
-                      reader.onload = async () => {
-                        loading.loadingStart();
-                        try {
-                          const response = await putRequestSend(
-                            USER_ACCOUNT_PHONE(authContext?.user?.phone),
-                            {},
-                            {
-                              nationalID: {
-                                front: reader.result,
-                                back: nidBack,
-                              },
-                            }
-                          );
 
-                          if (response.status === 200) {
-                            setNidFront(reader.result);
-                            toast.success(response.message);
-                          } else {
-                            toast.error(response.message);
-                          }
-                        } catch (error) {
-                          toast.error(
-                            "An error occurred while updating the profile."
-                          );
-                        } finally {
+                    if (file) {
+                      formData.append("nationalID.front", e.target.files[0]);
+                      fetch(USER_ACCOUNT_PHONE(authContext?.user?.phone), {
+                        method: "PUT",
+                        body: formData,
+                      })
+                        .then((res) => res.json())
+                        .then((res2) => {
                           loading.loadingEnd();
-                        }
-                      };
-                      reader.readAsDataURL(file);
+                          if (res2.status == 200) {
+                            toast.success(res2.message);
+                            getRequestSend(
+                              USER_ACCOUNT_PHONE(authContext?.user?.phone)
+                            ).then((getData) => {
+                              if (getData.status == 200) {
+                                setUserData({
+                                  name: getData.data.name,
+                                  phone: getData.data.phone,
+                                  email: getData.data.email,
+                                });
+                                setProfileImage(getData.data?.profile);
+                                setNidFront(getData.data?.nationalID?.front);
+                                setNidBack(getData.data?.nationalID?.back);
+                              }
+                            });
+                          } else {
+                            toast.error(res2.message);
+                          }
+                        });
                     }
                   }}
                 />
@@ -229,38 +238,38 @@ const AdminSetting = () => {
                   id="nidBack"
                   className="hidden"
                   onChange={(e) => {
+                    loading.loadingStart();
                     const file = e.target.files[0];
-                    if (file) {
-                      const reader = new FileReader();
-                      reader.onload = async () => {
-                        loading.loadingStart();
-                        try {
-                          const response = await putRequestSend(
-                            USER_ACCOUNT_PHONE(authContext?.user?.phone),
-                            {},
-                            {
-                              nationalID: {
-                                front: nidFront,
-                                back: reader.result,
-                              },
-                            }
-                          );
 
-                          if (response.status === 200) {
-                            setNidBack(reader.result);
-                            toast.success(response.message);
-                          } else {
-                            toast.error(response.message);
-                          }
-                        } catch (error) {
-                          toast.error(
-                            "An error occurred while updating the profile."
-                          );
-                        } finally {
+                    if (file) {
+                      formData.append("nationalID.back", e.target.files[0]);
+                      fetch(USER_ACCOUNT_PHONE(authContext?.user?.phone), {
+                        method: "PUT",
+                        body: formData,
+                      })
+                        .then((res) => res.json())
+                        .then((res2) => {
                           loading.loadingEnd();
-                        }
-                      };
-                      reader.readAsDataURL(file);
+                          if (res2.status == 200) {
+                            toast.success(res2.message);
+                            getRequestSend(
+                              USER_ACCOUNT_PHONE(authContext?.user?.phone)
+                            ).then((getData) => {
+                              if (getData.status == 200) {
+                                setUserData({
+                                  name: getData.data.name,
+                                  phone: getData.data.phone,
+                                  email: getData.data.email,
+                                });
+                                setProfileImage(getData.data?.profile);
+                                setNidFront(getData.data?.nationalID?.front);
+                                setNidBack(getData.data?.nationalID?.back);
+                              }
+                            });
+                          } else {
+                            toast.error(res2.message);
+                          }
+                        });
                     }
                   }}
                 />
