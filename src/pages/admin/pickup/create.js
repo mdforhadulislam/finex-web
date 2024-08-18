@@ -12,7 +12,7 @@ import React, { useContext, useState } from "react";
 import { toast } from "react-toastify";
 
 
-const CreatePick = () => {
+const CreatePickup = () => {
   const authContext = useContext(AuthContext);
   const router = useRouter();
   const loading = useContext(LoadingContext);
@@ -94,4 +94,4 @@ const CreatePick = () => {
     </div>
   );
 };
-export default CreatePick;
+export default CreatePickup;
