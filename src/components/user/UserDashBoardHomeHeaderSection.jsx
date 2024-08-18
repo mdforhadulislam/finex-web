@@ -1,3 +1,4 @@
+"use client"
 import { AuthContext } from "@/context/AuthContext";
 import { getRequestSend, ORDER_API, PICKUP_API } from "@/data/ApiMethod";
 import DashBoardHeaderButtonBox from "@/utils/DashBoardHeaderButtonBox";
