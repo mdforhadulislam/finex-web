@@ -32,4 +32,4 @@ const Collapse = ({ title, children }) => {
   );
 };
 
-export default React.memo(Collapse);
+export default Collapse

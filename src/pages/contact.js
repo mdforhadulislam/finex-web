@@ -8,19 +8,15 @@ const Contact = () => {
     <>
       <Head>
         <title>Finex - Contact</title>
-        <meta
-          title="Finex - Contact"
-          content="Faster International Express - Finex"
-        />
+        {/* Description meta tag for search engines and previews */}
         <meta
           name="description"
-          content="Finex: Your trusted Bangladeshi courier for low-cost, global delivery of official goods, documents, and more. ✈️"
+          content="Contact Finex for all your international courier needs. Reach out to us for low-cost, reliable global delivery of official goods, documents, and more."
         />
-        <meta name="description" content="Contact with us any time." />
-
+        {/* Keywords meta tag for SEO purposes (note: less influential than it used to be) */}
         <meta
-          name="keyword"
-          content="Faster,International, Express, Finex, DHL Express, DHL Bangladesh, Fedex Express, Fedex Bangladesh, Aramex, International Courier Express, Any Percel Courier, Shipment"
+          name="keywords"
+          content="Finex, Contact, Courier Services, International Shipping, DHL, Fedex, Aramex, Express Delivery"
         />
       </Head>
       <ContactHeaddingSection />

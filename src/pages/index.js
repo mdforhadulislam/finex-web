@@ -12,22 +12,25 @@ export default function Home() {
   return (
     <>
       <Head>
+        {/* Page title displayed in the browser tab and search results */}
         <title>Finex - Home</title>
-        <meta
-          title="Finex - Home"
-          content="Faster International Express - Finex"
-        />
+        {/* Description meta tag for search engines and previews */}
         <meta
           name="description"
-          content="Finex: Your trusted Bangladeshi courier for low-cost, global delivery of official goods, documents, and more. ✈️"
+          content="Finex: Your go-to courier service for fast, reliable, and affordable international shipping. Explore our services, meet our team, and discover how we can assist with your shipping needs."
         />
-
+        {/* Keywords meta tag for SEO purposes */}
         <meta
-          name="keyword"
-          content="Faster,International, Express, Finex, DHL Express, DHL Bangladesh, Fedex Express, Fedex Bangladesh, Aramex, International Courier Express, Any Percel Courier, Shipment"
+          name="keywords"
+          content="Finex, Courier Services, International Shipping, Fast Delivery, Reliable Courier, Affordable Shipping, DHL, Fedex, Aramex"
+        />
+        {/* Open Graph meta tags for social media sharing */}
+        <meta property="og:title" content="Finex - Home" />
+        <meta
+          property="og:description"
+          content="Finex provides fast, reliable, and affordable international shipping solutions. Learn about our services and how we can help with your shipping needs."
         />
       </Head>
-
       <HomeHeroSection />
       <HeroServiceSection />
       <HeroAboutUsSection />

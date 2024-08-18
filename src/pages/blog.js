@@ -8,7 +8,7 @@ export async function getStaticProps() {
   try {
     // Fetch data from the external API
     const res = await fetch(`${ROOT_API_V1}/blog`); // Use the full URL
-    if (!res.status) {
+    if (!res.ok) {
       throw new Error("Failed to fetch blog data");
     }
 
@@ -18,6 +18,7 @@ export async function getStaticProps() {
     return { props: { data: data.reverse() } };
   } catch (error) {
     // Handle errors, you might want to return an empty array or some error message
+    console.error(error); // Log the error for debugging purposes
     return { props: { data: [] } };
   }
 }
@@ -27,9 +28,15 @@ const Blog = ({ data }) => {
     <>
       <Head>
         <title>Finex - Blog</title>
-        {data.map((sBlog) => (
-          <meta key={sBlog._id} title={sBlog.title} content={sBlog.details} />
-        ))}
+        <meta
+          name="description"
+          content="Read the latest updates and insights from Finex. Stay informed with our blog on international courier services and more."
+        />
+        <meta
+          name="keywords"
+          content="Finex, Blog, Courier Services, International Shipping, DHL, Fedex, Aramex"
+        />
+        {/* Add other meta tags as needed */}
       </Head>
       <BlogHeaderSliderSection />
       <BlogBodySection blogData={data} />

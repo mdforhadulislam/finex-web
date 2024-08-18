@@ -108,7 +108,7 @@ const NavBar = () => {
                 {!authContext.isUserLogedIn && (
                   <Link
                     href="/auth/login"
-                    className="px-4 py-[2px] text-center shadow hover:bg-defult-button bg-defult-button text-white transition duration-300 block rounded-md w-full text-2xl"
+                    className="px-4 py-[2px] text-center shadow hover:bg-defult-button bg-defult-button text-white transition duration-300 block rounded-md w-full text-2xl bfont"
                   >
                     লগইন
                   </Link>

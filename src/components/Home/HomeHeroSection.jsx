@@ -3,10 +3,19 @@ import IsEnglish from "@/utils/IsEnglish";
 import React from "react";
 import HomeHeroPriceingSection from "./HomeHeroPriceingSection";
 import HomeHeroTrackBoxSection from "./HomeHeroTrackBoxSection";
+import Head from "next/head";
 
 const HomeHeroSection = () => {
   return (
     <div className="w-full h-full bg-defult pb-5">
+      <Head>
+        <meta name="description" content="Faster International Express provides reliable and efficient shipping solutions from air freight to sea freight. Serving your logistics needs with care." />
+        <meta name="keywords" content="shipping, logistics, air freight, sea freight, international shipping, courier service" />
+        <meta property="og:title" content="Faster International Express - Shipping Solutions" />
+        <meta property="og:description" content="Faster International Express offers comprehensive shipping solutions including air and sea freight, with a commitment to reliable and efficient service." />
+        <meta name="twitter:title" content="Faster International Express - Shipping Solutions" />
+        <meta name="twitter:description" content="Providing dependable and efficient shipping solutions with a focus on customer satisfaction." />
+      </Head>
       <div className="lg:container m-auto  flex flex-col align-middle items-center">
         <IsEnglish
           className={

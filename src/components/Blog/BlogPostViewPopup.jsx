@@ -1,14 +1,28 @@
-import Modal from '@/utils/Modal'
-import React from 'react'
+import Modal from '@/utils/Modal'; // Importing the Modal component for displaying popups
+import React from 'react'; // Importing React
 
-const BlogPostViewPopup = ({blogData}) => {
+// BlogPostViewPopup component definition
+const BlogPostViewPopup = ({ blogData }) => {
   return (
     <Modal>
-        <img src={blogData.image} alt={blogData.title} className='w-full h-[450px] rounded-md mb-3' />
-            <h1 className=' text-2xl font-semibold pb-2'>{blogData.title}</h1>
-            {blogData.details}
+      {/* Displaying the blog post image */}
+      <img 
+        src={blogData.image} // Image source from blogData
+        alt={blogData.title} // Alt text for the image
+        className='w-full h-[450px] rounded-md mb-3' // Full width, fixed height, rounded corners, and margin bottom
+      />
+      
+      {/* Displaying the blog post title */}
+      <h1 className='text-2xl font-semibold pb-2'>
+        {blogData.title} {/* Title of the blog post */}
+      </h1>
+      
+      {/* Displaying the blog post details */}
+      <div>
+        {blogData.details} {/* Details or content of the blog post */}
+      </div>
     </Modal>
-  )
-}
+  );
+};
 
-export default BlogPostViewPopup
+export default BlogPostViewPopup;

@@ -17,7 +17,12 @@ const service = () => {
           name="description"
           content="Finex: Your trusted Bangladeshi courier for low-cost, global delivery of official goods, documents, and more. ✈️"
         />
-
+        {/* Open Graph meta tags for social media sharing */}
+        <meta property="og:title" content="Finex - Services" />
+        <meta
+          property="og:description"
+          content="Explore Finex's comprehensive shipping services, including air and sea freight options tailored for your global shipping needs."
+        />
         <meta
           name="keyword"
           content="Faster,International, Express, Finex, DHL Express, DHL Bangladesh, Fedex Express, Fedex Bangladesh, Aramex, International Courier Express, Any Percel Courier, Shipment"
