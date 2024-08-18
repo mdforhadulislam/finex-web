@@ -14,7 +14,6 @@ export const TrackDataList = [
     name: "This shipment has completed Bangladesh custom check",
     level: 1,
   },
-  
   {
     id: 5626509874524,
     name: "This shipment is waiting for the airlines to prepare",
@@ -26,6 +25,11 @@ export const TrackDataList = [
     level: 2,
   },
   {
+    id: 5626547574544,
+    name: "This shipment is delayed due to severe weather conditions",
+    level: 2,
+  },
+  {
     id: 562646574524,
     name: "This shipment has completed custom checks",
     level: 2,
@@ -33,6 +37,35 @@ export const TrackDataList = [
   {
     id: 56265765674524,
     name: "This Shipment Has Reached The Nearest Hub",
+    level: 2,
+  },
+  {
+    id: 5626547574525,
+    name: "This shipment is being delivered to the recipient",
+    level: 2,
+  },
+  {
+    id: 5626547574527,
+    name: "This shipment is delayed due to unforeseen circumstances",
+    level: 2,
+  },
+  {
+    id: 5626547574528,
+    name: "This shipment could not be delivered due to an address issue",
+    level: 2,
+  },
+  {
+    id: 5626547574529,
+    name: "This shipment is returned to the sender",
+    level: 2,
+  },
+  {
+    id: 5626547574530,
+    name: "This shipment is undergoing inspection",
+    level: 2,
+  },{
+    id: 5626547574538,
+    name: "Delivery of the shipment has been rescheduled",
     level: 2,
   },
   {
