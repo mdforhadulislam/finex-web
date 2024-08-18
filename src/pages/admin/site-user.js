@@ -1,6 +1,7 @@
 "use client";
 
 import { getRequestSend, USER_ACCOUNT_API } from "@/data/ApiMethod";
+import Head from "next/head";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 
@@ -17,6 +18,7 @@ const SiteUser = () => {
   return (
     <div className="w-full h-auto p-2" id="AllUser">
 
+<Head><title>Admin Site-User</title></Head>
 <div className="w-full h-auto py-1 mb-4">
             <h1 className="font-semibold text-lg justify-center text-center align-middle items-center">
               Site User

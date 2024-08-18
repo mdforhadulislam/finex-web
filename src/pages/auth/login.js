@@ -2,6 +2,7 @@ import { AuthContext } from "@/context/AuthContext";
 import { postRequestSend, LOGIN_API } from "@/data/ApiMethod";
 import AuthLayout from "@/utils/AuthLayout";
 import InputBox from "@/utils/InputBox";
+import Head from "next/head";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useContext, useState } from "react";
@@ -63,6 +64,8 @@ const Login = () => {
 
   return (
     <AuthLayout>
+      
+    <Head><title>Finex - Login</title></Head>
       <form
         className="p-6 sm:p-8 pt-6 bg-white mx-auto shadow-4xl rounded-3xl w-full sm:w-96 flex flex-col justify-center items-center gap-7"
         onSubmit={submitHandler}

@@ -1,10 +1,12 @@
 import UserDashBoardTrackParcelListSection from '@/components/user/UserDashBoardTrackParcelListSection'
+import Head from 'next/head'
 
 const UserParcelTrack = () => {
   return (
-    <div>
+    <>
+    <Head><title>User Shipmant Track</title></Head>
         <UserDashBoardTrackParcelListSection />
-    </div>
+    </>
   )
 }
 

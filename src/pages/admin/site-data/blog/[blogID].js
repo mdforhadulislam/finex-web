@@ -13,6 +13,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { MdOutlineFileDownload } from "react-icons/md";
 import { toast } from "react-toastify";
 import Profile from "@/public/profile.svg";
+import Head from "next/head";
 
 const SingleBlog = () => {
   const router = useRouter();
@@ -41,6 +42,9 @@ const SingleBlog = () => {
 
   return (
     <div className="w-full h-auto py-2" id="Country">
+      <Head>
+        <title>{blogData?.title} Update</title>
+      </Head>
       <div className=" w-full h-auto p-2 shadow-3xl rounded-md">
         <div className="w-full h-auto py-1 mb-2">
           <h1 className="font-semibold text-center text-lg justify-center align-middle items-center">

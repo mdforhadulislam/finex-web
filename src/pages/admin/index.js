@@ -3,8 +3,9 @@ import AdminDashBoardHeaderSection from "@/components/Admin/AdminDashBoardHeader
 import AdminDashBoardOrderListSection from "@/components/Admin/AdminDashBoardOrderListSection";
 import AdminDashBoardPickupListSection from "@/components/Admin/AdminDashBoardPickupListSection";
 import AdminDashBoardTrackParcelListSection from "@/components/Admin/AdminDashBoardTrackParcelListSection";
-import SiteUser from "./site-user";
+import Head from "next/head";
 import { useState } from "react";
+import SiteUser from "./site-user";
 
 export default function AdminPage() {
   const [tab, setTab] = useState({
@@ -15,6 +16,7 @@ export default function AdminPage() {
 
   return (
     <>
+    <Head><title>Admin Dasboard</title></Head>
       <AdminDashBoardHeaderSection />
       <AdminDashBoardHeaderNavButtonSection tab={tab} setTab={setTab} />
       {tab.pickup && <AdminDashBoardPickupListSection />}

@@ -3,6 +3,7 @@ import UserDashBoardHomeHeaderSection from "@/components/user/UserDashBoardHomeH
 import UserDashBoardHomeTrackSection from "@/components/user/UserDashBoardHomeTrackSection";
 import { AuthContext } from "@/context/AuthContext";
 import { postRequestSend, VISITOR_API } from "@/data/ApiMethod";
+import Head from "next/head";
 import { useContext, useEffect } from "react";
 
 const UserDashboard = () => {
@@ -42,6 +43,7 @@ const UserDashboard = () => {
 
   return (
     <>
+    <Head><title>User DashBoard</title></Head>
       <UserDashBoardHomeHeaderSection />
       <UserDashBoardHomeTrackSection />
     </>

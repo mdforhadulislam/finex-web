@@ -1,4 +1,5 @@
 import { CONTACT_API, getRequestSend } from "@/data/ApiMethod";
+import Head from "next/head";
 import React, { useEffect, useState } from "react";
 
 const Contact = () => {
@@ -23,6 +24,8 @@ const Contact = () => {
 
   return (
     <div className="w-full h-auto p-2">
+      
+    <Head><title>Admin Contact</title></Head>
       <div className="w-full h-auto flex flex-col">
         {allContact.map(({ _id, name, phone, email, message, date }) => (
           <div key={_id} className="w-full h-auto p-2">

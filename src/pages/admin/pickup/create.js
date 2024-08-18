@@ -7,6 +7,7 @@ import {
 } from "@/data/ApiMethod";
 import { MainAddress } from "@/utils/Address";
 import InputBox from "@/utils/InputBox";
+import Head from "next/head";
 import { useRouter } from "next/router";
 import React, { useContext, useState } from "react";
 import { toast } from "react-toastify";
@@ -34,6 +35,8 @@ const CreatePickup = () => {
 
   return (
     <div className="w-full h-auto py-2" id="createrequest">
+      
+    <Head><title>Create Pickup</title></Head>
       <div className=" w-full h-auto p-2 shadow-3xl rounded-md pb-5">
         <div className="w-full h-auto py-2 pb-4">
           <h1 className="text-center text-lg font-semibold">PickUp Created</h1>

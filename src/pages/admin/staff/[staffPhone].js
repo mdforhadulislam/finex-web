@@ -23,6 +23,7 @@ import AdminDashBoardOrderCreatedPopup from "@/components/Admin/AdminDashBoardOr
 import { IoEyeOutline } from "react-icons/io5"; // Importing eye icon for viewing details
 import AdminDashBoardOrderListSectionBox from "@/components/Admin/AdminDashBoardOrderListSectionBox"; // Importing a component for displaying order list
 import { AuthContext } from "@/context/AuthContext";
+import Head from "next/head";
 
 const StaffDataView = () => {
   // Main component function
@@ -115,6 +116,8 @@ const StaffDataView = () => {
 
   return (
     <div className="w-full h-auto p-3 ">
+      
+    <Head><title>Staff {staffData.name}</title></Head>
       <div className="w-full h-auto bg-defult transition-all duration-300 rounded-md p-5 md:flex-row flex-col flex items-center justify-between gap-2">
         <div className="w-full sm:w-auto h-auto flex flex-col sm:flex-row gap-5 sm:gap-3">
           <div className="w-full flex justify-center items-center sm:block sm:w-auto h-auto p-2 bg-white rounded-md">

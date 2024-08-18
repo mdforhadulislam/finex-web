@@ -13,6 +13,7 @@ import {
 } from "@/data/ApiMethod";
 import InputBox from "@/utils/InputBox";
 import SelecteSearchBox from "@/utils/SelecteSearchBox";
+import Head from "next/head";
 import { useRouter } from "next/router";
 import { useContext, useEffect, useState } from "react";
 import { MdDeleteOutline } from "react-icons/md";
@@ -194,6 +195,8 @@ const StaffOrderCreate = () => {
 
   return (
     <div className="w-full h-auto py-2" id="createorder">
+      
+    <Head><title>Update Staff Order</title></Head>
       <div className=" w-full h-auto p-3 shadow-3xl rounded-md">
         <div className="w-full h-auto 1st-box-style">
           <div className="w-full h-auto flex sm:flex-row flex-col justify-center align-middle items-center gap-3 pb-6">

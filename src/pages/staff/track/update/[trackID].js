@@ -4,6 +4,7 @@ import { getRequestSend, putRequestSend, SINGLE_TRACK_PARCEL_API } from "@/data/
 import { TrackDataList } from "@/data/trackUpdateData";
 import InputBox from "@/utils/InputBox";
 import SelecteSearchBox from "@/utils/SelecteSearchBox";
+import Head from "next/head";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { MdDeleteOutline } from "react-icons/md";
@@ -38,6 +39,8 @@ const StaffUpdateParcelTrack = () => {
 
   return (
     <div className="w-full h-auto py-2" id="trackingupdate">
+      
+    <Head><title>Shipmant Tracking Update</title></Head>
       <div className=" w-full h-auto p-3 shadow-3xl rounded-md">
         <div className="w-full h-auto py-1 mb-3">
           <h1 className="font-semibold text-lg justify-center text-center align-middle items-center">

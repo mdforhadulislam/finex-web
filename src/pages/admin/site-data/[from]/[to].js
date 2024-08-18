@@ -10,6 +10,7 @@ import {
   SINGLE_PRICE_API,
 } from "@/data/ApiMethod";
 import InputBox from "@/utils/InputBox";
+import Head from "next/head";
 import { useRouter } from "next/router";
 import React, { useContext, useEffect, useState } from "react";
 import { toast } from "react-toastify";
@@ -231,6 +232,8 @@ const Single = () => {
 
   return (
     <div className="w-full h-auto">
+      
+    <Head><title>Create Rate Chart</title></Head>
       <div className="w-full h-auto py-2 px-2 flex gap-2">
         <InputBox value={fromCountry?.country} title={"From"} />
         <InputBox value={toCountry?.country} title={"To"} />

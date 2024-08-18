@@ -1,6 +1,7 @@
 import { LoadingContext } from "@/context/LoadingContext";
 import { postRequestSend, REGISTER_API } from "@/data/ApiMethod";
 import InputBox from "@/utils/InputBox";
+import Head from "next/head";
 import { useRouter } from "next/router";
 import React, { useContext, useState } from "react";
 import { toast } from "react-toastify";
@@ -36,6 +37,8 @@ const AddNewStaff = () => {
 
   return (
     <div className="w-full h-auto py-2" id="createrequest">
+      
+    <Head><title>Admin Staff Register</title></Head>
       <div className=" w-full h-auto p-2 shadow-3xl rounded-md pb-5">
         <div className="w-full h-auto py-2 pb-4">
           <h1 className="text-center text-lg font-semibold">Add New Staff</h1>
