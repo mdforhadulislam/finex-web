@@ -1,15 +1,10 @@
 import { AuthContext } from "@/context/AuthContext";
-import { getRequestSend, PICKUP_API } from "@/data/ApiMethod";
-import { getRequestMeta } from "next/dist/server/request-meta";
-import Image from "next/image";
-import React, { useContext, useEffect, useState } from "react";
-import { FiEdit } from "react-icons/fi";
-import { IoEyeOutline } from "react-icons/io5";
-import { MdDeleteOutline } from "react-icons/md";
-import UserDashBoardPickupListBox from "./UserDashBoardPickupListBox";
-import UserDashBoardPickupListViewPopup from "./UserDashBoardPickupListViewPopup";
 import { LoadingContext } from "@/context/LoadingContext";
 import { ModalContext } from "@/context/ModalContext";
+import { getRequestSend, PICKUP_API } from "@/data/ApiMethod";
+import { useContext, useEffect, useState } from "react";
+import UserDashBoardPickupListBox from "./UserDashBoardPickupListBox";
+import UserDashBoardPickupListViewPopup from "./UserDashBoardPickupListViewPopup";
 
 const UserDashBoardPickupListSection = () => {
   const authcontext = useContext(AuthContext);

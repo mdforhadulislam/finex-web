@@ -1,5 +1,5 @@
  "use client"
-import UserDashBoardOrderListSection from "@/components/Users/UserDashBoardOrderListSection";
+import UserDashBoardOrderListSection from "@/components/User/UserDashBoardOrderListSection";
 
 const UserOrder = () => {
   return (
