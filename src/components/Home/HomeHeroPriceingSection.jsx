@@ -61,7 +61,7 @@ const HomeHeroPriceingSection = () => {
   }, []);
 
   return (
-    <div className="w-full h-auto p-5 bg-white rounded-md shadow-md">
+    <div className="w-full h-auto p-5 bg-white rounded-md shadow-3xl">
       <form action="">
         <div className="w-full h-auto flex flex-col gap-4">
           <div className="w-full h-auto flex justify-start gap-3">

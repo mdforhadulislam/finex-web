@@ -1,4 +1,4 @@
-import { getRequestSend } from '@/data/ApiMethod';
+import { getRequestSend, SINGLE_TRACK_PARCEL_API } from '@/data/ApiMethod';
 import IsBangla from '@/utils/IsBangla';
 import IsEnglish from '@/utils/IsEnglish';
 import { useRouter } from 'next/router';
@@ -10,7 +10,7 @@ const HomeHeroTrackBoxSection = () => {
     const router = useRouter();
   
     return (
-      <div className="w-full h-full p-4 bg-white rounded-md shadow-md">
+      <div className="w-full h-full p-4 bg-white rounded-md shadow-3xl">
         <form className="w-full h-auto flex justify-center items-center flex-col gap-3">
           <IsEnglish>
             <h1 className="text-3xl font-bold text-defult mt-12">
@@ -36,7 +36,7 @@ const HomeHeroTrackBoxSection = () => {
               onClick={(e) => {
                 e.preventDefault()
                 if (trackNumber) {
-                  getRequestSend(`${TRACKING}${trackNumber}`).then((res) => {
+                  getRequestSend(SINGLE_TRACK_PARCEL_API(trackNumber)).then((res) => {
                     if (res.status == 200) {
                       toast.success(res.message);
                       router.push(`/track/${trackNumber}`);
@@ -59,7 +59,7 @@ const HomeHeroTrackBoxSection = () => {
               onClick={(e) => {
                 e.preventDefault()
                 if (trackNumber) {
-                  getRequestSend(`${TRACKING}${trackNumber}`).then((res) => {
+                  getRequestSend(SINGLE_TRACK_PARCEL_API(trackNumber)).then((res) => {
                     if (res.status == 200) {
                       toast.success(res.message);
                       router.push(`/track/${trackNumber}`);
