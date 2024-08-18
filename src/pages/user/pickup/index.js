@@ -1,6 +1,6 @@
  "use client"
- import UserDashBoardPickupHeaderNavButtonSection from "@/components/User/UserDashBoardPickupHeaderNavButtonSection";
-import UserDashBoardPickupListSection from "@/components/User/UserDashBoardPickupListSection";
+ import UserDashBoardPickupHeaderNavButtonSection from "@/components/user/UserDashBoardPickupHeaderNavButtonSection";
+import UserDashBoardPickupListSection from "@/components/user/UserDashBoardPickupListSection";
 
 const UserPickup = () => {
   return (
