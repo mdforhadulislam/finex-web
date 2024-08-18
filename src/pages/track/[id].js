@@ -6,4 +6,4 @@ const SingleTrack = () => {
   )
 }
 
-export default Single
+export default SingleTrack
