@@ -1,13 +1,12 @@
-import React, { useContext, useEffect, useState } from "react";
-import AdminDashBoardTrackParcelListSectionBox from "./AdminDashBoardTrackParcelListSectionBox";
-import { getRequestSend, TRACK_PARCEL_API } from "@/data/ApiMethod";
-import { IoEyeOutline } from "react-icons/io5";
-import { FiEdit } from "react-icons/fi";
-import { MdDeleteOutline } from "react-icons/md";
-import AdminDashBoardTrackParcelPopup from "./AdminDashBoardTrackParcelPopup";
 import { ModalContext } from "@/context/ModalContext";
-import { useRouter } from "next/router";
+import { getRequestSend, TRACK_PARCEL_API } from "@/data/ApiMethod";
 import InputBox from "@/utils/InputBox";
+import { useRouter } from "next/router";
+import { useContext, useEffect, useState } from "react";
+import { FiEdit } from "react-icons/fi";
+import { IoEyeOutline } from "react-icons/io5";
+import AdminDashBoardTrackParcelListSectionBox from "./AdminDashBoardTrackParcelListSectionBox";
+import AdminDashBoardTrackParcelPopup from "./AdminDashBoardTrackParcelPopup";
 
 const AdminDashBoardTrackParcelListSection = () => {
   const [trackData, setTrackData] = useState([]);
@@ -32,7 +31,7 @@ const AdminDashBoardTrackParcelListSection = () => {
 
   return (
     <div>
-      <div className="w-full h-auto py-2" id="trackinglist">
+      <div className="w-full h-auto py-2" id="allTrack">
         <div className=" w-full h-auto p-2 shadow-3xl rounded-md">
           <div className="w-full h-auto py-1 mb-4">
             <h1 className="font-semibold text-lg justify-center text-center align-middle items-center">

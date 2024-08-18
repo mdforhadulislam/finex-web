@@ -1,9 +1,13 @@
-import React from 'react'
+import AdminDashBoardBlogCreateSection from "@/components/Admin/AdminDashBoardBlogCreateSection";
+import AdminDashBoardBlogListSection from "@/components/Admin/AdminDashBoardBlogListSection";
 
 const Blog = () => {
   return (
-    <div>Blog</div>
-  )
-}
+    <>
+      <AdminDashBoardBlogCreateSection />
+      <AdminDashBoardBlogListSection />
+    </>
+  );
+};
 
-export default Blog
+export default Blog;

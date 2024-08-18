@@ -42,10 +42,10 @@ const AppBar = ({ isOpen, setIsOpen }) => {
           </div>
   
           <div className="cursor-pointer hover:bg-defult-100 transition-all rounded-md">
-            <HiMenuAlt3
-              className="w-8 h-8 text-defult"
+            <button
+              className="inline-flex items-center p-1 ml-1 py-[6px] px-3 bg-defult-button  rounded-lg text-white shadow-3xl  focus:outline-none"
               onClick={() => setIsOpen(!isOpen)}
-            />
+            >MENU</button>
           </div>
         </div>
       </div>

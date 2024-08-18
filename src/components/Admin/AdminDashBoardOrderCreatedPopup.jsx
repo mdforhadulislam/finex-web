@@ -34,19 +34,22 @@ const AdminDashBoardOrderCreatedPopup = ({ orderData }) => {
           <div className="w-auto h-auto p-3">
             <table className="table-auto border-[2px]">
               <tbody>
-              <tr>
-                <td>Date:</td>
-                <td>{new Date(orderData.orderDate).toLocaleDateString()}</td>
-              </tr>
-              <tr>
-                <td>Order ID:</td>
-                <td>{orderData?._id}</td>
-              </tr>
-
-              <tr>
-                <td>Tracking ID:</td>
-                <td>{orderData?.trackingId}</td>
-              </tr>
+                <tr>
+                  <td>Date:</td>
+                  <td>{new Date(orderData.orderDate).toLocaleDateString()}</td>
+                </tr>
+                <tr>
+                  <td>Order ID:</td>
+                  <td>{orderData?._id}</td>
+                </tr>
+                <tr>
+                  <td>Tracking ID:</td>
+                  <td>{orderData?.trackingId}</td>
+                </tr>
+                <tr>
+                  <td>Creator Phone:</td>
+                  <td>{orderData?.creatorPhone}</td>
+                </tr>
               </tbody>
             </table>
           </div>
@@ -62,22 +65,22 @@ const AdminDashBoardOrderCreatedPopup = ({ orderData }) => {
 
             <table className="table-auto border-[2px] w-full h-auto py-2 px-1 text-sm">
               <tbody>
-              <tr>
-                <td>Name: </td>
-                <td>{orderData?.parcel?.sender?.name}</td>
-              </tr>
-              <tr>
-                <td>Phone: </td>
-                <td>{orderData?.parcel?.sender?.phone}</td>
-              </tr>
-              <tr>
-                <td>E-mail: </td>
-                <td>{orderData?.parcel?.sender?.email}</td>
-              </tr>
-              <tr>
-                <td>Address: </td>
-                <td>{orderData?.parcel?.sender?.address}</td>
-              </tr>
+                <tr>
+                  <td>Name: </td>
+                  <td>{orderData?.parcel?.sender?.name}</td>
+                </tr>
+                <tr>
+                  <td>Phone: </td>
+                  <td>{orderData?.parcel?.sender?.phone}</td>
+                </tr>
+                <tr>
+                  <td>E-mail: </td>
+                  <td>{orderData?.parcel?.sender?.email}</td>
+                </tr>
+                <tr>
+                  <td>Address: </td>
+                  <td>{orderData?.parcel?.sender?.address}</td>
+                </tr>
               </tbody>
             </table>
           </div>
@@ -86,91 +89,91 @@ const AdminDashBoardOrderCreatedPopup = ({ orderData }) => {
               Reciver:
             </h1>
             <table className="table-auto border-[2px] w-full h-auto py-2 px-1  text-sm">
-           <tbody>
-           <tr>
-                <td>Name: </td>
-                <td>{orderData?.parcel?.reciver?.name}</td>
-              </tr>
-              <tr>
-                <td>Phone: </td>
-                <td>{orderData?.parcel?.reciver?.phone}</td>
-              </tr>
-              <tr>
-                <td>E-mail: </td>
-                <td>{orderData?.parcel?.reciver?.email}</td>
-              </tr>
-              <tr>
-                <td>Address: </td>
-                <td>
-                  {orderData?.parcel?.reciver?.address?.address}
-                  {orderData?.parcel?.reciver?.country}
-                </td>
-              </tr>
-           </tbody>
+              <tbody>
+                <tr>
+                  <td>Name: </td>
+                  <td>{orderData?.parcel?.reciver?.name}</td>
+                </tr>
+                <tr>
+                  <td>Phone: </td>
+                  <td>{orderData?.parcel?.reciver?.phone}</td>
+                </tr>
+                <tr>
+                  <td>E-mail: </td>
+                  <td>{orderData?.parcel?.reciver?.email}</td>
+                </tr>
+                <tr>
+                  <td>Address: </td>
+                  <td>
+                    {orderData?.parcel?.reciver?.address?.address}
+                    {orderData?.parcel?.reciver?.country}
+                  </td>
+                </tr>
+              </tbody>
             </table>
           </div>
         </div>
 
         <div>
           <table className="table-auto border-[2px] w-full h-auto py-2 px-1  text-sm mt-2">
-           <tbody>
-           <tr>
-              <td>Tracking ID</td>
-              <td>Item</td>
-              <td>Weight</td>
-              <td>Total Amount</td>
-            </tr>
-            <tr>
-              <td>{orderData?.trackingId}</td>
+            <tbody>
+              <tr>
+                <td>Tracking ID</td>
+                <td>Item</td>
+                <td>Weight</td>
+                <td>Total Amount</td>
+              </tr>
+              <tr>
+                <td>{orderData?.trackingId}</td>
 
-              <td>
-                {orderData?.parcel?.item?.list?.map((item) => (
-                  <div key={item.id}>{item.name},</div>
-                ))}
-              </td>
-              <td>{orderData?.parcel?.weight}</td>
-              <td>
-                <div className="w-full flex justify-between">
-                  <span>Weight Charge:</span>
-                  <span> {Number(orderData?.payment?.pAmount)}</span>
-                </div>
-                <div className="w-full flex justify-between">
-                  <span>Extra Charge:</span>
-                  <span>{Number(orderData?.payment?.pExtraCharge)}</span>
-                </div>
-                <div className="w-full flex justify-between">
-                  <span>Discount:</span>
-                  <span> {Number(orderData?.payment?.pDiscount)}</span>
-                </div>
-                <hr />
-                <div className="w-full flex justify-between">
-                  <span>Total Charge:</span>
-                  <span>
-                    {Number(orderData?.payment?.pAmount) +
-                      Number(orderData?.payment?.pExtraCharge) -
-                      Number(orderData?.payment?.pDiscount)}
-                  </span>
-                </div>
+                <td>
+                  {orderData?.parcel?.item?.list?.map((item) => (
+                    <div key={item.id}>{item.name},</div>
+                  ))}
+                </td>
+                <td>{orderData?.parcel?.weight}</td>
+                <td>
+                  <div className="w-full flex justify-between">
+                    <span>Weight Charge:</span>
+                    <span> {Number(orderData?.payment?.pAmount)}</span>
+                  </div>
+                  <div className="w-full flex justify-between">
+                    <span>Extra Charge:</span>
+                    <span>{Number(orderData?.payment?.pExtraCharge)}</span>
+                  </div>
+                  <div className="w-full flex justify-between">
+                    <span>Discount:</span>
+                    <span> {Number(orderData?.payment?.pDiscount)}</span>
+                  </div>
+                  <hr />
+                  <div className="w-full flex justify-between">
+                    <span>Total Charge:</span>
+                    <span>
+                      {Number(orderData?.payment?.pAmount) +
+                        Number(orderData?.payment?.pExtraCharge) -
+                        Number(orderData?.payment?.pDiscount)}
+                    </span>
+                  </div>
 
-                <div className="w-full flex justify-between">
-                  <span>Total Charge Recived:</span>
-                  <span>{Number(orderData?.payment?.pRecived)}</span>
-                </div>
+                  <div className="w-full flex justify-between">
+                    <span>Total Charge Recived:</span>
+                    <span>{Number(orderData?.payment?.pRecived)}</span>
+                  </div>
 
-                <hr />
+                  <hr />
 
-                <div className="w-full flex justify-between">
-                  <span>Due Charge:</span>
-                  <span>
-                    {Number(orderData?.payment?.pAmount) +
-                      Number(orderData?.payment?.pExtraCharge) -
-                      Number(orderData?.payment?.pDiscount) -
-                      Number(orderData?.payment?.pRecived)}
-                  </span>
-                </div>
-              </td>
-            </tr>
-           </tbody>
+                  <div className="w-full flex justify-between">
+                    <span>Due Charge:</span>
+                    <span>
+                      {Number(orderData?.payment?.pAmount) +
+                        Number(orderData?.payment?.pExtraCharge) -
+                        Number(orderData?.payment?.pDiscount) -
+                        Number(orderData?.payment?.pRecived)}
+                    </span>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
           </table>
         </div>
         <div className=" relative">

@@ -1,6 +1,6 @@
 "use client";
-import UserDashBoardHomeHeaderSection from "@/components/user/UserDashBoardHomeHeaderSection";
-import UserDashBoardHomeTrackSection from "@/components/user/UserDashBoardHomeTrackSection";
+import UserDashBoardHomeHeaderSection from "@/components/User/UserDashBoardHomeHeaderSection";
+import UserDashBoardHomeTrackSection from "@/components/User/UserDashBoardHomeTrackSection";
 import { AuthContext } from "@/context/AuthContext";
 import { postRequestSend, VISITOR_API } from "@/data/ApiMethod";
 import { useContext, useEffect } from "react";

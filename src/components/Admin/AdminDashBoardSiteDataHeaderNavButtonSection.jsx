@@ -12,6 +12,11 @@ const AdminDashBoardSiteDataHeaderNavButtonSection = () => {
       link={"/admin/site-data/#rateChart"}
       title={"Rate Chart Section"}
     />
+
+    <DashBoardLinkButton
+      link={"/admin/site-data/blog"}
+      title={"Blog"}
+    />
   </div>
   )
 }

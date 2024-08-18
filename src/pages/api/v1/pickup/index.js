@@ -22,7 +22,7 @@ export default async function handler(req, res) {
 
           await newPickupRequest.save(); // Save the new pickup to the database
 
-          return response(res, 201, "Pickup Created", []); // Success response with status 201 Created
+          return response(res, 200, "Pickup Created", []); // Success response with status 201 Created
         } else {
           return response(res, 400, "Invalid Data Provided", []); // Bad request response
         }

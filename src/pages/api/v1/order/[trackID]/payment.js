@@ -1,7 +1,6 @@
 import response from "@/libs/common/response";
 import configDB from "@/libs/config/db";
 import Order from "@/libs/models/Order.Model";
-import Tracking from "@/libs/models/Tracking.Model";
 
 configDB(); // Initialize the database connection
 
@@ -31,7 +30,7 @@ export default async function handler(req, res) {
           const findOrder = await Order.findOne({ trackingId: TrackID });
           if (findOrder) {
             // Get payment information from request body or use existing value
-            const payment = body.payment ?? findOrder.payment;
+            const payment = body ?? findOrder.payment;
 
             // Update the payment information
             findOrder.payment = payment;

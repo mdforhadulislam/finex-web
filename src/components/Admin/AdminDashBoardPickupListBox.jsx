@@ -26,25 +26,25 @@ const AdminDashBoardPickupListBox = ({
           />
         </div>
         <table className="w-full flex gap-2 align-middle sm:items-center justify-center sm:justify-around flex-col sm:flex-row ">
-          <div className="w-auto flex gap-2">
-            <span className="block md:hidden">Name :</span>
-            <span>{pData?.name}</span>
-          </div>
-          <div className="w-auto flex gap-2">
-            <span className="block md:hidden">Phone :</span>
-            <span>{pData?.phone}</span>
-          </div>
-          <div className="w-auto flex gap-2">
-            <span className="block md:hidden">Date :</span>
-            <span>
+          <tr className="w-auto flex gap-2">
+            <td className="block md:hidden">Name :</td>
+            <td>{pData?.name}</td>
+          </tr>
+          <tr className="w-auto flex gap-2">
+            <td className="block md:hidden">Phone :</td>
+            <td>{pData?.phone}</td>
+          </tr>
+          <tr className="w-auto flex gap-2">
+            <td className="block md:hidden">Date :</td>
+            <td>
               {new Date(pData?.dateTime).toLocaleDateString()}-
               {new Date(pData?.dateTime).toLocaleTimeString()}
-            </span>
-          </div>
-          <div className="w-auto flex gap-2">
-            <span className="block md:hidden">Weight :</span>
-            <span>{pData?.weight}</span>
-          </div>
+            </td>
+          </tr>
+          <tr className="w-auto flex gap-2">
+            <td className="block md:hidden">Weight :</td>
+            <td>{pData?.weight}</td>
+          </tr>
         </table>
         <div className="flex gap-2">
           <IoEyeOutline

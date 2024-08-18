@@ -4,10 +4,11 @@ import Link from 'next/link'
 import React from 'react'
 import { FaChevronRight } from 'react-icons/fa'
 
+import BG from "@/public/bg.png";
 const AboutTitleSection = () => {
   return (
-    <div className='w-full h-auto bg'>
-    <div className='lg:container h-auto m-auto   sm:p-2 p-4 sm:py-24'>
+    <div className='w-full h-auto bg' style={{ backgroundImage: `url('${BG.src}')` }}>
+    <div className='lg:container h-auto m-auto   sm:p-2 p-4 sm:py-24' >
         <IsEnglish><h1 className='font-bold text-3xl sm:text-5xl text-white'>ABOUT</h1></IsEnglish>
         <IsBangla className={""}><h1 className='font-bold text-5xl sm:text-6xl text-white bfont'>আমাদের সম্পর্কে</h1></IsBangla>
         <IsEnglish>

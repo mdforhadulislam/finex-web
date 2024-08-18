@@ -35,7 +35,7 @@ const AdminDashBoardPickupListSection = () => {
   }, []);
 
   return (
-    <div className="w-full h-auto py-2" id="createrequest">
+    <div className="w-full h-auto py-2" id="pickup">
       <div className=" w-full h-auto p-2 shadow-3xl rounded-md pb-5">
         <div className="w-full h-auto py-2 pb-4">
           <h1 className="text-center text-lg font-semibold">PickUp List</h1>

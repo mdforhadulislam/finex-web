@@ -38,7 +38,11 @@ const DragBar = ({ isOpen, setIsOpen }) => {
       { title: "Pickup Request", link: "/admin/pickup/", icon: GiCardPickup },
       { title: "Parcel Order", link: "/admin/order/", icon: FiBox },
       { title: "Track Parcel", link: "/admin/track/", icon: FiBox },
-      { title: "Profile Setting", link: "/admin/setting", icon: GrUserSettings },
+      {
+        title: "Profile Setting",
+        link: "/admin/setting",
+        icon: GrUserSettings,
+      },
       { title: "Staff", link: "/admin/staff", icon: AiOutlineUserAdd },
       { title: "Contact", link: "/admin/contact", icon: RiContactsLine },
       { title: "Site User", link: "/admin/site-user", icon: AiOutlineUserAdd },
@@ -55,10 +59,11 @@ const DragBar = ({ isOpen, setIsOpen }) => {
     ],
     staff: [
       { title: "Dashboard", link: "/staff", icon: LuLayoutDashboard },
-      { title: "Pickup Request", link: "/setting", icon: GiCardPickup },
-      { title: "Parcel Order", link: "/setting", icon: FiBox },
-      { title: "Track Parcel", link: "/setting", icon: FiBox },
-      { title: "Profile Setting", link: "/setting", icon: GrUserSettings },
+      { title: "Pickup Request", link: "/staff/pickup/", icon: GiCardPickup },
+      { title: "Parcel Order", link: "/staff/order/", icon: FiBox },
+      { title: "Track Parcel", link: "/staff/track/", icon: FiBox },
+      { title: "Accounts", link: "/staff/account/", icon: MdAccountBalance },
+      { title: "Profile Setting", link: "/staff/setting/", icon: GrUserSettings },
     ],
   };
 

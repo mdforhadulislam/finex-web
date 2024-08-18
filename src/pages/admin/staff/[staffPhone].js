@@ -8,7 +8,8 @@ import {
   getRequestSend, // Importing method to handle GET requests
   ORDER_API, // API endpoint for orders
   PICKUP_API, // API endpoint for pickups
-  putRequestSend, // Importing method to handle PUT requests
+  putRequestSend,
+  USER_ACCOUNT_API, // Importing method to handle PUT requests
   USER_ACCOUNT_PHONE, // Helper function to construct API endpoint for user account
 } from "@/data/ApiMethod"; // Importing API methods from a custom file
 import InputBox from "@/utils/InputBox"; // Importing a custom input box component
@@ -21,12 +22,17 @@ import { ModalContext } from "@/context/ModalContext"; // Importing context for 
 import AdminDashBoardOrderCreatedPopup from "@/components/Admin/AdminDashBoardOrderCreatedPopup"; // Importing a component for viewing order details
 import { IoEyeOutline } from "react-icons/io5"; // Importing eye icon for viewing details
 import AdminDashBoardOrderListSectionBox from "@/components/Admin/AdminDashBoardOrderListSectionBox"; // Importing a component for displaying order list
+import { AuthContext } from "@/context/AuthContext";
 
 const StaffDataView = () => {
   // Main component function
   const router = useRouter(); // Getting router instance for accessing route parameters
   const { staffPhone } = router.query; // Extracting staffPhone from query parameters
+
+  const formData = new FormData();
+
   const loading = useContext(LoadingContext); // Accessing loading context to manage loading state
+
   const modal = useContext(ModalContext); // Accessing modal context to manage modal state
 
   // State hooks for various data and UI states
@@ -37,42 +43,26 @@ const StaffDataView = () => {
   const [profileImage, setProfileImage] = useState("");
   const [nidFront, setNidFront] = useState("");
   const [nidBack, setNidBack] = useState("");
-  const [staffData, setstaffData] = useState({});
+  const [staffData, setStaffData] = useState({});
 
-  // Handler function for updating profile information
   const uploadUpdatedHandler = async () => {
-    loading.loadingStart(); // Start loading indicator
+    loading.loadingStart();
     try {
       const response = await putRequestSend(
-        USER_ACCOUNT_PHONE(staffPhone), // Endpoint to update user profile
+        `${USER_ACCOUNT_API}/?phone=${staffPhone}`,
         {},
-        staffData // Updated staff data
+        staffData
       );
-
       if (response.status === 200) {
-        toast.success(response.message); // Show success message
-        // Fetch updated staff data
-        getRequestSend(USER_ACCOUNT_PHONE(staffPhone)).then((res) => {
-          if (res.status == 200) {
-            loading.loadingEnd(); // End loading indicator
-            setstaffData({
-              name: res.data.name,
-              phone: res.data.phone,
-              role: res.data.role,
-              email: res.data.email,
-            });
-            setProfileImage(res.data?.profile);
-            setNidFront(res.data?.nationalID?.front);
-            setNidBack(res.data?.nationalID?.back);
-          }
-        });
+        setStaffData(response.data);
+        toast.success(response.message);
       } else {
-        toast.error(response.message); // Show error message
+        toast.error(response.message);
       }
     } catch (error) {
-      toast.error("An error occurred while updating the profile."); // Show error message if an exception occurs
+      toast.error("An error occurred while updating the profile.");
     } finally {
-      loading.loadingEnd(); // End loading indicator
+      loading.loadingEnd();
     }
   };
 
@@ -84,25 +74,31 @@ const StaffDataView = () => {
 
   // Fetch data when component mounts
   useEffect(() => {
-    const fetchUserData = async () => {
-      loading.loadingStart(); // Start loading indicator
-      getRequestSend(USER_ACCOUNT_PHONE(staffPhone)).then((res) => {
-        if (res.status == 200) {
-          loading.loadingEnd(); // End loading indicator
-          setstaffData({
-            name: res.data.name,
-            phone: res.data.phone,
-            role: res.data.role,
-            email: res.data.email,
+    const fetchstaffData = async () => {
+      loading.loadingStart();
+      try {
+        const response = await getRequestSend(USER_ACCOUNT_PHONE(staffPhone));
+        if (response.status === 200) {
+          setStaffData({
+            name: response.data.name,
+            phone: response.data.phone,
+            email: response.data.email,
+            role: response.data.role,
           });
-          setProfileImage(res.data?.profile);
-          setNidFront(res.data?.nationalID?.front);
-          setNidBack(res.data?.nationalID?.back);
+          setProfileImage(response.data?.profile);
+          setNidFront(response.data?.nationalID?.front);
+          setNidBack(response.data?.nationalID?.back);
         }
-      });
+      } catch (error) {
+        console.log(error);
+
+        toast.error("An error occurred while fetching user data.");
+      } finally {
+        loading.loadingEnd();
+      }
     };
 
-    fetchUserData(); // Fetch user data
+    fetchstaffData(); // Fetch user data
 
     getRequestSend(PICKUP_API).then((res) => {
       if (res.status == 200) {
@@ -133,23 +129,23 @@ const StaffDataView = () => {
           <div className="w-auto h-auto flex flex-col items-start font-sans text-white mb-5">
             <h1 className="text-2xl font-bold text-white uppercase">
               {/* // Display staff name */}
-              {staffData.name || "User Name"} 
+              {staffData?.name || "User Name"}
             </h1>
             <div className="w-full md:w-auto flex-col mt-3">
               <div className="w-auto flex items-center gap-3">
                 <span className="w-[56px]">Role</span>:
                 {/* // Display staff role */}
-                <span>{staffData?.role || "N/A"}</span> 
+                <span>{staffData?.role || "N/A"}</span>
               </div>
               <div className="w-auto flex items-center gap-3">
                 <span className="w-[56px]">Email</span>:
                 {/* // Display staff email */}
-                <span>{staffData?.email || "N/A"}</span> 
+                <span>{staffData?.email || "N/A"}</span>
               </div>
               <div className="w-auto flex items-center gap-3">
                 <span className="w-[56px]">Phone</span>:
                 {/* // Display staff phone */}
-                <span>{staffData?.phone || "N/A"}</span> 
+                <span>{staffData?.phone || "N/A"}</span>
               </div>
             </div>
           </div>
@@ -246,35 +242,39 @@ const StaffDataView = () => {
                     id="profilePic"
                     className="hidden"
                     onChange={(e) => {
+                      loading.loadingStart();
                       const file = e.target.files[0];
-                      if (file) {
-                        const reader = new FileReader();
-                        reader.onload = async () => {
-                          loading.loadingStart(); // Start loading indicator
-                          try {
-                            const response = await putRequestSend(
-                              USER_ACCOUNT_PHONE(staffPhone), // Endpoint to update profile
-                              {},
-                              {
-                                profile: reader.result, // Updated profile image
-                              }
-                            );
 
-                            if (response.status === 200) {
-                              setProfileImage(reader.result); // Update profile image state
-                              toast.success(response.message); // Show success message
+                      if (file) {
+                        formData.append("profile", e.target.files[0]);
+                        fetch(USER_ACCOUNT_PHONE(staffPhone), {
+                          method: "PUT",
+                          body: formData,
+                        })
+                          .then((res) => res.json())
+                          .then((res2) => {
+                            loading.loadingEnd();
+                            if (res2.status == 200) {
+                              toast.success(res2.message);
+                              getRequestSend(
+                                USER_ACCOUNT_PHONE(staffPhone)
+                              ).then((getData) => {
+                                if (getData.status == 200) {
+                                  setStaffData({
+                                    name: getData.data.name,
+                                    phone: getData.data.phone,
+                                    email: getData.data.email,
+                                    role: getData.data.role,
+                                  });
+                                  setProfileImage(getData.data?.profile);
+                                  setNidFront(getData.data?.nationalID?.front);
+                                  setNidBack(getData.data?.nationalID?.back);
+                                }
+                              });
                             } else {
-                              toast.error(response.message); // Show error message
+                              toast.error(res2.message);
                             }
-                          } catch (error) {
-                            toast.error(
-                              "An error occurred while updating the profile." // Show error message if an exception occurs
-                            );
-                          } finally {
-                            loading.loadingEnd(); // End loading indicator
-                          }
-                        };
-                        reader.readAsDataURL(file); // Read file as data URL
+                          });
                       }
                     }}
                   />
@@ -282,7 +282,7 @@ const StaffDataView = () => {
                   <Image
                     width={150}
                     height={150}
-                    src={profileImage || Profile} // Display profile image
+                    src={profileImage || Profile}
                     alt="Profile Pic"
                     className="w-36 h-36 border shadow-3xl rounded-md"
                   />
@@ -299,38 +299,39 @@ const StaffDataView = () => {
                     id="nidFront"
                     className="hidden"
                     onChange={(e) => {
+                      loading.loadingStart();
                       const file = e.target.files[0];
-                      if (file) {
-                        const reader = new FileReader();
-                        reader.onload = async () => {
-                          loading.loadingStart(); // Start loading indicator
-                          try {
-                            const response = await putRequestSend(
-                              USER_ACCOUNT_PHONE(staffPhone), // Endpoint to update NID front
-                              {},
-                              {
-                                nationalID: {
-                                  front: reader.result, // Updated NID front image
-                                  back: nidBack, // Retain existing NID back image
-                                },
-                              }
-                            );
 
-                            if (response.status === 200) {
-                              setNidFront(reader.result); // Update NID front image state
-                              toast.success(response.message); // Show success message
+                      if (file) {
+                        formData.append("nationalID.front", e.target.files[0]);
+                        fetch(USER_ACCOUNT_PHONE(staffPhone), {
+                          method: "PUT",
+                          body: formData,
+                        })
+                          .then((res) => res.json())
+                          .then((res2) => {
+                            loading.loadingEnd();
+                            if (res2.status == 200) {
+                              toast.success(res2.message);
+                              getRequestSend(
+                                USER_ACCOUNT_PHONE(staffPhone)
+                              ).then((getData) => {
+                                if (getData.status == 200) {
+                                  setStaffData({
+                                    name: getData.data.name,
+                                    phone: getData.data.phone,
+                                    email: getData.data.email,
+                                    role: getData.data.role,
+                                  });
+                                  setProfileImage(getData.data?.profile);
+                                  setNidFront(getData.data?.nationalID?.front);
+                                  setNidBack(getData.data?.nationalID?.back);
+                                }
+                              });
                             } else {
-                              toast.error(response.message); // Show error message
+                              toast.error(res2.message);
                             }
-                          } catch (error) {
-                            toast.error(
-                              "An error occurred while updating the profile." // Show error message if an exception occurs
-                            );
-                          } finally {
-                            loading.loadingEnd(); // End loading indicator
-                          }
-                        };
-                        reader.readAsDataURL(file); // Read file as data URL
+                          });
                       }
                     }}
                   />
@@ -338,7 +339,7 @@ const StaffDataView = () => {
                   <Image
                     width={150}
                     height={150}
-                    src={nidFront || Profile} // Display NID front image
+                    src={nidFront || Profile}
                     alt="NID Front"
                     className="w-36 h-36 border shadow-3xl rounded-md"
                   />
@@ -355,38 +356,39 @@ const StaffDataView = () => {
                     id="nidBack"
                     className="hidden"
                     onChange={(e) => {
+                      loading.loadingStart();
                       const file = e.target.files[0];
-                      if (file) {
-                        const reader = new FileReader();
-                        reader.onload = async () => {
-                          loading.loadingStart(); // Start loading indicator
-                          try {
-                            const response = await putRequestSend(
-                              USER_ACCOUNT_PHONE(staffPhone), // Endpoint to update NID back
-                              {},
-                              {
-                                nationalID: {
-                                  front: nidFront, // Retain existing NID front image
-                                  back: reader.result, // Updated NID back image
-                                },
-                              }
-                            );
 
-                            if (response.status === 200) {
-                              setNidBack(reader.result); // Update NID back image state
-                              toast.success(response.message); // Show success message
+                      if (file) {
+                        formData.append("nationalID.back", e.target.files[0]);
+                        fetch(USER_ACCOUNT_PHONE(staffPhone), {
+                          method: "PUT",
+                          body: formData,
+                        })
+                          .then((res) => res.json())
+                          .then((res2) => {
+                            loading.loadingEnd();
+                            if (res2.status == 200) {
+                              toast.success(res2.message);
+                              getRequestSend(
+                                USER_ACCOUNT_PHONE(staffPhone)
+                              ).then((getData) => {
+                                if (getData.status == 200) {
+                                  setStaffData({
+                                    name: getData.data.name,
+                                    phone: getData.data.phone,
+                                    email: getData.data.email,
+                                    role: getData.data.role,
+                                  });
+                                  setProfileImage(getData.data?.profile);
+                                  setNidFront(getData.data?.nationalID?.front);
+                                  setNidBack(getData.data?.nationalID?.back);
+                                }
+                              });
                             } else {
-                              toast.error(response.message); // Show error message
+                              toast.error(res2.message);
                             }
-                          } catch (error) {
-                            toast.error(
-                              "An error occurred while updating the profile." // Show error message if an exception occurs
-                            );
-                          } finally {
-                            loading.loadingEnd(); // End loading indicator
-                          }
-                        };
-                        reader.readAsDataURL(file); // Read file as data URL
+                          });
                       }
                     }}
                   />
@@ -394,7 +396,7 @@ const StaffDataView = () => {
                   <Image
                     width={150}
                     height={150}
-                    src={nidBack || Profile} // Display NID back image
+                    src={nidBack || Profile}
                     alt="NID Back"
                     className="w-36 h-36 border shadow-3xl rounded-md"
                   />
@@ -406,27 +408,27 @@ const StaffDataView = () => {
               title="Name"
               value={staffData.name}
               action={(e) =>
-                setstaffData({ ...staffData, name: e.target.value })
-              } // Input for staff name
+                setStaffData({ ...staffData, name: e.target.value })
+              }
             />
             <InputBox
               title="Phone"
               value={staffData.phone}
               action={(e) =>
-                setstaffData({ ...staffData, phone: e.target.value })
-              } // Input for staff phone
+                setStaffData({ ...staffData, phone: e.target.value })
+              }
             />
             <InputBox
               title="Email"
               value={staffData.email}
               action={(e) =>
-                setstaffData({ ...staffData, email: e.target.value })
-              } // Input for staff email
+                setStaffData({ ...staffData, email: e.target.value })
+              }
             />
 
             <button
               className="inline-flex items-center p-1 py-2 px-[6px] bg-defult-button rounded-lg text-white shadow-3xl justify-center text-center mt-4 "
-              onClick={uploadUpdatedHandler} // Button to update profile
+              onClick={uploadUpdatedHandler}
             >
               Update Profile
             </button>

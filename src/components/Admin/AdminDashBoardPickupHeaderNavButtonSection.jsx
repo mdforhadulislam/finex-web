@@ -8,10 +8,7 @@ const AdminDashBoardPickupHeaderNavButtonSection = () => {
       link={"/admin/pickup/create"}
       title={"Create Pickup"}
     />
-    <DashBoardLinkButton
-      link={"/admin/site-data/#rateChart"}
-      title={"Rate Chart Section"}
-    />
+   
   </div>
   )
 }

@@ -35,13 +35,13 @@ const AdminDashBoardOrderListSection = () => {
   useEffect(() => {
     getRequestSend(ORDER_API).then((res) => {
       if (res.status == 200) {
-        setOrderData(res.data);
+        setOrderData(res.data.reverse());
       }
     });
   }, []);
 
   return (
-    <div className="w-full h-auto py-2" id="allorderlist">
+    <div className="w-full h-auto py-2" id="allOrder">
       <div className=" w-full h-auto pb-8 p-2 shadow-3xl rounded-md">
         <div className="w-full h-auto py-1 mb-3">
           <h1 className="font-semibold text-lg justify-center text-center align-middle items-center">
@@ -68,7 +68,7 @@ const AdminDashBoardOrderListSection = () => {
                         );
                     }),
                   ]);
-                  setOrderData([...filteringData]);
+                  setOrderData([...filteringData.reverse()]);
                 }
               });
             }}
@@ -91,7 +91,7 @@ const AdminDashBoardOrderListSection = () => {
                         );
                     }),
                   ]);
-                  setOrderData([...filteringData]);
+                  setOrderData([...filteringData.reverse()]);
                 }
               });
             }}
@@ -138,7 +138,7 @@ const AdminDashBoardOrderListSection = () => {
                         toast.success(res.message);
                         getRequestSend(ORDER_API).then((res) => {
                           if (res.status == 200) {
-                            setOrderData(res.data);
+                            setOrderData(res.data.reverse());
                           }
                         });
                       }

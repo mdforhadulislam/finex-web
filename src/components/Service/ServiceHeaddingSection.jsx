@@ -3,7 +3,7 @@ import IsEnglish from "@/utils/IsEnglish";
 import Link from "next/link";
 import React from "react";
 import { FaChevronRight } from "react-icons/fa";
-import BG from "../../assets/bg.png";
+import BG from "@/public/bg.png";
 
 const ServiceHeaddingSection = () => {
   return (

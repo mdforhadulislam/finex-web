@@ -1,5 +1,4 @@
-import UserDashBoardTrackParcelListSection from '@/components/user/UserDashBoardTrackParcelListSection'
-import React from 'react'
+import UserDashBoardTrackParcelListSection from '@/components/User/UserDashBoardTrackParcelListSection'
 
 const UserParcelTrack = () => {
   return (

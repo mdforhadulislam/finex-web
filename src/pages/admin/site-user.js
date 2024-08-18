@@ -15,7 +15,15 @@ const SiteUser = () => {
     });
   },[]);
   return (
-    <div className="w-full h-auto p-2">
+    <div className="w-full h-auto p-2" id="AllUser">
+
+<div className="w-full h-auto py-1 mb-4">
+            <h1 className="font-semibold text-lg justify-center text-center align-middle items-center">
+              Site User
+            </h1>
+          </div>
+
+      <div className="w-full h-auto p-2 shadow-3xl rounded-lg py-4">
       <div className="w-full h-auto grid lg:grid-cols-3 grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-3">
         {allUser?.map((sUser) => (
           <div
@@ -33,6 +41,7 @@ const SiteUser = () => {
             </div>
 
             <table className="w-full h-full">
+              <tbody  className="w-full h-full">
               <tr>
                 <td>Name:</td> <td>{sUser?.name}</td>
               </tr>
@@ -45,9 +54,11 @@ const SiteUser = () => {
               <tr>
                 <td>E-mail:</td> <td>{sUser?.email}</td>
               </tr>
+              </tbody>
             </table>
           </div>
         ))}
+      </div>
       </div>
     </div>
   );

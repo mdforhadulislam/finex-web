@@ -37,6 +37,10 @@ export const SINGLE_PICKUP_API = (id) => `${ROOT_API_V1}/pickup/${id}`;
 export const CONTACT_API = `${ROOT_API_V1}/contact`;
 export const VISITOR_API =   `${ROOT_API_V1}/visitor`
 
+export const BLOG_API = `${ROOT_API_V1}/blog`
+export const SINGLE_BLOG_API = (blogID) => `${ROOT_API_V1}/blog/${blogID}`
+export const BLOG_IMAGE_UPLOAD_API =  `${ROOT_API_V1}/blog/blogImageUpload`
+
 
 
 export const getRequestSend = async (url, header) => {

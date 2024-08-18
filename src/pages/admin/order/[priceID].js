@@ -26,6 +26,9 @@ const OrderCreate = () => {
   const modal = useContext(ModalContext)
   const [isEdit, setIsEdit]= useState(false)
 
+  console.log(router.query);
+  
+
   const [createdOrderTrackingId, setCreatedOrderTrackingId] = useState("");
   const [getOrderfullData,setGetOrderfullData] = useState({})
 

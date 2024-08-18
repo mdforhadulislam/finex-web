@@ -46,7 +46,7 @@ export default async function handler(req, res) {
         // Save the updated user
         await user.save();
 
-        response(res, 200, "User data updated successfully", []);
+        response(res, 200, "User data updated successfully", user);
         break;
 
       default:

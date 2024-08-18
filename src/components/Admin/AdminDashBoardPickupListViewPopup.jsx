@@ -4,6 +4,7 @@ const AdminDashBoardPickupListViewPopup = ({ pickupData }) => {
   return (
     <Modal>
       <table className="w-full">
+        <tbody className="w-full">
         <tr>
           <td>Customar Name: </td> <td>{pickupData?.name}</td>
         </tr>
@@ -30,11 +31,13 @@ const AdminDashBoardPickupListViewPopup = ({ pickupData }) => {
             {pickupData?.address?.city}, {pickupData?.address?.region}
           </td>
         </tr>
+        </tbody>
       </table>
 
       <h1>{pickupData?.isConfirm?.confirm && "Accepted By"}</h1>
       {pickupData?.isConfirm?.confirm && (
         <table className="w-full">
+          <tbody  className="w-full">
           <tr>
             <td>Staff ID: </td> <td>{pickupData?.isConfirm?.staffPhone}</td>
           </tr>
@@ -46,6 +49,7 @@ const AdminDashBoardPickupListViewPopup = ({ pickupData }) => {
             <td>Accept Time: </td>
             <td>{new Date(pickupData?.isConfirm?.dateTime).toLocaleDateString()} - {new Date(pickupData?.isConfirm?.dateTime).toLocaleTimeString()}</td>
           </tr>
+          </tbody>
         </table>
       )}
     </Modal>

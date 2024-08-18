@@ -1,6 +1,5 @@
  "use client"
-import UserDashBoardOrderListSection from "@/components/user/UserDashBoardOrderListSection";
-import React from "react";
+import UserDashBoardOrderListSection from "@/components/User/UserDashBoardOrderListSection";
 
 const UserOrder = () => {
   return (
