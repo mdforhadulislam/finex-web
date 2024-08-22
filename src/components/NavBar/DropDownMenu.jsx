@@ -4,10 +4,12 @@ import { LOGOUT_API, postRequestSend } from "@/data/ApiMethod";
 import IsBangla from "@/utils/IsBangla";
 import IsEnglish from "@/utils/IsEnglish";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import { useContext } from "react";
 import { toast } from "react-toastify";
 
 const DropDownMenu = ({ setIsProfileClick }) => {
+  const router = useRouter();
   const loading = useContext(LoadingContext);
   const authContext = useContext(AuthContext);
 
@@ -56,12 +58,22 @@ const DropDownMenu = ({ setIsProfileClick }) => {
         </li>
         <li>
           <IsEnglish>
-            <Link
-              href={"/auth/settings"}
+            <button
+              onClick={() => {
+                if (authContext.user.role == "user") {
+                  router.push("/dashboard/setting");
+                } else if (authContext.user.role == "admin") {
+                  router.push("/admin/setting");
+                } else if (authContext.user.role == "staff") {
+                  router.push("/staff/setting");
+                } else {
+                  router.push("/notfound");
+                }
+              }}
               className="block px-4 py-2 hover:bg-gray-100 cursor-pointer"
             >
               Settings
-            </Link>
+            </button>
           </IsEnglish>
           <IsBangla>
             <Link
