@@ -8,8 +8,8 @@ const AuthContextProvider = ({ children }) => {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
-    const token = localStorage?.getItem("token");
-    const user = JSON.parse(localStorage?.getItem("user"));
+    const token = localStorage?.getItem("finex-token");
+    const user = JSON.parse(localStorage?.getItem("finex-user"));
     setToken(token);
     setUser(user);
   }, [])
@@ -21,16 +21,16 @@ const userRole = user?.role
   const logoutHandler = () => {
     setToken(null);
     setUser(null);
-    localStorage.removeItem("token");
-    localStorage.removeItem("user");
+    localStorage.removeItem("finex-token");
+    localStorage.removeItem("finex-user");
   };
 
   const loginHandler = (token, user) => {
     setToken(token);
     setUser(user);
 
-    localStorage.setItem("token", token);
-    localStorage.setItem("user", JSON.stringify(user));
+    localStorage.setItem("finex-token", token);
+    localStorage.setItem("finex-user", JSON.stringify(user));
   };
 
   const authContext = {

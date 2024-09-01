@@ -92,7 +92,7 @@ const UserDashBoardOrderListSection = () => {
           </div>
   
           <div className="w-full flex align-middle items-center flex-col mt-3 p-3 gap-3">
-            {orderData?.filter(fItem=>fItem.parcel.sender.phone==authContext.user.phone)?.map((item, index) => (
+            {orderData?.filter(fItem=>fItem?.parcel?.sender?.phone==authContext.user.phone)?.map((item, index) => (
             <div className="w-full h-auto relative" key={index}>
                 <UserDashBoardOrderListBox orderData={item} />
   
