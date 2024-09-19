@@ -30,6 +30,7 @@ export default function Home() {
           property="og:description"
           content="Finex provides fast, reliable, and affordable international shipping solutions. Learn about our services and how we can help with your shipping needs."
         />
+            <meta name="facebook-domain-verification" content="uympri4y7q1uc1ry7fs9de0b6duwkj" />
       </Head>
       <HomeHeroSection />
       <HeroServiceSection />
