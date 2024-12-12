@@ -27,7 +27,8 @@ const AboutPage = () => {
       {/* Section providing detailed information about Finex */}
       <AboutDetailsSection />
       {/* Section showcasing the team members */}
-      <AboutTeamMemberSection />
+      {/* <AboutTeamMemberSection /> */}
+       
     </>
   );
 };
