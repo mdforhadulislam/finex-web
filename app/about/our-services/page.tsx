@@ -1,14 +1,15 @@
-import OurServicesHeaderSection from '@/components/About/OurServicesHeaderSection'
-import React from 'react'
-import OurServicesBodySection from "@/components/About/OurServicesBodySection"
+import OurServicesBodySection from "@/components/About/OurServicesBodySection";
+import OurServicesHeaderSection from "@/components/About/OurServicesHeaderSection";
+import HomeCustomerReview from "@/components/Home/HomeCustomerReview";
 
 const OurServices = () => {
   return (
     <>
       <OurServicesHeaderSection />
       <OurServicesBodySection />
+      <HomeCustomerReview />
     </>
-  )
-}
+  );
+};
 
-export default OurServices
+export default OurServices;

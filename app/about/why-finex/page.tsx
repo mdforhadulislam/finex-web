@@ -1,15 +1,15 @@
-import WhyFinexBodySection from '@/components/About/WhyFinexBodySection'
-import WhyFinexHeaderSection from '@/components/About/WhyFinexHeaderSection'
-import React from 'react'
+import WhyFinexBodySection from "@/components/About/WhyFinexBodySection";
+import WhyFinexHeaderSection from "@/components/About/WhyFinexHeaderSection";
+import HomeCustomerReview from "@/components/Home/HomeCustomerReview";
 
 const WhyFinex = () => {
   return (
     <>
-    <WhyFinexHeaderSection />
-    <WhyFinexBodySection />
-    
+      <WhyFinexHeaderSection />
+      <WhyFinexBodySection />
+      <HomeCustomerReview />
     </>
-  )
-}
+  );
+};
 
-export default WhyFinex
+export default WhyFinex;

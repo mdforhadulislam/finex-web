@@ -19,7 +19,7 @@ import {
   CarouselPrevious,
 } from "../ui/carousel";
 interface Feedback {
-  id: number;
+  _id: number;
   name: string;
   profile: string;
   rating: number;
@@ -27,7 +27,11 @@ interface Feedback {
   isApproved: boolean;
 }
 
+
+
+
 const HomeCustomerReview = () => {
+  
   const [allFeedBack, setFeedBack] = useState<Feedback[]>([]);
 
   useEffect(() => {
@@ -137,7 +141,7 @@ const HomeCustomerReview = () => {
                 ?.filter((sFFeedBack) => sFFeedBack?.isApproved == true)
                 .map((sFeedBack) => (
                   <CarouselItem
-                    key={sFeedBack.id}
+                    key={sFeedBack._id}
                     className="pl-1 sm:basis-1/2 md:basis-1/3 lg:basis-1/4 h-full"
                   >
                     <div className="p-2 h-full">

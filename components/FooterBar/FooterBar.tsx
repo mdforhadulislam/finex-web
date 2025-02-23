@@ -21,37 +21,37 @@ const solutionsFeatures = [
   {
     id: 1213,
     title: "Air Freight",
-    link: "/about/our-service/",
+    link: "/about/our-services/",
     titleBn: "বাই এয়ার",
   },
   {
     id: 3568,
     title: "Sea Freight",
-    link: "/about/our-service/",
+    link: "/about/our-services/",
     titleBn: "বাই সী",
   },
   {
     id: 4668,
     title: "Custom Clearnces",
-    link: "/about/our-service/",
+    link: "/about/our-services/",
     titleBn: "কাস্টম ক্লিয়ারেঞ্ছ",
   },
   {
     id: 89865,
     title: "Export Shipments",
-    link: "/about/our-service/",
+    link: "/about/our-services/",
     titleBn: "রপ্তানি চালান",
   },
   {
     id: 565465,
     title: "Courier Service",
-    link: "/about/our-service/",
+    link: "/about/our-services/",
     titleBn: "কুরিয়ার সার্ভিস",
   },
   {
     id: 565465,
     title: "Shipment Tracking",
-    link: "/about/our-service/",
+    link: "/about/our-services/",
     titleBn: "চালান ট্র্যাকিং",
   },
   {
@@ -84,25 +84,25 @@ const ourCompany = [
   {
     id: 565343465,
     title: "Help & Support",
-    link: "/about/help-&-support/",
+    link: "/about/help-&-supports/",
     titleBn: "সহযোগিতা এবং সমর্থন",
   },
   {
     id: 56543465,
     title: "Trust & Safety",
-    link: "/about/trust&safety/",
+    link: "/about/trust&safetys/",
     titleBn: "আস্থা ও নিরাপত্তা",
   },
   {
     id: 562354265,
     title: "Privacy Policy",
-    link: "/about/privacy-policy/",
+    link: "/about/privacy-policys/",
     titleBn: "গোপনীয়তা নীতি",
   },
   {
     id: 562354265,
     title: "Refund Policy",
-    link: "/about/refund-policy/",
+    link: "/about/refund-policys/",
     titleBn: "ফেরত নীতি",
   },
 ];

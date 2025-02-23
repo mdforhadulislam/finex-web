@@ -66,29 +66,7 @@ interface TrackData {
   track_info?: TrackInfo;
 }
 
-const couriers = [
-  "FedEx", "UPS", "DHL", "Aramex", "SMSA", "OCS", "USPS", "Canada Post", "Royal Mail",
-  "TNT", "DPD", "Yodel", "Hermes", "China Post", "Japan Post", "India Post", "Korea Post",
-  "SingPost", "AusPost", "PostNL", "Hongkong Post", "SF Express", "DHL Express", "La Poste",
-  "Correos Spain", "Brazil Correios", "Russia Post", "Thailand Post", "Malaysia Pos",
-  "Viettel Post", "J&T Express", "Ninja Van", "Best Express", "Gati", "DTDC", "SpeedPost",
-  "Parcel Force", "An Post", "Swiss Post", "BPost", "Norway Post", "Poste Italiane",
-  "CTT Portugal", "Türkiye Post", "Saudi Post", "LBC Express", "Blue Dart", "SkyNet",
-  "Fastway", "New Zealand Post", "Estafeta", "Canada Express", "Delhivery", "XpressBees",
-  "GDEX", "City-Link Express", "Pos Indonesia", "Mexico Post", "Correos Chile", "Correos Peru",
-  "Toll Group", "Cambodia Post", "Pony Express", "Vietnam Post", "Yanwen", "ZTO Express",
-  "STO Express", "YTO Express", "Shree Tirupati", "Ecom Express", "DPE Express", "Armadillo",
-  "Poczta Polska", "Cargo Expreso", "PostNord", "Asendia", "SunYou", "Epacket", "Nacex",
-  "GLS", "Sagawa Express", "Seur", "MNG Kargo", "Cainiao", "CJ Logistics", "Tiki",
-  "Shadowfax", "DPEX", "ABF Freight", "Loomis Express", "Spee-Dee Delivery", "OnTrac",
-  "Tuffnells", "Purolator", "Landmark Global", "CollectPlus", "Australia Post",
-  "DX Delivery", "IMEX Global Solutions", "DHL eCommerce", "Expeditors", "JNE Express",
-  "Sicepat Express", "Parcel2Go", "WishPost", "LaserShip", "Skynet Malaysia", "SkyPostal",
-  "Shiptor", "JD Logistics", "CEVA Logistics", "DB Schenker", "First Flight Couriers",
-  "PFC Express", "Sinoair", "Newgistics", "Shree Maruti Courier", "Super Express",
-  "TForce Freight", "TNT Express", "Spoton Logistics", "XPO Logistics", "GEODIS",
-  "Averitt Express", "Mainfreight", "Echo Global Logistics", "Roadrunner Freight"
-];
+const couriers = ["FedEx", "UPS", "DHL", "Aramex", "SMSA", "OCS", "USPS","DPD","SF Express", "DHL Express",  "DTDC", "DPEX", "DHL eCommerce", ];
 
 // Create a regex pattern to match all courier names
 const courierRegex = new RegExp(couriers.join("|"), "gi");

@@ -16,9 +16,8 @@ const ContactBodySection = () => {
                 Get in Touch
               </h1>
               <p className="text-base font-normal text-justify py-3">
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                Mollitia ipsam in culpa laboriosam tempora provident ut officia
-                deleniti laborum illo.
+              Have questions or need assistance with air freight or customs clearance?  <br />
+              Finex is here to help! Contact us via phone, email, or our online form for expert support. Our team is ready to provide tailored solutions to meet your shipping and logistics needs. Let’s connect today!
               </p>
             </IsEnglish>
 
@@ -28,9 +27,7 @@ const ContactBodySection = () => {
                 যোগাযোগ করুন
               </h1>
               <p className="text-justify py-3 bfont text-2xl leading-6">
-                আমাদের গ্রাহক পরিষেবা সেলগুলি আপনার সমস্ত প্রশ্নের জন্য দ্রুত
-                প্রতিক্রিয়া প্রদান করে। আন্তঃনগর পিক-আপ এবং ডেলিভারিতে আমাদের
-                গাড়ির বহর দ্রুত এবং নিরাপদ ডেলিভারি প্রদান করে।
+              আপনার কি প্রশ্ন আছে বা এয়ার ফ্রেইট ও কাস্টমস ক্লিয়ারেন্স নিয়ে সহায়তা দরকার? ফিনেক্স সবসময় আপনাকে সাহায্য করতে প্রস্তুত! ফোন, ইমেইল বা আমাদের অনলাইন ফর্মের মাধ্যমে আমাদের সাথে যোগাযোগ করুন। আপনার শিপিং ও লজিস্টিক চাহিদা অনুযায়ী আমরা সেরা সমাধান প্রদান করি। আজই যোগাযোগ করুন!
               </p>
             </IsBangla>
 
@@ -43,7 +40,7 @@ const ContactBodySection = () => {
           {/* Right side - Google Maps embed */}
           <div className="w-full h-auto p-4">
             <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d912.214058578806!2d90.39848236952292!3d23.85923832515917!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755c50019ecfb45%3A0x97051f8809df19ce!2sRahman%20Villa!5e0!3m2!1sen!2sbd!4v1717447882392!5m2!1sen!2sbd"
+               src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d228.18441651039544!2d90.39773209168601!3d23.78477111242577!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sbd!4v1740319786643!5m2!1sen!2sbd" 
               width={600}
               height={450}
               loading="lazy"

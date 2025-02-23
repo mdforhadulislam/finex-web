@@ -1,7 +1,5 @@
 import IsBangla from "@/utils/IsBangla";
 import IsEnglish from "@/utils/IsEnglish";
-import React from "react";
-import HomeCustomerReview from "../Home/HomeCustomerReview";
 
 const OurServicesBodySection = () => {
   return (
@@ -535,8 +533,6 @@ const OurServicesBodySection = () => {
           </p>
         </IsBangla>
       </div>
-
-      <HomeCustomerReview />
     </>
   );
 };
