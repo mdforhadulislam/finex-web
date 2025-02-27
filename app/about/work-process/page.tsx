@@ -8,7 +8,6 @@ const WorkProcess = () => {
     <>
       <WorkProcessHeaderSection />
       <WorkProcessBodySection />
-      
       <HomeCustomerReview />
     </>
   )

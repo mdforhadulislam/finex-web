@@ -74,7 +74,7 @@ const WorkProcessBodySection = () => {
     },
     {
       title: "spe",
-      img: "/sp.png",
+      img: "/sf.webp",
     },
     {
       title: "tntey",
@@ -101,8 +101,8 @@ const WorkProcessBodySection = () => {
       img: "/dtdc.png",
     },
     {
-      title: "fedext",
-      img: "/fedex.png",
+      title: "dpd",
+      img: "/dpd.webp",
     },
     {
       title: "spet",

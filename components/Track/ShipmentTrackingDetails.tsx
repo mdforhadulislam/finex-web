@@ -59,9 +59,9 @@ interface TrackData {
   track_info?: TrackInfo;
 }
 
-const couriers = ["FedEx", "UPS", "DHL", "Aramex", "SMSA", "OCS", "USPS","DPD","SF Express", "DHL Express",  "DTDC", "DPEX", "DHL eCommerce" ];
-const courierRegex = new RegExp(couriers.join("|"), "gi");
-const replaceCourierWithFinex = (text:string) => text.replace(courierRegex, "Finex");
+const couriers = ["FedEx", "UPS", "DHL", "Aramex", "SMSA", "OCS", "USPS","DPD","SF Express", "DHL Express",  "DTDC", "DPEX", "DHL eCommerce"];
+const courierRegex = new RegExp(couriers?.join("|"), "gi");
+const replaceCourierWithFinex = (text:string) => text?.replace(courierRegex, "Finex");
 
 export const ShipmentTrackingDetails: React.FC<{ trackID: string }> = ({
   trackID,
@@ -75,11 +75,11 @@ export const ShipmentTrackingDetails: React.FC<{ trackID: string }> = ({
     getRequestSend(PUBLIC_TRACKING_API(trackID)).then((res) => {
       load.loadingEnd()
       if (res.status === 200) {
-        setResMessage(res.message)
-        toast.success(res.message);
-        setTrackData(res.data?.order_info ? res.data : { track_info: res.data });
+        setResMessage(res?.message)
+        toast.success(res?.message);
+        setTrackData(res?.data?.order_info ? res?.data : { track_info: res?.data });
       } else {
-        toast.error(res.message);
+        toast.error(res?.message);
       }
     });
   }, [trackID, load]);
@@ -150,7 +150,7 @@ export const ShipmentTrackingDetails: React.FC<{ trackID: string }> = ({
             <div className="w-full h-auto">
               <div className="flex flex-col  text-gray-50">{["pickup_bd", "inforeceived", "transit", "delivered"].map((status) => {
 
-                    const item = [...(trackData?.track_info?.own_tracking_info ?.tracking_info || []),...(trackData?.track_info?.own_tracking_info?.courier_tracking !=null && trackData.track_info.own_tracking_info.courier_tracking.length >= 0? trackData.track_info.own_tracking_info.courier_tracking[0]?.origin_info?.trackinfo?.toReversed(): []),].reverse().find((oItem) => oItem?.checkpoint_delivery_status === status);
+                    const item = [...(trackData?.track_info?.own_tracking_info ?.tracking_info || []),...(trackData?.track_info?.own_tracking_info?.courier_tracking !=null && trackData?.track_info?.own_tracking_info?.courier_tracking?.length >= 0? trackData?.track_info?.own_tracking_info?.courier_tracking[0]?.origin_info?.trackinfo?.toReversed(): []),].reverse().find((oItem) => oItem?.checkpoint_delivery_status === status);
 
                     return <ShipmentTrackParcelLocationBox key={status} item={item || null}/>
                   })}
@@ -169,8 +169,8 @@ export const ShipmentTrackingDetails: React.FC<{ trackID: string }> = ({
                 <h1 className="sm:w-[230px] text-right">Location</h1>
               </div>
               {[...(trackData?.track_info?.own_tracking_info?.tracking_info ||[]),
-                ...(trackData?.track_info?.own_tracking_info?.courier_tracking && trackData.track_info.own_tracking_info.courier_tracking.length >
-                  0 ? trackData.track_info.own_tracking_info.courier_tracking[0]?.origin_info?.trackinfo?.toReversed(): []),]?.map((item, i) => (
+                ...(trackData?.track_info?.own_tracking_info?.courier_tracking && trackData?.track_info?.own_tracking_info?.courier_tracking?.length >
+                  0 ? trackData?.track_info?.own_tracking_info?.courier_tracking[0]?.origin_info?.trackinfo?.toReversed(): []),]?.map((item, i) => (
                 <div key={i} className=" flex sm:gap-2 flex-col sm:flex-row font-medium text-base item-center">
                   <h1 className="sm:w-[250px]">{new Date(item?.checkpoint_date?.toLocaleString())?.toLocaleDateString()}{" "}{" - "}</h1>
                   <p className="sm:w-[320px] text-sm font-normal text-left">{replaceCourierWithFinex(item?.tracking_detail)}</p>
