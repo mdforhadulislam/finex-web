@@ -6,6 +6,7 @@ import LangContextProvider from "@/context/LangContext";
 import LoadContextProvider from "@/context/LoadContext";
 import UserTrackContext from "@/context/UserTrackContext";
 import Spriner from "@/utils/Spriner";
+import { Analytics } from "@vercel/analytics/react"
 import type { Metadata } from "next";
 import "./globals.css";
 export const metadata: Metadata = {
@@ -29,6 +30,7 @@ export default function RootLayout({
               <UserTrackContext>
                 <Navbar />
                 <Spriner />
+                <Analytics />
                 {children}
                 <FooterBar />
                 <Toaster
