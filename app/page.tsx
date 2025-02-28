@@ -9,7 +9,7 @@ export default function Home() {
   return (
     <>
       <Head>
-        <meta property="og:logo" content="https://www.finex.ltd/logo-en.png" />
+        <meta property="og:logo" content="https://www.finex.ltd/logo-en-.png" />
         <meta property="og:finex" content="https://www.finex.ltd/" />
         <meta property="og:Finex - Home" content="Link preview title" />
         <meta
