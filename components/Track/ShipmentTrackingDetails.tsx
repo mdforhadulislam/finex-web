@@ -120,9 +120,11 @@ export const ShipmentTrackingDetails: React.FC<{ trackID: string }> = ({
                 <div>to :{" "} {trackData?.order_info?.parcel?.reciver?.address?.address}</div>
                 <div>weight: {trackData?.order_info?.parcel?.weight}</div>
               </div>
+          
+
             </>
           ) : (
-            ""
+            <>  </>
           )}
         </div>
 
@@ -148,9 +150,9 @@ export const ShipmentTrackingDetails: React.FC<{ trackID: string }> = ({
 
             <h1 className="text-lg font-semibold pb-8">Shipment Update</h1>
             <div className="w-full h-auto">
-              <div className="flex flex-col  text-gray-50">{["pickup_bd", "inforeceived", "transit", "delivered"].map((status) => {
+              <div className="flex flex-col  text-gray-50">{["delivered","transit","inforeceived", "pickup_bd",  ].map((status) => {
 
-                    const item = [...(trackData?.track_info?.own_tracking_info ?.tracking_info || []),...(trackData?.track_info?.own_tracking_info?.courier_tracking !=null && trackData?.track_info?.own_tracking_info?.courier_tracking?.length >= 0? trackData?.track_info?.own_tracking_info?.courier_tracking[0]?.origin_info?.trackinfo?.toReversed(): []),].reverse().find((oItem) => oItem?.checkpoint_delivery_status === status);
+                    const item = [...(trackData?.track_info?.own_tracking_info?.courier_tracking !=null && trackData?.track_info?.own_tracking_info?.courier_tracking?.length >= 0? trackData?.track_info?.own_tracking_info?.courier_tracking[0]?.origin_info?.trackinfo: []),].reverse().find((oItem) => oItem?.checkpoint_delivery_status === status);
 
                     return <ShipmentTrackParcelLocationBox key={status} item={item || null}/>
                   })}
@@ -168,9 +170,8 @@ export const ShipmentTrackingDetails: React.FC<{ trackID: string }> = ({
                 <p className="sm:w-[320px] text-sm font-normal text-left">Description {" - "}</p>
                 <h1 className="sm:w-[230px] text-right">Location</h1>
               </div>
-              {[...(trackData?.track_info?.own_tracking_info?.tracking_info ||[]),
-                ...(trackData?.track_info?.own_tracking_info?.courier_tracking && trackData?.track_info?.own_tracking_info?.courier_tracking?.length >
-                  0 ? trackData?.track_info?.own_tracking_info?.courier_tracking[0]?.origin_info?.trackinfo?.toReversed(): []),]?.map((item, i) => (
+              {[...(trackData?.track_info?.own_tracking_info?.courier_tracking && trackData?.track_info?.own_tracking_info?.courier_tracking?.length >
+                  0 ? trackData?.track_info?.own_tracking_info?.courier_tracking[0]?.origin_info?.trackinfo: []),]?.map((item, i) => (
                 <div key={i} className=" flex sm:gap-2 flex-col sm:flex-row font-medium text-base item-center">
                   <h1 className="sm:w-[250px]">{new Date(item?.checkpoint_date?.toLocaleString())?.toLocaleDateString()}{" "}{" - "}</h1>
                   <p className="sm:w-[320px] text-sm font-normal text-left">{replaceCourierWithFinex(item?.tracking_detail)}</p>

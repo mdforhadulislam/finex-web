@@ -54,6 +54,7 @@ interface SChart {
   premium?: WeightRates;
   affordable?: WeightRates;
   economy?: WeightRates;
+  profitPercentage: number;
 }
 
 const PriceGet = ({ params }: PriceGetProps) => {
@@ -243,7 +244,7 @@ const PriceGet = ({ params }: PriceGetProps) => {
                       : ""}{" "}
                   </div>
 
-                  <div> = {value} TK</div>
+                  <div> = {Math.round((value + (value / 100 ) * (rateChart?.profitPercentage ?? 1) )+0.4)} TK</div>
                 </div>
               ))}
             </div>
@@ -310,7 +311,7 @@ const PriceGet = ({ params }: PriceGetProps) => {
                       : ""}{" "}
                   </div>
 
-                  <div> = {value} TK</div>
+                  <div> = {Math.round((value + (value / 100 ) * (rateChart?.profitPercentage ?? 1) )+0.4)} TK</div>
                 </div>
               ))}
             </div>
@@ -377,7 +378,7 @@ const PriceGet = ({ params }: PriceGetProps) => {
                       : ""}{" "}
                   </div>
 
-                  <div> = {value} TK</div>
+                  <div> = {Math.round((value + (value / 100 ) * (rateChart?.profitPercentage ?? 1) )+0.4)} TK</div>
                 </div>
               ))}
             </div>

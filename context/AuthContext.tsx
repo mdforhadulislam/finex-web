@@ -36,10 +36,11 @@ const AuthContextProvider: React.FC<{ children: React.ReactNode }> = ({
   const [user, setUser] = useState<UserDataType | null>(null);
 
   useEffect(() => {
-    const storedToken = window?.localStorage?.getItem("finex-token") || "";
-    const storedUser = JSON.parse(window?.localStorage?.getItem("finex-user") || "{}")
+    const storedToken = window?.localStorage?.getItem("finex-token") ? window?.localStorage?.getItem("finex-token") : "";
+    
+    const storedUser = JSON?.parse(window?.localStorage?.getItem("finex-user") ?? "{}")
 
-    setToken(storedToken);
+    setToken(storedToken || "");
     setUser(storedUser);
   }, []);
 

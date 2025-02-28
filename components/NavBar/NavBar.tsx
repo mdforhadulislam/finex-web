@@ -157,7 +157,7 @@ export default function NavBar() {
           setIsLogin(false);
           auth.loginHandler(res?.data?.token, res?.data?.user);
           toast.success(res.message);
-          router.push(`https://finex-app.vercel.app/${res?.data?.token}?phone=${res?.data?.user?.phone}`)
+          // router.push(`https://finex-app.vercel.app/${res?.data?.token}?phone=${res?.data?.user?.phone}`)
         } else {
           setIsLogin(true);
           toast.error(res.message);

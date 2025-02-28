@@ -12,7 +12,7 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: "Finex - Home",
   description: "Finex provides fast, reliable, and affordable international shipping solutions, specializing in air and sea freight, custom clearance, and competitive pricing.",
-  keywords: "international shipping, affordable shipping solutions, air freight, sea freight, custom clearance, export rates, courier services in Surat, DHL rates comparison, FedEx shipping quotes, UPS shipping options, hassle-free logistics, professional shipping solutions, global shipping services, Surat logistics provider, fast delivery services, international export assistance, shipping quote comparison, reliable freight forwarding, express courier services, door-to-door shipping, efficient customs clearance, international package tracking, Surat freight services, cost-effective global logistics",
+  keywords: "international shipping, affordable shipping solutions, air freight, sea freight, custom clearance, export rates, courier services in Surat, DHL rates comparison, FedEx shipping quotes, UPS shipping options, hassle-free logistics, professional shipping solutions, global shipping services, Surat logistics provider, fast delivery services, international export assistance, shipping quote comparison, reliable freight forwarding, express courier services, door-to-door shipping, efficient customs clearance, international package tracking, Surat freight services, cost-effective global logistics, Faster International Express - Finex, Finex Shippment Tracking, Finex International Courier, Finex Parcel Tracking",
   icons:["/icon.png"]
 };
 

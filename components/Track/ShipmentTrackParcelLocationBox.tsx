@@ -13,11 +13,11 @@ const ShipmentTrackParcelLocationBox: React.FC<{ item: Item | null }> = ({ item 
       if (!isNaN(parsedDate.getTime())) {
         return parsedDate.toLocaleDateString();
       }
-      return ""; // Return an empty string if the date string is invalid
+      return "";
     } else if (date instanceof Date) {
       return date.toLocaleDateString();
     }
-    return ""; // Default return if date is neither string nor Date
+    return ""; 
   };
 
 
