@@ -43,7 +43,7 @@ import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import { Label } from "../ui/label";
 import { navigationMenuTriggerStyle } from "../ui/navigation-menu";
-import { useRouter } from "next/navigation";
+// import { useRouter } from "next/navigation";
 
 interface InternalLinkProps {
   href?: string; // Optional href
@@ -95,7 +95,7 @@ export default function NavBar() {
   const [navBarScrolled, setNavBarScrolled] = useState<boolean>(false);
   const [isProfileMenu, setIsProfileMenu] = useState<boolean>(false);
 
-  const router = useRouter()
+  // const router = useRouter()
 
   const lang = useLang();
   const userTrack = useUserTrack();
