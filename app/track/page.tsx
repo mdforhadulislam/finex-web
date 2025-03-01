@@ -3,12 +3,15 @@
 import ShipmentTrackingBox from "@/components/Track/ShipmentTrackingBox";
 import IsBangla from "@/utils/IsBangla";
 import IsEnglish from "@/utils/IsEnglish";
+import Head from "next/head";
 import Link from "next/link";
 import { FaChevronRight } from "react-icons/fa";
 
 const UserTrackSearchBook = () => {
   return (
-    <>
+    <><Head>
+      <title>Finex - Shipment Track</title>
+    </Head>
       <div
         className="w-full h-auto bg-cover bg-no-repeat"
         style={{ backgroundImage: `url(/bg.png)` }}

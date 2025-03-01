@@ -4,12 +4,16 @@ import WhyFinexBodySection from "@/components/About/WhyFinexBodySection";
 import WorkProcessBodySection from "@/components/About/WorkProcessBodySection";
 import IsBangla from "@/utils/IsBangla";
 import IsEnglish from "@/utils/IsEnglish";
+import Head from "next/head";
 import Link from "next/link";
 import { FaChevronRight } from "react-icons/fa";
 
 const About = () => {
   return (
     <>
+    <Head>
+      <title>Finex - About</title>
+    </Head>
       <div
         className="w-full h-auto bg-cover bg-no-repeat"
         style={{ backgroundImage: `url(/bg.png)` }}

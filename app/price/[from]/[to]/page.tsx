@@ -7,6 +7,7 @@ import PriceCBMCalculatorSction from "@/components/Price/PriceCBMCalculatorSctio
 import { useLoad } from "@/context/LoadContext";
 import IsBangla from "@/utils/IsBangla";
 import IsEnglish from "@/utils/IsEnglish";
+import Head from "next/head";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { FaChevronRight } from "react-icons/fa";
@@ -81,6 +82,9 @@ const PriceGet = ({ params }: PriceGetProps) => {
 
   return (
     <div>
+      <Head>
+        <title>Finex - {rateChart?.from?.name} TO {rateChart?.to?.name} Rate Chart</title>
+      </Head>
       <div
         className="w-full h-auto bg-cover bg-no-repeat"
         style={{ backgroundImage: `url(/bg.png)` }}
