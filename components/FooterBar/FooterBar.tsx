@@ -84,25 +84,25 @@ const ourCompany = [
   {
     id: 565343465,
     title: "Help & Support",
-    link: "/about/help-&-supports/",
+    link: "/about/help-&-support/",
     titleBn: "সহযোগিতা এবং সমর্থন",
   },
   {
     id: 56543465,
     title: "Trust & Safety",
-    link: "/about/trust&safetys/",
+    link: "/about/trust&safety/",
     titleBn: "আস্থা ও নিরাপত্তা",
   },
   {
     id: 562354265,
     title: "Privacy Policy",
-    link: "/about/privacy-policys/",
+    link: "/about/privacy-policy/",
     titleBn: "গোপনীয়তা নীতি",
   },
   {
     id: 562354265,
     title: "Refund Policy",
-    link: "/about/refund-policys/",
+    link: "/about/refund-policy/",
     titleBn: "ফেরত নীতি",
   },
 ];

@@ -40,7 +40,7 @@ const ContactBodySection = () => {
           {/* Right side - Google Maps embed */}
           <div className="w-full h-auto p-4">
             <iframe
-               src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d228.18441651039544!2d90.39773209168601!3d23.78477111242577!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sbd!4v1740319786643!5m2!1sen!2sbd" 
+               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d456.3683760269063!2d90.39745618503241!3d23.78490129063545!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755c7001b793559%3A0xfeaae069a5aa15!2sFASTER%20INTERNATIONAL%20EXPRESS!5e0!3m2!1sen!2sbd!4v1741102980508!5m2!1sen!2sbd"
               width={600}
               height={450}
               loading="lazy"

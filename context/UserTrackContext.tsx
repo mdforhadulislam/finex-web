@@ -23,7 +23,7 @@ import {
 // import { useRouter } from "next/navigation";
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { toast } from "sonner";
-import { useLoad } from "./LoadContext";
+import { useLoad } from "./LoadContext"; 
 
 interface UserTrackDataType {
   isDone: boolean;
@@ -111,24 +111,17 @@ const UserTrackContextProvider: React.FC<{ children: React.ReactNode }> = ({
   };
 
   const handleSubmit = () => {
-    
     if (isValidForm()) {
       load.loadingStart()
       postRequestSend(VISITOR_POST_API, {}, userTrackData).then((res) => {
         load.loadingEnd()
         if (res.status == 200) {
           toast.success(res.message);
-          window?.localStorage?.setItem(
-            "finex-user-track",
-            JSON?.stringify(userTrackData)
-          );
+          window?.localStorage?.setItem("finex-user-track",JSON?.stringify(userTrackData));
           if (userTrackData.type == "B2B") {
-            // router.push("/b2b");
           }
           if (userTrackData.type == "B2C") {
-            // router.push("/");
           }
-
           setOpen(false);
         } else {
           toast.success(res.message);
@@ -169,7 +162,8 @@ const UserTrackContextProvider: React.FC<{ children: React.ReactNode }> = ({
                 value={userTrackData.email}
                 onChange={handleInputChange}
                 className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-200"
-              />
+              /> 
+              
               <Input
                 type="tel"
                 name="phone"
