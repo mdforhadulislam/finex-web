@@ -19,7 +19,7 @@ const teamMember = [
   {
     id: 2,
     name: "FORHADUL ISLAM",
-    title: "FOUNDER & HEAD OF OPARATION",
+    title: "FOUNDER & HEAD OF OPERATION",
     image: "/forhad.png",
   },
   {
@@ -31,7 +31,7 @@ const teamMember = [
   {
     id: 4,
     name: "MD. NAZMUL HOSSAIN",
-    title: "CO-FOUNDER & OPARATION SUPPERVISOR",
+    title: "CO-FOUNDER & OPERATION SUPPERVISOR",
     image: "/Nazmul.png",
   },
 ];
