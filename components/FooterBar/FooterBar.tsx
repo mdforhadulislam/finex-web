@@ -51,7 +51,7 @@ const solutionsFeatures = [
   {
     id: 565465,
     title: "Shipment Tracking",
-    link: "/about/our-services/",
+    link: "/track/",
     titleBn: "চালান ট্র্যাকিং",
   },
   {
