@@ -30,13 +30,13 @@ const teamMember = [
     id: 3,
     name: "MD. TAUHIDUL ISLAM",
     title: "CO-FOUNDER & SALES MANAGER",
-    image: "/towhid.jpg",phone: "+8801577057714", email:"tauhid@finex.ltd"
+    image: "/towhid.jpg",phone: "+8801645034000", email:"tauhid@finex.ltd"
   },
   {
     id: 4,
     name: "MD. NAZMUL HOSSAIN",
     title: "CO-FOUNDER & OPERATION SUPPERVISOR",
-    image: "/Nazmul.png",phone: "+8801577057714", email:"nazmul@finex.ltd"
+    image: "/Nazmul.png",phone: "+8801645034000", email:"nazmul@finex.ltd"
   },
 ];
 const OurTeamMemberBodySection = () => {
