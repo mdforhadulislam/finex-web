@@ -10,7 +10,7 @@ import { Analytics } from "@vercel/analytics/react";
 import type { Metadata } from "next";
 import "./globals.css";
 export const metadata: Metadata = {
-  title: "FASTER INTERNATIONAL EXPRESS (FINEX)",
+  title: "FINEX LTD.",
   description: `Faster International Express (Finex) is a trusted global logistics provider offering comprehensive shipping solutions tailored to businesses and individuals worldwide. We specialize in international shipping, air freight, sea freight, express delivery, and supply chain optimization, ensuring cost-effective and reliable cargo transport. Our services include door-to-door delivery, customs clearance, import-export logistics, cargo insurance, and real-time parcel tracking to guarantee a hassle-free shipping experience.
 
   With a strong presence in Surat and an extensive global delivery network, Finex provides fast and secure courier services, B2B and bulk shipping, and temperature-controlled freight solutions. Our expertise in customs brokerage, bonded warehousing, and multimodal logistics allows businesses to streamline their supply chains efficiently. We compare shipping rates from leading carriers like DHL, FedEx, and UPS, offering the best freight options at competitive prices.
