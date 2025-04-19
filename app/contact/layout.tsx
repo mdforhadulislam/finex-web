@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 export const metadata: Metadata = {
-  title: "Finex - Price CalCulator",
+  title: "Finex - Contact Us",
   description: `Welcome to the official Finex Contact Page. At Faster International Express (Finex), we understand that successful logistics is built on clear and constant communication. Whether you're a small business, a global enterprise, or an individual looking for reliable shipping, our support team is ready to assist with all your inquiries. From tracking your shipment and calculating rates to resolving customs clearance questions and scheduling pickups, Finex’s customer support is here to guide you every step of the way. Our global presence, local expertise, and responsive communication channels ensure that no question goes unanswered and no shipment is left behind. 
 
 Finex offers phone support, WhatsApp chat, live chat, and email access to all customers. Visit our headquarters in Surat or reach out online through our secure contact form. We’re ready to handle shipment status updates, price calculation inquiries, B2B partnerships, customs help, and claims documentation. 
