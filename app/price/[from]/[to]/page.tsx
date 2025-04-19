@@ -248,7 +248,7 @@ const PriceGet = ({ params }: PriceGetProps) => {
                       : ""}{" "}
                   </div>
 
-                  <div> = {Math.round((value + (value / 100 ) * (rateChart?.profitPercentage ?? 1) )+0.4)} TK</div>
+                  <div> = {Math.round((value + (value / 100 ) * (rateChart?.profitPercentage ?? 1) )+0.4)} $</div>
                 </div>
               ))}
             </div>
@@ -315,7 +315,7 @@ const PriceGet = ({ params }: PriceGetProps) => {
                       : ""}{" "}
                   </div>
 
-                  <div> = {Math.round((value + (value / 100 ) * (rateChart?.profitPercentage ?? 1) )+0.4)} TK</div>
+                  <div> = {Math.round((value + (value / 100 ) * (rateChart?.profitPercentage ?? 1) )+0.4)} $</div>
                 </div>
               ))}
             </div>
@@ -382,7 +382,7 @@ const PriceGet = ({ params }: PriceGetProps) => {
                       : ""}{" "}
                   </div>
 
-                  <div> = {Math.round((value + (value / 100 ) * (rateChart?.profitPercentage ?? 1) )+0.4)} TK</div>
+                  <div> = {Math.round((value + (value / 100 ) * (rateChart?.profitPercentage ?? 1) )+0.4)} $</div>
                 </div>
               ))}
             </div>
