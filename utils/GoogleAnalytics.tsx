@@ -20,10 +20,11 @@ export default function GoogleAnalytics() {
   }, []);
 
   return (
-<>
+    <>
+{/* Google tag (gtag.js) */}
       <Script
-        src="https://www.googletagmanager.com/gtag/js?id=G-SWC7MTSL7V"
         strategy="afterInteractive"
+        src="https://www.googletagmanager.com/gtag/js?id=G-SWC7MTSL7V"
       />
     </>
   );
