@@ -9,6 +9,8 @@ import Spriner from "@/utils/Spriner";
 import { Analytics } from "@vercel/analytics/react";
 import type { Metadata } from "next";
 import "./globals.css";
+import GoogleAnalytics from "@/utils/GoogleAnalytics"
+
 export const metadata: Metadata = {
   title: "FINEX LTD.",
   description: `Faster International Express (Finex) is a trusted global logistics provider offering comprehensive shipping solutions tailored to businesses and individuals worldwide. We specialize in international shipping, air freight, sea freight, express delivery, and supply chain optimization, ensuring cost-effective and reliable cargo transport. Our services include door-to-door delivery, customs clearance, import-export logistics, cargo insurance, and real-time parcel tracking to guarantee a hassle-free shipping experience.
@@ -30,6 +32,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
+        
         <LangContextProvider>
           <LoadContextProvider>
             <AuthContextProvider>
@@ -37,6 +40,7 @@ export default function RootLayout({
                 <Navbar />
                 <Spriner />
                 <Analytics />
+                <GoogleAnalytics/>
                 {children}
                 <FooterBar />
                 <Toaster
