@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import GoogleAnalytics from "@/utils/GoogleAnalytics"
 export const metadata: Metadata = {
   title: "Finex - About",
   description: `Finex (Faster International Express) is a trusted global logistics and courier company offering reliable, affordable, and efficient shipping solutions for businesses and individuals worldwide. Headquartered in Surat, India, Finex specializes in international shipping, air freight, sea freight, express courier services, customs clearance, and supply chain management. Our mission is to simplify global trade through innovative logistics technology, real-time parcel tracking, and personalized support.
@@ -19,6 +20,7 @@ export default function BlogLayout({
 }>) {
   return (
     <>
+      <GoogleAnalytics/>
       {children}
     </>
   );
