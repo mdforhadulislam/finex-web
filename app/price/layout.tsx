@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import GoogleAnalytics from "@/utils/GoogleAnalytics"
 export const metadata: Metadata = {
   title: "Finex - Price CalCulator",
   description: `Finex makes shipping simple and transparent with our easy-to-use Price Calculator. Whether you're sending a parcel locally or internationally, you can quickly calculate your shipping cost based on package weight, dimensions, destination, and delivery speed. Our real-time courier rate calculator compares prices across major logistics partners like DHL, FedEx, UPS, and more, ensuring you get the best shipping rates available. Finex offers competitive pricing for a wide range of services, including air freight, sea freight, express delivery, bulk cargo, and e-commerce shipping. Our price list covers domestic and international routes, and includes additional options like door-to-door service, customs clearance, cargo insurance, and temperature-controlled shipping. Whether you're a business managing regular shipments or an individual sending a one-time parcel, Finex helps you find the most cost-effective and reliable shipping solution. Try our online shipping cost calculator today and enjoy transparent, upfront pricing with no hidden fees.`,
@@ -15,6 +16,7 @@ export default function PriceLayout({
 }>) {
   return (
     <>
+      <GoogleAnalytics/>
       {children}
     </>
   );
