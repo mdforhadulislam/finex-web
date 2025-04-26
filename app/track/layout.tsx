@@ -1,3 +1,5 @@
+
+import GoogleAnalytics from "@/utils/GoogleAnalytics"
 import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Finex - Shipment Track",
@@ -13,5 +15,5 @@ export default function TrackLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return <>{children}</>;
+  return <> <GoogleAnalytics /> {children}</>;
 }
