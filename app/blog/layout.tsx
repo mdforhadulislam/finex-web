@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import GoogleAnalytics from "@/utils/GoogleAnalytics"
 export const metadata: Metadata = {
   title: "Finex - Our Service",
   description: `Stay informed with the Finex Blog — your ultimate source for global logistics insights, shipping tips, and industry updates. Whether you're a business looking to streamline your supply chain, an e-commerce seller expanding internationally, or an individual curious about courier trends, our blog delivers expert advice and valuable content to help you navigate the world of shipping with confidence.
@@ -21,6 +22,7 @@ export default function BlogLayout({
 }>) {
   return (
     <>
+      <GoogleAnalytics/>
       {children}
     </>
   );
