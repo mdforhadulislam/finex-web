@@ -8,8 +8,8 @@ import {
 
 
 const slider_image = [
-  {id:1, src:"/slider-1.jpg"},
   {id:2, src:"/banar2.png"},
+  {id:1, src:"/slider-1.jpg"},
 ]
 
 
@@ -22,7 +22,7 @@ const HomeBanarSection = () => {
             {slider_image.map((item, index) => (
               <CarouselItem key={index}>
                 <div
-                  className="w-full h-[250px] md:h-[550px] p-2 bg-cover rounded-lg bg-no-repeat bg-center"
+                  className="w-full h-[250px] md:h-[500px] p-2 bg-cover rounded-lg bg-no-repeat bg-center"
                   style={{ backgroundImage: `url(${item.src})` }}
                 >
                   
