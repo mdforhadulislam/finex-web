@@ -106,6 +106,51 @@ const PriceCalCulatorSection = () => {
             </Button>
           </div>
         </div>
+
+
+<div className="w-full h-auto pt-16">
+  
+
+<IsEnglish className="w-full h-auto flex justify-center align-middle items-center pb-8">
+          <h1 className="text-xl sm:text-4xl md:text-5xl font-bold text-defult text-center">
+          IMPORTANT NOTICE 
+          </h1>
+        </IsEnglish>
+        <IsBangla className="w-full h-auto flex justify-center align-middle items-center pb-6">
+          <h1 className="text-3xl sm:text-5xl md:text-7xl font-bold text-defult bfont text-center">
+          গুরুত্বপূর্ণ বিজ্ঞপ্তি
+          </h1>
+        </IsBangla>
+
+        <div className="w-full h-auto px-5 py-8 pt-5 border-defult rounded-lg border shadow-3xl ">
+          <IsEnglish className="">
+          <h2 className="text-lg text-defult font-bold text-left">
+            Country Zone list:
+          </h2>
+          </IsEnglish>
+          <IsBangla className="">
+          <h2 className="text-2xl text-defult font-bold text-left bfont">
+          দেশের অঞ্চল তালিকা:
+          </h2>
+          </IsBangla>
+
+          <ul className="list-disc pl-5 flex flex-col gap-4">
+            <li>EUROPE (D) : UNITED KINGDOM, ANDORRA, AUSTRIA, BELGIUM, GERMANY, ITALY, FRANCE, LIECHTENSTEIN, LUXEMBOURG, MONACO, NETHERLANDS, SPAIN, VATICAN CITY</li>
+            <li>EUROPE (E) : CYPRUS, CZECH REPUBLIC, DENMARK, FINLAND, IRELAND, GREECE, HUNGARY, NORWAY, POLAND, PORTUGAL, SWEDEN, SWIZERLAND</li>
+            <li>EUROPE (J) : CROATIA, ESTONIA, LATVIA, LITHUANIA, ROMANIA, SOLVENIA, BULGARIA, SLOVAKIA, SERBIA, MONTENEGRO, MACEDONIA</li>
+
+            <li>MIDDLE EAST (B) : BAHARAIN, IRAQ REPUBLIC, KUWAIT, LEBANON, OMAN, QATAR, SAUDI ARABIA, UNITED ARAB EMIRATES, YEMEN</li>
+
+          </ul>
+
+
+
+        </div>
+
+
+</div>
+
+
       </div>
     </>
   );
