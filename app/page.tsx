@@ -1,6 +1,7 @@
 import HomeBanarSection from "@/components/Home/HomeBanarSection";
 import HomeCustomerReview from "@/components/Home/HomeCustomerReview";
 import HomeHeroSection from "@/components/Home/HomeHeroSection";
+import PriceCalCulatorSection from "@/components/Price/PriceCalCulatorSection";
 import Head from "next/head";
 // import HomeSubscriptionSection from "@/components/Home/HomeSubscriptionSection";
 
@@ -18,6 +19,9 @@ export default function Home() {
       </Head>
       <HomeHeroSection />
       <HomeBanarSection />
+      <div  className=" w-full p-2 sm:container h-auto m-auto">
+      <PriceCalCulatorSection />
+      </div>
       <HomeCustomerReview />
     </>
   );
