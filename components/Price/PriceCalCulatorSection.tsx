@@ -154,7 +154,7 @@ const PriceCalCulatorSection = () => {
                           setSearchCountryList(countryList);
                         }
                       }}> 
-                      <Input className="w-full h-auto py-2" onChange={(e)=>{
+                      <Input className="w-full h-auto py-2" placeholder="Search Country Zone" onChange={(e)=>{
                       setInputSearchCountry(e.target.value);
                     }} />
                     
