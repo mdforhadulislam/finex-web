@@ -1,5 +1,5 @@
 // export const ROOT_API = `http://localhost:5000/`;
-export const ROOT_API = `https://finex.up.railway.app/`;
+export const ROOT_API = `https://finex-server.onrender.com/`;
 
 export const ROOT_API_V1 = `${ROOT_API}api/v1/`;
 export const LOGIN_API = `${ROOT_API_V1}auth/login/`
@@ -27,11 +27,14 @@ export const getRequestSend = async (url, header) => {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        'finex': apiKey,
+        'x-api-key': apiKey,
         ...header,
       },
     });
     const data = await response.json();
+
+    console.log(data);
+    
     return { data: data?.data, message: data?.message, status: data?.status };
   } catch (error) {
     return { message: "Error", status: 200, data: "Error" };
@@ -44,7 +47,7 @@ export const postRequestSend = async (url, header, dataSend) => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        'finex': apiKey,
+        'x-api-key': apiKey,
         ...header,
       },
       body: JSON.stringify(dataSend),
@@ -62,7 +65,7 @@ export const putRequestSend = async (url, header, dataSend) => {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
-        'finex': apiKey,
+        'x-api-key': apiKey,
         ...header,
       },
       body: JSON.stringify(dataSend),
@@ -80,7 +83,7 @@ export const deleteRequestSend = async (url, header) => {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
-        'finex': apiKey,
+        'x-api-key': apiKey,
         ...header,
       },
     });
