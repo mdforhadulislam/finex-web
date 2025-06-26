@@ -1,5 +1,6 @@
 // export const ROOT_API = `http://localhost:5000/`;
-export const ROOT_API = `https://finex-server.onrender.com/`;
+export const ROOT_API = `https://finex.up.railway.app/`;
+// export const ROOT_API = `https://finex-server.onrender.com/`;
 
 export const ROOT_API_V1 = `${ROOT_API}api/v1/`;
 export const LOGIN_API = `${ROOT_API_V1}auth/login/`
