@@ -115,12 +115,12 @@ const PriceCalCulatorSection = () => {
           <div className="w-full h-auto pb-16">
           <IsEnglish className="w-full h-auto flex justify-center align-middle items-center pb-8">
             <h1 className="text-xl sm:text-4xl md:text-5xl font-bold text-defult text-center">
-              IMPORTANT NOTICE
+              WORLD COUNTRY ZONE LIST
             </h1>
           </IsEnglish>
           <IsBangla className="w-full h-auto flex justify-center align-middle items-center pb-6">
             <h1 className="text-3xl sm:text-5xl md:text-7xl font-bold text-defult bfont text-center">
-              গুরুত্বপূর্ণ বিজ্ঞপ্তি
+              বিশ্বের দেশের অঞ্চল তালিকা
             </h1>
           </IsBangla>
 
