@@ -1,14 +1,12 @@
-// export const ROOT_API = `http://localhost:5000/`;
+export const ROOT_API = `http://localhost:5000/`;
 // export const ROOT_API = `https://finex.up.railway.app/`;
-export const ROOT_API = `https://finex-server.onrender.com/`;
+// export const ROOT_API = `https://finex-server.onrender.com/`;
 
 export const ROOT_API_V1 = `${ROOT_API}api/v1/`;
-
 
 export const LOGIN_API = `${ROOT_API_V1}auth/login/`
 export const REGISTER_API = `${ROOT_API_V1}auth/register/`
 export const LOGOUT_API = `${ROOT_API_V1}auth/logout/`
-
 
 export const USER_ACCOUNT_API = (phone)=> `${ROOT_API_V1}account/${phone}`
 export const PUBLIC_TRACKING_API = (id) => `${ROOT_API_V1}track/${id}`;
@@ -20,7 +18,6 @@ export const COUNTRY_API = `${ROOT_API_V1}utils/country/`
 export const COUNTRY_SINGLE_API =(id)=> `${COUNTRY_API}${id}`
 export const CONTACT_API = `${ROOT_API_V1}utils/contact/`
 export const OUR_BLOG_API = `${ROOT_API_V1}blog/`
-
 
 
 const apiKey = `finex157705771418342144011930631910`
