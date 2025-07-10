@@ -1,4 +1,4 @@
-"use client";
+"use client"
 
 import { useAuth } from "@/context/AuthContext";
 import { useLang } from "@/context/LangContext";
@@ -404,6 +404,8 @@ export default function NavBar() {
                 </NavigationMenuContent>
               </NavigationMenuItem>
 
+              
+
 
               <NavigationMenuItem>
                 <Link href="/contact" legacyBehavior passHref>
@@ -413,6 +415,19 @@ export default function NavBar() {
                   </NavigationMenuLink>
                 </Link>
               </NavigationMenuItem>
+
+
+              
+              <NavigationMenuItem>
+                <Link href="/api-doc" legacyBehavior passHref>
+                  <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                    <IsEnglish className="">API Documentation</IsEnglish>
+                    <IsBangla className={"bfont text-[21px]"}>এপিআই ডকুমেন্টেশন</IsBangla>
+                  </NavigationMenuLink>
+                </Link>
+              </NavigationMenuItem>
+
+
             </NavigationMenuList>
           </NavigationMenu>
         </div>
