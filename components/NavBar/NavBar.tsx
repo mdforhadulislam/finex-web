@@ -898,6 +898,17 @@ export default function NavBar() {
                 </NavigationMenuLink>
               </Link>
             </NavigationMenuItem>
+               <NavigationMenuItem onClick={()=>{setIsMenuVisible(false)}}>
+              <Link href="/api-doc" legacyBehavior passHref>
+                <NavigationMenuLink
+                  style={{ width: "100%", textAlign: "left", display: "block" }}
+                  className={`group inline-flex h-9 w-max items-center justify-center rounded-md px-4 py-2 text-sm font-medium transition-colors focus:bg-neutral-100 focus:text-neutral-900 focus:outline-none disabled:pointer-events-none disabled:opacity-50 hover:bg-defult-button text-defult-button hover:text-white bg-transparent`}
+                >
+                  <IsEnglish className="">API Documentation</IsEnglish>
+                  <IsBangla className={"bfont text-[21px]"}>এপিআই ডকুমেন্টেশন</IsBangla>
+                </NavigationMenuLink>
+              </Link>
+            </NavigationMenuItem>
           </NavigationMenuList>
         </NavigationMenu>
       </div>

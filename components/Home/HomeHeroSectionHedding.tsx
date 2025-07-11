@@ -7,7 +7,7 @@ const HomeHeroSectionHedding = () => {
     <div>
       <IsEnglish
         className={
-          "w-full h-auto flex justify-left align-middle items-center py-8 pt-14 sm:pt-0"
+          "w-full h-auto flex justify-left align-middle items-center py-8 pt-[420px] sm:pt-0"
         }
       >
         <h1 className="text-4xl  md:text-5xl lg:text-6xl font-extrabold text-white">
