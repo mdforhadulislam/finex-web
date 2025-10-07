@@ -1,3 +1,4 @@
+import OurTeamMemberBodySection from "@/components/About/OurTeamMemberBodySection";
 import WhyFinexBodySection from "@/components/About/WhyFinexBodySection";
 import WorkProcessBodySection from "@/components/About/WorkProcessBodySection";
 import OurBlogBodySection from "@/components/Blog/OurBlogBodySection";
@@ -15,11 +16,10 @@ export default function Home() {
       <div className=" w-full p-2 sm:container h-auto m-auto">
         <WhyFinexBodySection />
         <PriceCalCulatorSection />
-
         <WorkProcessBodySection />
         <OurBlogBodySection />
       </div>
-
+<OurTeamMemberBodySection />
       <HomeCustomerReview />
     </>
   );
