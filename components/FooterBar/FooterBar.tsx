@@ -181,6 +181,7 @@ const FooterBar = () => {
                           Phone:
                         </TableCell>
                         <TableCell className="font-medium pb-0 flex gap-2">
+                          <a href="tel:+880 9606-770909">+880 9606-770909,</a>
                           <a href="tel:+880 1577-057714">+880 1645-034000,</a>
                           <a href="tel:+880 1577-057714">+880 1577-057714</a>
                         </TableCell>
@@ -213,6 +214,8 @@ const FooterBar = () => {
                           মোবাইলঃ
                         </TableCell>
                         <TableCell className="font-medium pb-0  bfont text-[20px] flex gap-2">
+                          
+                          <a href="tel:+880 9606-770909" className="font-medium pb-0  bfont text-[20px]">+৮৮০ ৯৬০৬-৭৭০৯০৯,</a>
                         <a href="tel:+880 1577-057714" className="font-medium pb-0  bfont text-[20px]">+৮৮০ ১৬৪৫-০৩৪০০০,</a>
                         <a href="tel:+880 1577-057714" className="font-medium pb-0  bfont text-[20px]">+৮৮০ ১৫৭৭-০৫৭৭১৪</a>
                         </TableCell>
