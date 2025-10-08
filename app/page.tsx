@@ -18,10 +18,9 @@ export default function Home() {
         <PriceCalCulatorSection />
         </div>
         
-      <div className=" w-full">
         <WorkProcessBodySection />
         <OurBlogBodySection />
-      </div>
+  
       <OurTeamMemberBodySection />
       <HomeCustomerReview />
     </>
