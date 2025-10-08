@@ -13,13 +13,16 @@ export default function Home() {
     <>
       <HomeHeroSection />
       <HomeBanarSection />
-      <div className=" w-full p-2 sm:container h-auto m-auto">
+      <div className=" w-full sm:container h-auto m-auto">
         <WhyFinexBodySection />
         <PriceCalCulatorSection />
+        </div>
+        
+      <div className=" w-full">
         <WorkProcessBodySection />
         <OurBlogBodySection />
       </div>
-<OurTeamMemberBodySection />
+      <OurTeamMemberBodySection />
       <HomeCustomerReview />
     </>
   );

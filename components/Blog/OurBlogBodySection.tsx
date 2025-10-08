@@ -31,7 +31,7 @@ const OurBlogBodySection = () => {
   }, []);
 
   return (
-    <div className=" container h-auto py-24 px-4 sm:px-8 md:px-12 grid sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 grid-cols-2 gap-2 items-center align-middle justify-center m-auto">
+    <div className=" container h-auto py-24 px-4 sm:px-8 md:px-12 grid sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 grid-cols-2 gap-2 align-middle justify-center m-auto">
       {allBlog.map((sBlog) => (
         <Card
           key={sBlog._id}
@@ -44,14 +44,14 @@ const OurBlogBodySection = () => {
             width={200}
             height={200}
           />
-          <div className=" w-full h-auto flex flex-col gap-2 p-2 text-left">
+          <div className=" w-full h-full flex flex-col gap-2 p-2 text-left justify-between">
             <IsEnglish className="">
-              <h1 className=" text-lg font-semibold text-gray-800 leading-4">
+              <h1 className=" text-lg font-semibold line-clamp-5 text-gray-800 leading-4">
                 {sBlog.title}
               </h1>
             </IsEnglish>
             <IsBangla className="">
-              <h1 className=" text-2xl bfont text-gray-800 leading-4">
+              <h1 className=" text-2xl bfont line-clamp-5 text-gray-800 leading-4">
                 {sBlog.titleBn}
               </h1>
             </IsBangla>
