@@ -58,7 +58,7 @@ const OurTeamMemberBodySection = () => {
         </h1>
       </IsBangla>
       {/* Slider Component */}
-      <div className="w-full grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 grid-cols-2 gap-3 align-middle justify-center m-auto items-center p-12">
+      <div className="w-full grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 grid-cols-1 gap-3 align-middle justify-center m-auto items-center p-12">
         {teamMember.map((item, index) => (
           <div className="w-full h-full" key={index}>
             <Card className=" w-full h-full  shadow-3xl p-1">
