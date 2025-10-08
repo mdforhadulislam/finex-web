@@ -296,35 +296,35 @@ const WorkProcessBodySection = () => {
           </p>
         </IsBangla>
 
-        <div className="w-full h-auto px-2 py-4 grid sm:grid-cols-2 lg:grid-cols-3 grid-cols-1 gap-4 pb-5">
+        <div className="w-full h-auto px-2 py-4 grid sm:grid-cols-3 lg:grid-cols-4 grid-cols-2 gap-3 pb-5">
           {featuresData.map(
             ({ title, icon, id, details, titleBn, detailsBn }) => {
               return (
                 <div key={id} className="w-full h-full p-2 pb-0">
                   <div className="w-full h-full p-4 pb-2 shadow-3xl rounded-lg border">
                     <div className="w-full h-auto flex justify-center align-middle items-center p-3 pt-2">
-                      <Image width={100} height={100} src={icon} alt={title} />
+                      <Image width={80} height={80} src={icon} alt={title} />
                     </div>
                     <IsEnglish className="w-full h-full p-2 ">
                       <h1
-                        className={` mb-3 text-gray-900 text-xl font-semibold`}
+                        className={` mb-3 text-gray-900 text-lg font-semibold`}
                       >
                         {title}
                       </h1>
                       <p
-                        className={`font-normal text-gray-800 text-justify text-base`}
+                        className={`font-normal text-gray-800 text-justify text-sm`}
                       >
                         {details}
                       </p>
                     </IsEnglish>
                     <IsBangla className="w-full h-full p-2 ">
                       <h1
-                        className={` mb-3 text-gray-900 text-3xl font-semibold bfont`}
+                        className={` mb-3 text-gray-900 text-2xl font-semibold bfont`}
                       >
                         {titleBn}
                       </h1>
                       <p
-                        className={`font-normal text-gray-800 text-justify text-xl bfont`}
+                        className={`font-normal text-gray-800 text-justify text-lg bfont`}
                       >
                         {detailsBn}
                       </p>
