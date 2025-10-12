@@ -14,16 +14,16 @@ export default function Home() {
       <HomeHeroSection />
       <HomeBanarSection />
 
-      <WhyFinexBodySection />
+      {/* <WhyFinexBodySection /> */}
 
       <div className=" w-full p-2 sm:container h-auto m-auto">
         <PriceCalCulatorSection />
       </div>
-
+{/* 
       <WorkProcessBodySection />
       <OurBlogBodySection />
 
-      <OurTeamMemberBodySection />
+      <OurTeamMemberBodySection /> */}
       <HomeCustomerReview />
     </>
   );
